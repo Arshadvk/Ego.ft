@@ -1,0 +1,66 @@
+<%- include('../layouts/header.ejs') %>
+
+    <!-- PAGE LOADING
+    ================================================== -->
+    <div id="preloader"></div>
+
+    <!-- MAIN WRAPPER
+    ================================================== -->
+    <div class="main-wrapper mp-pusher" id="mp-pusher">
+
+        <!-- HEADER
+        ================================================== -->
+        <%- include('../layouts/nav.ejs') %>
+
+       
+            <!-- PAGE TITLE
+        ================================================== -->
+            <section class="page-title-section bg-img cover-background" data-background="img/bg/page-title.jpg">
+                <div class="container">
+
+                    <div class="title-info">
+                        <h1>Success!</h1>
+                    </div>
+                    <div class="breadcrumbs-info">
+                        <ul class="ps-0">
+                            <li><a href="home-shop-1.html">Home</a></li>
+                            <li><a href="#">Success!</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- CHECKOUT COMPLETE
+        ================================================== -->
+            <section class="md">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+
+                            <div class="common-block text-center">
+
+                                <div class="inner-title">
+                                    <h3 class="mb-0">Thank you for your order!</h3>
+                                </div>
+
+                                <p class="lead mb-4">
+                                    Order id     : <%= order.orderId %> <br>
+                                    Order totel  : ₹ <%= order.totel %> <br>
+                                    Payment Type : <%= order.paymentType %> <br>
+                                    
+                                </p>
+                                <a href="/home" class="butn-style2 wide m-1">Back to home</a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <%- include('../layouts/foot.ejs') %>
+
+    </div>
+
+    <%- include('../layouts/footer.ejs') %>

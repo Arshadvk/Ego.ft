@@ -1,0 +1,124 @@
+<div class="main-wrapper mp-pusher" id="mp-pusher">
+
+    <!-- HEADER
+================================================== -->
+    <header class="menu_area-light header-light-nav header-02">
+
+        <div class="navbar-default">
+
+            <!-- top search -->
+            <div class="top-search bg-primary">
+                <div class="container-fluid">
+                    <form class="search-form" action="#" method="GET">
+                        <div class="input-group">
+                            <span class="input-group-addon cursor-pointer">
+                                <button class="search-form_submit fas fa-search display-27 text-white"
+                                    type="submit"></button>
+                            </span>
+                            <input type="text" class="search-form_input form-control" name="s" autocomplete="off"
+                                placeholder="Type & hit enter...">
+                            <span class="input-group-addon close-search"><i
+                                    class="fas fa-times display-27 mt-2"></i></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- end top search -->
+
+            <div class="container">
+                <div class="row align-items-center g-0">
+                    <div class="col-12 col-lg-12">
+                        <div class="menu_area alt-font">
+                            <nav class="navbar navbar-expand-lg navbar-light p-0">
+
+                                <div class="navbar-header navbar-header-custom">
+                                    <!-- logo -->
+                                    <a href="home-shop-1.html" class="navbar-brand logodefault"><img id="logo"
+                                            src="/userr/img/logos/ego.png" alt="logo"></a>
+                                    <!-- end logo -->
+                                </div>
+
+                                <!-- menu toggler -->
+                                <div class="navbar-toggler"></div>
+                                <!-- end menu toggler -->
+
+                                <!-- menu area -->
+                                <ul class="navbar-nav mx-auto" id="nav" style="display: none;">
+
+                                    <li><a href="/">Home</a></li>
+                                    <li><a href="#">Shop</a>
+                                        <ul>
+                                            <li>
+
+                                            <li><a href="/shop">All Products</a></li>
+                                            <% if(category.length> 0){
+                                                for(let i=0; i<category.length; i++){ %>
+                                                    <li><a href="/category/<%= category[i]._id %>">
+                                                            <%= category[i].category_name %>
+                                                        </a></li>
+                                                    <% }} %>
+
+                                    </li>
+                                </ul>
+                                </li>
+                                <li><a href="#">Pages</a>
+                                    <ul>
+                                        <li><a href="/adout_us">About Us</a></li>
+                                        <li><a href="/contacts">Contacts</a></li>
+                                        <li><a href="/faq"> FAQ</a></li>
+                                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                                    </ul>
+                                </li>
+                                <% if(user){ %>
+                                    <li><a href="#">Account</a>
+                                        <ul>
+
+                                            <li><a href="/logout">Logout</a></li>
+                                            <li><a href="/forget">Password Recovery</a></li>
+                                            <li><a href="/orders">Orders List</a></li>
+                                            <li><a href="/wishlist">Wishlist</a></li>
+                                            <li><a href="/profile">Profile Page</a></li>
+                                            <li><a href="/address">Contact / Shipping Address</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <% } else{ %>
+                                        <li><a href="/login">Login / Register</a></li>
+                                        <% }%>
+
+                                            </ul>
+                                            <!-- end menu area -->
+
+                                            <!-- attribute navigation -->
+                                            <div class="attr-nav">
+                                                <ul>
+                                                    <% if (user){ %>
+                                                        <li class=" me-lg-0">
+                                                            <a href="/cart">
+                                                                <i class="ti-bag"></i>
+                                                                <span class="badge bg-primary"></span>
+                                                            </a>
+                                                        </li>
+                                                        <% } else { %>
+                                                            <li class=" me-lg-0">
+                                                                <a href="/login">
+                                                                    <i class="ti-bag"></i>
+                                                                    <span class="badge bg-primary">0</span>
+                                                                </a>
+                                                            </li>
+                                                            <% } %>
+                                                                <li class="search"><a href="#"><i
+                                                                            class="ti-search"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <!-- end attribute navigation -->
+
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </header>

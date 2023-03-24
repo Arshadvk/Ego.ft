@@ -1,0 +1,45 @@
+<%- include('../layouts/header.ejs') %>
+  <link rel="stylesheet" href="/css/stylee.css">
+
+  <div class="preloader"></div>
+  <div class="container">
+
+    <h1><b>For otp login</b></h1>
+
+    <form method="post" action="" onsubmit="return validateSubmit()">
+      <input class="signup-input" type="text" name="number" placeholder="Enter Number">
+      <div id="error" style="color: darkred;"></div>
+
+      <% if(typeof message !=='undefined' ){ %>
+        <div class="alert-success" role="alert">
+          <p style="color: rgb(100, 0, 0);">
+            <%= message %>
+          </p>
+        </div>
+
+        <% } %>
+          <br>
+          <button type="submit">send a otp</button>
+          <br>
+    </form>
+  </div>
+
+
+
+  <script>
+    const email = document.getElementById("email")
+    const pass = document.getElementById("pass")
+    function validateSubmit() {
+      if (email.value == "") {
+        document.getElementById("error").innerHTML = "enter email and password"
+      }
+      else if (pass.value == "") {
+        document.getElementById("error").innerHTML = "enter password"
+      }
+      else {
+        document.getElementById("error").innerHTML = ""
+      }
+    }
+  </script>
+
+  <%- include('../layouts/footer.ejs') %>

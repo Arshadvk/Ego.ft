@@ -1,0 +1,91 @@
+<%- include('../layouts/header.ejs') %>
+
+  <link rel="stylesheet" href="/css/stylee.css">
+  <div class="nevhead">
+
+  </div>
+
+  <div class="container">
+    <img src="/userr/img/logos/egoft.png" height="1500" width="150">
+    <h1>Create an Account</h1>
+    <form method="post" class="row g-3 needs-validation" novalidate>
+      <div class="col-md-12">
+        <div class="form-outline">
+          <input type="text" class="form-control " id="validationCustom01" name="name" placeholder="Enter Your Name"
+            required />
+          <div class="invalid-feedback">Please Enter Your Name</div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-outline">
+          <input type="email" class="form-control" name="email" placeholder=" Enter Your Email" required />
+          <div class="invalid-feedback">Please Enter Your Email</div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-outline">
+          <input type="text" class="form-control" minlength="10" maxlength="13" name="number"
+            placeholder=" Enter Your Number" required />
+          <div class="invalid-feedback">Please Enter Your Number</div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-outline">
+          <input type="password" class="form-control" minlength="6" name="pass" placeholder="Create a Password"
+            required />
+          <div class="invalid-feedback">Please Enter Your Number</div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-outline">
+          <input type="password" class="form-control " minlength="6" name="pas" placeholder="Re Enter Password"
+            required />
+          <div class="invalid-feedback">Please Enter Your Number</div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required />
+          <label class="form-check-label" for="invalidCheck">Agree to terms and conditions</label>
+          <div class="invalid-feedback">You must agree before submitting.</div>
+        </div>
+      </div>
+      <div class="col-12">
+        <button type="submit">Create Account</button>
+      </div>
+      <div id="error" style="color: darkred;"></div>
+      <% if(typeof success !=='undefined' ){ %>
+        <div class="alert alert-success alert-dismissible" role="alert">
+          <%= success %>
+        </div>
+        <% } %>
+          <% if(typeof message !=='undefined' ){ %>
+            <div class="alert alert-warning alert-dismissible" role="alert">
+              <%= message %>
+            </div>
+            <% } %>
+    </form>
+
+    <script>
+      (() => {
+        'use strict';
+
+
+        const forms = document.querySelectorAll('.needs-validation');
+
+
+        Array.prototype.slice.call(forms).forEach((form) => {
+          form.addEventListener('submit', (event) => {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      })();
+    </script>
+
+  </div>
+
+  <%- include('../layouts/footer.ejs') %>

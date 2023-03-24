@@ -1,0 +1,228 @@
+<%- include('../layouts/header.ejs') %>
+
+    <%- include('../layouts/nav.ejs') %>
+        <!-- PAGE TITLE
+        ================================================== -->
+        <section class="page-title-section bg-img cover-background" >
+            <div class="container">
+
+                <div class="title-info">
+                    <h1>My Wishlist</h1>
+                </div>
+                <div class="breadcrumbs-info">
+                    <ul class="ps-0">
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="#">My Wishlist</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ACCOUNT WISHLIST
+        ================================================== -->
+        <section class="md">
+            <div class="container">
+                <div class="row justify-content-center">
+
+                    <!-- left panel -->
+                    <div class="col-lg-4 col-sm-9 mb-2-3 mb-lg-0">
+
+                        <div class="account-pannel">
+
+                            <div class="p-4">
+
+                                <div class="text-center">
+                                    <div class="pb-3">
+                                        <img class="img-fluid rounded-circle img-thumbnail"
+                                            src="/userr/img/avatar/t-3.jpg" alt="...">
+                                    </div>
+                                    <h6 class="mb-0 display-28"><%= user.name %></h6>
+                                    <small>Joined February 06, 2017</small>
+                                    <div class="reward-points">
+                                        <i class="ti-star text-primary pe-1"></i> Points: 7386
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="list-group">
+                                <a class="list-group-items" href="/orders"><i class="ti-bag pe-2"></i>Orders<span
+                                        class="badge badge-pill">6</span></a>
+                                <a class="list-group-items" href="/profile"><i class="ti-user pe-2"></i>Profile</a>
+                                <a class="list-group-items" href="/address"><i
+                                        class="ti-location-pin pe-2"></i>Addresses</a>
+                                <a class="list-group-items active" href="/wishlist"><i
+                                        class="ti-heart pe-2"></i>Wishlist<span class="badge badge-pill">3</span></a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- end left panel -->
+
+                    <!-- right panel -->
+                    <div class="col-lg-8">
+
+                        <div class="common-block">
+                            
+                            <div class="inner-title">
+                                <h4 class="mb-0">My Wishlist</h4>
+                            </div>
+                            <% if(wishlist.length> 0) { %>
+                            <div class="table-responsive" id="reloadDiv">
+                                <table class="table v-align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th></th>
+                                            <th>Price</th>
+                                            <th>Stock Status</th>
+                                            <th>Add To Cart</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                            <% for (let i = 0; i < wishlist.length; i++) { %>
+
+                                                <tr id="reloadDiv">
+
+                                                    <td>
+                                                        <a href="#"><img
+                                                                src="/product_img/<%= wishlist[i].product.image[0] %>"
+                                                                alt="..." height="80px" width="80px" /></a>
+                                                    </td>
+
+                                                    <td><a href="#">
+                                                            <%= wishlist[i].product.product_name %>
+                                                        </a></td>
+                                                    <td class="product-price">₹<%= product.wishlist[i].product.price %>
+                                                    </td>
+                                                    <% if( wishlist[i].product.quantity> 0 ){ %>
+                                                        <td class="product-quantity"><b>In Stock</b></td>
+                                                        <% }else { %>
+                                                            <td class="product-quantity" style="color: darkred; "><b>No
+                                                                    Stock</b></td>
+                                                            <% } %>
+                                                                <td> <button class="butn-style2 small"
+                                                                        onclick="addToCart('<%= wishlist[i].product._id %>')">Add
+                                                                        To Cart</button> </td>
+
+                                                                <td><button
+                                                                        onclick="deleteWish('<%= wishlist[i].product._id %>')"
+                                                                        style="border: none;"><i
+                                                                            class="fas fa-trash"></i></button>
+                                                               </td>
+
+                                                </tr>
+                                                <% } %>
+                                                   
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <a class="butn-style2 mt-3" href="#"><span>Clear Wishlist</span></a>
+                            <% } else{ %>
+                   
+                        <img src="userr/img/content/cart_empty.webp" alt="" srcset="">
+                        <a href="/shop"><button
+                            class="butn-style2 dark bg-color float-end ms-2 mb-2 mb-md-0"><span>Continue
+                                Shopping</span></button></a>
+                            
+                            <br><br>
+                        <% } %>
+                        </div>
+
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        
+
+        <!-- FOOTER
+        ================================================== -->
+        <%- include('../layouts/foot.ejs') %>
+        </div>
+
+
+
+        <!-- SCROLL TO TOP
+    ================================================== -->
+        <a href="#" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
+
+        <script>
+
+            function deleteWish(proid) {
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You wan't to delete!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'yes, delete!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "/remove_wishlist",
+                            data: {
+                                productId: proid
+                            },
+                            method: 'post',
+                            success: (response) => {
+                                console.log("waoring")
+
+                                $('#reloadDiv').load('/wishlist #reloadDiv')
+                                console.log(response);
+                                Swal.fire({
+                                    title: 'deleted!',
+                                    text: 'Your deleted',
+                                    icon: 'success',
+                                    showConfirmButton: false
+                                })
+                                //  setTimeout(()=>{
+                                //     location.reload()
+                                //  },1000);
+
+                            }
+
+                        })
+                    }
+                })
+            }
+
+            function addToCart(proid) {
+
+                $.ajax({
+                    url: "/add_to_cart",
+                    data: {
+                        productId: proid
+                    },
+                    method: 'post',
+                    success: (response) => {
+                        console.log("waoring")
+
+                        $('#reloadDiv').load('/wishlist #reloadDiv')
+                        console.log(response);
+                        Swal.fire({
+                            title: 'added',
+                            text: 'iteam in your cart ',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                        //  setTimeout(()=>{
+                        //     location.reload()
+                        //  },1000);
+
+                    }
+
+                })
+            }
+
+        </script>
+
+        <%- include('../layouts/footer.ejs') %>

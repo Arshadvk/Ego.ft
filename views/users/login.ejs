@@ -1,0 +1,74 @@
+<%- include('../layouts/header.ejs') %>
+  <link rel="stylesheet" href="/css/stylee.css">
+
+
+  <div class="container">
+
+    <img src="/userr/img/logos/egoft.png" height="1500" width="150">
+    <h1><b>Sign In</b></h1>
+    <form method="post" class="row g-3 needs-validation" novalidate>
+      <div class="col-md-12">
+        <div class="form-outline">
+          <input type="text" class="form-control" id="validationCustom01" placeholder="Enter Your Email" name="email"
+            required />
+          <div class="invalid-feedback">Please Enter Email.</div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-outline">
+          <input type="password" class="form-control" id="validationCustom02" name="pass"
+            placeholder="Enter Your Password" required />
+          <div class="invalid-feedback">Please Enter Password</div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <% if(typeof message !=='undefined' ){ %>
+
+          <div class="alert alert-warning alert-dismissible" role="alert">
+            <%= message %>
+          </div>
+
+      </div>
+
+      <% } %>
+        <div class="col-12">
+
+          <button type="submit">Sign In</button>
+        </div>
+    </form>
+    <br>
+    <a href="/forget">Forget Password |</a>
+    <a href="/sendotp">Login with number</a>
+    <br>
+    <br>
+    <span>Don't have an account ? <a style="text-decoration: none;" href="/signup">Create Account</a></span>
+    <br>
+
+
+  </div>
+
+  <script>
+
+    (() => {
+      'use strict';
+
+
+      const forms = document.querySelectorAll('.needs-validation');
+
+
+      Array.prototype.slice.call(forms).forEach((form) => {
+        form.addEventListener('submit', (event) => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+  </script>
+
+
+
+  <%- include('../layouts/footer.ejs') %>

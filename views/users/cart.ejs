@@ -1,0 +1,270 @@
+<%- include('../layouts/header.ejs') %>
+    <%- include('../layouts/nav.ejs') %>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.3.js"
+            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+        <!-- PAGE LOADING
+    ================================================== -->
+        <div id="preloader"></div>
+
+        <!-- MAIN WRAPPER
+    ================================================== -->
+        <div class="main-wrapper mp-pusher" id="mp-pusher">
+
+
+
+
+            <!-- PAGE TITLE
+        ================================================== -->
+            <section class="page-title-section bg-img cover-background" data-background="img/bg/page-title.jpg">
+                <div class="container">
+
+                    <div class="title-info">
+                        <h1>Shop Cart</h1>
+                    </div>
+                    <div class="breadcrumbs-info">
+                        <ul class="ps-0">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="#">Shop Cart</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- CART TABLE
+        ================================================== -->
+
+
+
+            <section class="md">
+                <div class="container">
+                    <div class="row">
+
+
+                        <!-- left pannel section -->
+                        <div class="col-lg-8 col-md-12 ps-1-1 mb-1-9 mb-lg-0">
+
+                            <div class="common-block">
+
+
+                                <% if(cart.length> 0) { %>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="first"></th>
+                                                    <th class="text-uppercase font-weight-500">Product</th>
+                                                    <th class="text-uppercase font-weight-500">Price</th>
+                                                    <th class="text-uppercase font-weight-500">Stock</th>
+                                                    <th class="text-uppercase font-weight-500">Qty</th>
+                                                    <th class="text-uppercase font-weight-500">Sub Total</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+
+                                                <% cart.forEach(x=> { %>
+
+                                                    <tr id="reloadDiv">
+
+                                                        <td>
+                                                            <a href="#"><img
+                                                                    src="/product_img/<%= x.product.image[0] %>"
+                                                                    alt="..." height="80px" width="80px" /></a>
+                                                        </td>
+
+                                                        <td><a href="#">
+                                                                <%= x.product.product_name %>
+                                                            </a></td>
+                                                        <td class="product-price">₹<%= x.product.price %>
+                                                        </td>
+                                                        <td>
+                                                            <% if (x.product.quantity>0) { %>
+                                                                Stock In
+                                                                <% }else{ %>
+                                                                    Stock out
+                                                                    <% } %>
+                                                        </td>
+
+                                                        <td class="quantity__item">
+                                                            <span>
+                                                                <button type="button"
+                                                                    onclick="quty_change('<%= x.product._id %>', -1 , '<%= x.product.price %>' )"
+                                                                    class="btn btn-dark">-</button>
+                                                                <div id="pro<%= x.product._id %>">
+                                                                    <%= x.qty %>
+                                                                </div>
+                                                                <button type="button"
+                                                                    onclick="quty_change('<%= x.product._id %>', 1 , '<%= x.product.price %>' )"
+                                                                    class="btn btn-secondary">+</button>
+                                                            </span>
+                                                        </td>
+                                                        <td class="pro<%= x.product._id %>">₹<%= x.price %>
+                                                        </td>
+                                                        <td class="product-remove text-center">
+                                                            <button onclick="deletecart('<%= x.product._id %>')"
+                                                                style="border: none;"><i
+                                                                    class="fas fa-times"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                    <% }); %>
+
+                                            </tbody>
+
+
+                                        </table>
+
+                                    </div>
+
+                                    <div class="buttons-set">
+                                        <a href="/shop" class="butn-style2 dark float-end"
+                                            style="border: none;">Continue Shopping</a>
+                                        <br>
+
+
+                                    </div>
+                                    <% } else{ %>
+
+                                        <img src="userr/img/content/cart_empty.webp" alt="" srcset="">
+                                        <a href="/shop"><button
+                                                class="butn-style2 dark bg-color float-end ms-2 mb-2 mb-md-0"><span>Continue
+                                                    Shopping</span></button></a>
+
+                                        <br><br>
+                                        <% } %>
+                            </div>
+
+                        </div>
+                        <!-- end left pannel section -->
+
+                        <!-- right pannel section -->
+                        <% if(cart.length> 0) { %>
+                        <div class="col-lg-4 col-12 side-bar">
+
+
+
+                            <div class="widget">
+
+                                <div class="widget-title">
+                                    <h5>Cart Summary</h5>
+                                </div>
+
+                                <table class="table classic">
+                                    <tbody>
+                                        <tr>
+                                            <th>Cart Subtotal:</th>
+                                            <td class="carttotel">₹ <%= totel %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Shipping:</th>
+                                            <td class="text-gray-dark">Free</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total:</th>
+                                            <td class="carttotel">₹ <%= totel %>
+                                            </td>
+                                            <input type="hidden" name="totel" value="">
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <a href="/checkout" class="butn-style2 dark float-end" style="border: none;">Checkout</a>
+
+
+
+                        </div>
+                        <% }  %>
+
+                        <!-- end right pannel section -->
+
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- FOOTER
+        ================================================== -->
+            <%- include('../layouts/foot.ejs') %>
+                <script>
+
+                    function deletecart(proid) {
+
+
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You wan't to delete!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'yes, delete!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.ajax({
+                                    url: "/remove_cart",
+                                    data: {
+                                        productId: proid
+                                    },
+                                    method: 'post',
+                                    success: (response) => {
+                                        console.log("waoring")
+
+                                        $('#reloadDiv').load('/cart #reloadDiv')
+                                        console.log(response);
+                                        Swal.fire({
+                                            title: 'deleted!',
+                                            text: 'Your deleted',
+                                            icon: 'success',
+                                            showConfirmButton: false,
+                                            timer: 1000
+                                        })
+                                        //  setTimeout(()=>{
+                                        //     location.reload()
+                                        //  },1000);
+
+                                    }
+
+                                })
+                            }
+                        })
+                    }
+
+
+                    function quty_change(proid, count, productPrice) {
+                        let quantity = document.getElementById('pro' + proid).innerHTML
+                        // let count = parseInt(count)
+                        if (quantity <= 1 && count == -1) {
+                            //just dont do anything
+                        } else {
+                            $.ajax({
+                                url: "/changeqty",
+                                data: {
+                                    productId: proid,
+                                    count: count,
+                                    price: productPrice,
+                                },
+                                method: 'post',
+                                success: (response) => {
+                                    console.log(response);
+                                    document.getElementById('pro' + proid).innerHTML = parseInt(quantity) + count
+                                    document.getElementsByClassName('pro' + proid)[0].innerHTML = '₹' + response.totelPrice
+                                    document.getElementsByClassName('carttotel')[0].innerHTML = '₹' + response.sum
+                                    document.getElementsByClassName('carttotel')[1].innerHTML = '₹' + response.sum
+
+                                }
+                            })
+                        }
+                    }
+                </script>
+
+        </div>
+        <%- include('../layouts/footer.ejs') %>

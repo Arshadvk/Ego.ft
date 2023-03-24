@@ -1,0 +1,404 @@
+<%- include('../layouts/header.ejs') %>
+    <%- include('../layouts/nav.ejs') %>
+
+        <!-- PAGE TITLE
+        ================================================== -->
+        <section class="page-title-section bg-img cover-background">
+            <div class="container">
+
+                <div class="title-info">
+                    <h1>My Profile</h1>
+                </div>
+                <div class="breadcrumbs-info">
+                    <ul class="ps-0">
+                        <li><a href="home-shop-1.html">Home</a></li>
+                        <li><a href="#">My Profile</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ACCOUNT ORDERS
+        ================================================== -->
+        <section class="md">
+            <div class="container">
+                <div class="row justify-content-center">
+
+                    <!-- left panel -->
+                    <div class="col-lg-4 col-sm-9 mb-2-3 mb-lg-0">
+
+                        <div class="account-pannel">
+
+                            <div class="p-4">
+
+                                <div class="text-center">
+                                    <div class="pb-3">
+                                        <img class="img-fluid rounded-circle img-thumbnail"
+                                            src="/userr/img/avatar/t-3.jpg" alt="...">
+                                    </div>
+                                    <h6 id="reloadDiv" class="mb-0 display-28">
+                                        <%= user.name %>
+                                    </h6>
+                                    <small>Joined <%= user.join_date.toLocaleDateString() %></small>
+                                    <div class="reward-points">
+                                        <i class="ti-star text-primary pe-1"></i> Wallet: <%= user.wallet %>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="list-group">
+                                <a class="list-group-items" href="account-orders.html"><i
+                                        class="ti-bag pe-2"></i>Orders<span class="badge badge-pill">6</span></a>
+                                <a class="list-group-items active" href="account-profile.html"><i
+                                        class="ti-user pe-2"></i>Profile</a>
+                                <a class="list-group-items" href="/address"><i
+                                        class="ti-location-pin pe-2"></i>Addresses</a>
+                                <a class="list-group-items" href="/wishlist"><i class="ti-heart pe-2"></i>Wishlist<span
+                                        class="badge badge-pill">3</span></a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- end left panel -->
+
+                    <!-- right panel -->
+                    <div class="col-lg-8">
+
+                        <div class="common-block">
+
+                            <div class="inner-title">
+                                <h4 class="mb-0">My Profile</h4>
+                                <p class="mb-0">Time for a Sharp My profile.</p>
+                            </div>
+
+                            <form method="post" id="myform" action="/profile">
+
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label>Your Name</label>
+                                            <input type="text" class="form-control" name="name"
+                                                value="<%= user.name %>">
+                                            <div class="invalid " id="validation"></div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label>Email Address</label>
+                                            <input type="email" class="form-control" name="email"
+                                                value="<%= user.email %>">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label>Contact Number</label>
+                                            <input type="text" class="form-control" name="number"
+                                                value=" <%= user.number %>">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                              
+
+                                <button type="submit" class="butn-style2 mt-4">Update Profile</button>
+                                <button type="button" class="butn-style2 dark" data-bs-toggle="modal"
+                                    data-bs-target="#change_password" style="border: none;">Change Password </button>
+                            </form>
+
+                        </div>
+
+                    </div>
+                    <!-- end right panel -->
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER
+        ================================================== -->
+        <footer class="classic-footer bordered">
+
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6 mb-2-3 mb-lg-0">
+                        <h3>Contact Us</h3>
+                        <ul class="list-style mb-2 ps-0">
+                            <li>
+                                <strong>Address:</strong><span class="ps-1">74 Guild Street 542B, Town MT.</span>
+                            </li>
+                            <li>
+                                <strong>Phone: </strong><span class="ps-1">(+44) 123 456 789</span>
+                            </li>
+                            <li>
+                                <strong>Email: </strong><span class="ps-1">addyour@emailhere</span>
+                            </li>
+                        </ul>
+
+                        <ul class="list-style-two mb-0 ps-0">
+                            <li>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-2-3 mb-lg-0">
+
+                        <div class="row">
+                            <div class="col-md-6 col-6 pe-lg-0">
+                                <h3>Quick Links</h3>
+                                <ul class="list-style ps-0">
+                                    <li><a href="#">News</a></li>
+                                    <li><a href="#">History</a></li>
+                                    <li><a href="#">Our shop</a></li>
+                                    <li><a href="#">Secure shopping</a></li>
+                                    <li><a href="#">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 col-6 pe-lg-0">
+                                <h3>My Account</h3>
+                                <ul class="list-style ps-0">
+                                    <li><a href="#">My Account</a></li>
+                                    <li><a href="#">Order History</a></li>
+                                    <li><a href="#">Wish List</a></li>
+                                    <li><a href="#">Newsletter</a></li>
+                                    <li><a href="#">Returns</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12">
+                        <div class="ps-lg-1-9">
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-6 mb-1-9">
+                                    <h3>News Letter</h3>
+                                    <form method="post">
+                                        <div class="form-group footer-subscribe">
+                                            <input type="email" placeholder="Subscribe with us" id="email"
+                                                class="form-control">
+                                            <a href="#" class="butn-style2"><i
+                                                    class="fas fa-paper-plane display-27 mt-1"></i></a>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-lg-12 col-md-6">
+                                    <h3>Download Our Mobile Apps</h3>
+                                    <div class="text-start">
+                                        <a href="#"
+                                            class="btn bordered text-start ms-1 ms-md-0 mt-1 mt-md-0 mb-0 mb-lg-2 mb-xl-0">
+                                            <span class="media align-items-center">
+                                                <span class="fab fa-apple display-26 pe-3"></span>
+                                                <span class="media-body">
+                                                    <span class="d-block display-32">Download on the</span>
+                                                    <strong>App Store</strong>
+                                                </span>
+                                            </span>
+                                        </a>
+
+                                        <a href="#" class="btn bordered text-start ms-1 ms-lg-0 ms-xl-1 mt-1 mt-md-0">
+                                            <span class="media align-items-center">
+                                                <span class="fab fa-google-play display-26 pe-3"></span>
+                                                <span class="media-body">
+                                                    <span class="d-block display-32">Get it on</span>
+                                                    <strong>Google Play</strong>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="footer-bottom py-1-9 mt-6 mt-lg-8">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <div class="text-center text-md-start">
+                                <p class="mb-0">&copy; <span class="current-year"></span> Smartshop is Powered by <a
+                                        href="https://www.chitrakootweb.com/" target="_blank"
+                                        class="text-dark">Chitrakoot Web</a></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-style-17 text-center text-md-end">
+                                <li><img src="/userr/img/content/payment-options/visa.png" alt="..."></li>
+                                <li><img src="/userr/img/content/payment-options/mastercard.png" alt="..."></li>
+                                <li><img src="/userr/img/content/payment-options/paypal.png" alt="..."></li>
+                                <li><img src="/userr/img/content/payment-options/amex.png" alt="..."></li>
+                                <li><img src="/userr/img/content/payment-options/discover.png" alt="..."></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+
+        </div>
+        <div class="modal fade" id="change_password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">change Password</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" id="password">
+
+                            <div class="row">
+
+                                <div class="col-sm-12">
+
+                                    <div class="form-group">
+                                        <label>Old Password</label>
+                                        <input type="text" class="form-control" minlength="6" name="oldPassword">
+                                    </div>
+
+                                </div>
+
+                                
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <input name="id" type="hidden">
+                                    <div class="form-group">
+                                        <label>New password</label>
+                                        <input type="text" class="form-control" minlength="6" name="pass">
+                                    </div>
+
+                                </div>
+
+                               <div class="col-sm-6">
+
+                                    <div class="form-group">
+                                        <label>Renter password</label>                                     
+                                        <input type="text" class="form-control" minlength="6" name="pas">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        
+
+                          
+
+                            <button type="submit" class="btn btn-dark float-end" data-bs-dismiss="modal">Save</button>
+
+
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('#myform').submit(function (event) {
+                    event.preventDefault(); //prevent default form submit action
+                    var formData = $(this).serialize(); //serialize form data
+                    $.ajax({
+                        type: 'POST',
+                        url: '/edit-profile',
+                        data: formData,
+                        success: function (response) {
+                            if (response.success == true) {
+                                $('#reloadDiv').load('/profile #reloadDiv')
+                                console.log(response);
+                                Swal.fire({
+                                    title: 'Edited!',
+                                    text: 'Your profile edited',
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                })
+                            } else {
+                                document.getElementById('validation').innerHTML = 'please fill your form'
+                            }
+
+                        },
+                        error: function (xhr, status, error) {
+                            //handle error response
+                        }
+                    });
+                });
+            });
+
+
+            $(document).ready(function () {
+            $('#password').submit(function (event) {
+                event.preventDefault(); //prevent default form submit action
+                var formData = $(this).serialize(); //serialize form data
+            
+                $.ajax({
+                    type: 'POST',
+                    url: '/change-password',
+                    data: formData,
+                    success: function (response) {
+                        if(response == true){
+                            Swal.fire({
+                            title: 'Changed!',
+                            text: 'Your Password Changed',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                        }else{
+                            Swal.fire({
+                            title: 'Not Changed!',
+                            text: 'Enter correct Password',
+                            icon: 'warning',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                        }
+                        
+                    },
+                    error: function (xhr, status, error) {
+                        //handle error response
+                    }
+                });
+            });
+        });
+        </script>
+
+        <%- include('../layouts/footer.ejs') %>

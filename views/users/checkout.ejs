@@ -1,0 +1,692 @@
+<%- include('../layouts/header.ejs') %>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <div class="main-wrapper mp-pusher" id="mp-pusher">
+
+        <!-- HEADER
+    ================================================== -->
+        <header class="menu_area-light header-light-nav header-02">
+
+            <div class="navbar-default">
+
+                <!-- top search -->
+                <div class="top-search bg-primary">
+                    <div class="container-fluid">
+                        <form class="search-form" action="#" method="GET">
+                            <div class="input-group">
+                                <span class="input-group-addon cursor-pointer">
+                                    <button class="search-form_submit fas fa-search display-27 text-white"
+                                        type="submit"></button>
+                                </span>
+                                <input type="text" class="search-form_input form-control" name="s" autocomplete="off"
+                                    placeholder="Type & hit enter...">
+                                <span class="input-group-addon close-search"><i
+                                        class="fas fa-times display-27 mt-2"></i></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- end top search -->
+
+                <div class="container">
+                    <div class="row align-items-center g-0">
+                        <div class="col-12 col-lg-12">
+                            <div class="menu_area alt-font">
+                                <nav class="navbar navbar-expand-lg navbar-light p-0">
+
+                                    <div class="navbar-header navbar-header-custom">
+                                        <!-- logo -->
+                                        <a href="/home" class="navbar-brand logodefault"><img id="logo"
+                                                src="/userr/img/logos/ego.png" alt="logo"></a>
+                                        <!-- end logo -->
+                                    </div>
+
+
+
+                                    <h3> Checkout</h3>
+
+
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+        <!-- PAGE TITLE
+        ================================================== -->
+        <section class="page-title-section ">
+            <div class="container">
+
+                <div class="title-info">
+                    <h1>Shop Checkout</h1>
+                </div>
+                <div class="breadcrumbs-info">
+                    <ul class="ps-0">
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="#">Checkout</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CHECKOUT
+        ================================================== -->
+        <section class="md">
+            <div class="container">
+                <div class="row">
+
+
+                    <!-- left pannel section -->
+                    <div class="col-lg-8 col-md-12 ps-2-3 mb-1-9 mb-lg-0">
+
+                        <div class="common-block">
+
+
+
+                            <div class="table-responsive">
+                                <table class="table">
+
+
+
+                                    <form method="post" id="checkout_form" novalidate>
+                                        <label class="col-sm-2 col-form-label"
+                                            for="basic-default-company">Address</label>
+                                        <div class="col-sm-12" id="reloadDiv">
+                                            <select id="Select Category" name="address" class="form-select" required>
+                                                <% if(user[0].address.length>0 ){
+                                                    user[0].address.forEach((x)=>{ %>
+
+                                                    <option value="<%= x._id %>">
+                                                        <strong>
+                                                            <%= x.name %>
+                                                        </strong>
+                                                        <%= x.building %>
+                                                            <%= x.street %>
+                                                                <%= x.state %>
+                                                                    <%= x.pincode %>
+                                                                        <%= x.number %>
+                                                    </option>
+
+                                                    <% })} %>
+                                            </select>
+                                            <input type="hidden" name="total" value="<%= user[0].cartTotel %>">
+
+
+                                            <br>
+
+
+
+                                            <hr>
+                                            <label class="col-sm-2 col-form-label"
+                                                for="basic-default-company">Payment</label>
+                                            <div class="invalid-feedback">Please Choose one</div>
+                                            <ul>
+
+                                                <li> <input class="form-check-input" type="radio" value="UPI"
+                                                        name="shipping_method" id="shipping-method"
+                                                        required><span><strong>
+                                                            UPI </strong> </span></li>
+
+                                                <li> <input class="form-check-input" type="radio" value="COD"
+                                                        name="shipping_method"><span><strong> COD </strong> </span></li>
+
+                                                <li> <input class="form-check-input" type="radio" value="WALLET"
+                                                        name="shipping_method" id="shipping-method"
+                                                        required><span><strong>
+                                                            WALLET</strong> </span></li>
+
+                                            </ul>
+
+
+                                </table>
+                            </div>
+
+                            <div class="buttons-set">
+                                <button type="button" class="butn-style2 dark" data-bs-toggle="modal"
+                                    data-bs-target="#add_address" style="border: none;">Add Address </button>
+                                <td><button type="submit" class="butn-style2 dark" style="border: none;"> Place Order
+                                    </button></td>
+                                <br>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- end left pannel section -->
+
+                    <!-- right pannel section -->
+                    <div class="col-lg-4 col-12 side-bar">
+
+                        <div class="widget">
+
+                            <div class="widget-title">
+                                <h5>Your Cart</h5>
+                            </div>
+
+
+                            <table class="table classic">
+
+                                <tbody>
+
+                                    <tr>
+
+                                        <th class="text-start text-uppercase font-weight-50"><span>Product</span> </th>
+                                        <th class="text-start text-uppercase">Total</th>
+
+                                    </tr>
+                                    <% user[0].cart.forEach((x)=>{ %>
+                                        <tr>
+
+                                            <td class="text-start">
+                                                <a href="#">
+                                                    <%= x.product.product_name %>
+                                                </a>
+                                            </td>
+                                            <td class="product-subtotal text-start">₹<%= x.price %>
+                                            </td>
+                                            <td class="product-remove text-center">
+                                                <a href="#"><i class="far fa-edit"></i></a>
+                                            </td>
+                                        </tr>
+
+
+                                        <!-- hide data  -->
+
+                                        <input type="hidden" name="qty" value="<%= x.qty %>">
+                                        <input type="text" name="productId" value="<%= x.product._id %>" hidden>
+                                        <input type="hidden" name="singleTotel" value="<%= x.price %>">
+                                        <input type="hidden" name="price" value="<%= x.product.price %>">
+
+
+                                        <% }) %>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div class="widget">
+
+                            <div class="widget-title">
+                                <h5>Order Summary</h5>
+                            </div>
+
+                            <table class="table classic">
+                                <tbody >
+                                    <tr>
+                                        <th>Cart Subtotal:</th>
+                                        <td class="text-gray-dark" >₹ <%= user[0].cartTotel %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Shipping:</th>
+                                        <td class="text-gray-dark">Free</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total:</th>
+                                        <td class="text-lg text-gray-dark">₹ <%= user[0].cartTotel %>
+                                        </td>
+                                        <input type="hidden" name="totel" value="<%= user[0].cartTotel %>">
+                                    </tr>
+                                    <tr>
+                                        <th id="discountt"></th>
+                                        <td class="text-gray-dark" id="discount"></td>
+                                    </tr>
+                                    <tr>
+                                        <th id="newtotal"></th>
+                                        <td class="text-gray-dark" id="newwtotal"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+                        </form>
+
+                    </div>
+                    <div class="col-12 cart-total pt-1-9 pt-lg-2-3">
+                        <div class="row">
+
+                            <div class="col-lg-5 col-md-12 ps-2-3 mb-1-9 mb-lg-0">
+                                <div id="accordion" class="accordion-style3">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseOne" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                    Coupon Code
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                            data-bs-parent="#accordion">
+                                            <div class="card-body">
+
+                                                <form id="apply_coupon">
+
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12 mb-2">
+
+                                                            <div class="form-group">
+                                                                <label>Enter Your Coupon Code</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="couponcode"
+                                                                    placeholder="Enter Your Coupon Code">
+                                                            </div>
+                                                            <input type="hidden" name="cartTotel" value="<%= user[0].cartTotel %>">
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <button type="submit" class="butn-style2 dark" onclick="">Apply Code</button>
+
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!-- end right pannel section -->
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- FOOTER
+        ================================================== -->
+        <%- include('../layouts/foot.ejs') %>
+    </div>
+
+
+    <div class="modal fade" id="add_address" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add
+                        Address</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="add">
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" class="form-control" name="name">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="text" class="form-control" name="number">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <input name="id" type="hidden">
+                                <div class="form-group">
+                                    <label>Pincode</label>
+                                    <input type="text" class="form-control" name="pincode">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <select class="form-control form-select" name="state">
+                                        <option selected="selected">
+
+                                        </option>
+                                        <option value="Andhra Pradesh">
+                                            Andhra Pradesh</option>
+                                        <option value="Arunachal Pradesh">
+                                            Arunachal Pradesh</option>
+                                        <option value="Assam">Assam
+                                        </option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chhattisgarh">
+                                            Chhattisgarh</option>
+                                        <option value="Goa ">Goa </option>
+                                        <option value="Gujarat ">Gujarat
+                                        </option>
+                                        <option value="Haryana ">Haryana
+                                        </option>
+                                        <option value="Himachal Pradesh ">
+                                            Himachal Pradesh </option>
+                                        <option value="Jharkhand ">Jharkhand
+                                        </option>
+                                        <option value="Karnataka ">Karnataka
+                                        </option>
+                                        <option value="Kerala ">Kerala
+                                        </option>
+                                        <option value="Madhya Pradesh ">
+                                            Madhya Pradesh </option>
+                                        <option value="Maharashtra ">
+                                            Maharashtra </option>
+                                        <option value="Manipur ">Manipur
+                                        </option>
+                                        <option value="Meghalaya ">Meghalaya
+                                        </option>
+                                        <option value="Mizoram ">Mizoram
+                                        </option>
+                                        <option value="Nagaland ">Nagaland
+                                        </option>
+                                        <option value="Odisha ">Odisha
+                                        </option>
+                                        <option value="Punjab ">Punjab
+                                        </option>
+                                        <option value="Rajasthan ">Rajasthan
+                                        </option>
+                                        <option value="Sikkim ">Sikkim
+                                        </option>
+                                        <option value="Tamil Nadu ">Tamil
+                                            Nadu </option>
+                                        <option value="Telangana ">Telangana
+                                        </option>
+                                        <option value="Tripura ">Tripura
+                                        </option>
+                                        <option value="Uttar Pradesh">Uttar
+                                            Pradesh</option>
+                                        <option value="Uttarakhand">
+                                            Uttarakhand</option>
+                                        <option value="West Bengal ">West
+                                            Bengal </option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>City / Town </label>
+                                    <input type="text" class="form-control" name="street">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>Place name </label>
+                                    <input type="text" class="form-control" name="place">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>Hosue No / Building Name </label>
+                                    <input type="text" class="form-control" name="building"
+                                        placeholder="Hosue No / Building Name ">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <button type="submit" class="btn btn-dark float-end" data-bs-dismiss="modal">Save</button>
+
+
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- SCROLL TO TOP
+    ================================================== -->
+    <a href="#" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
+    <script>
+
+        $(document).ready(function () {
+            $('#add').submit(function (event) {
+                event.preventDefault(); //prevent default form submit action
+                var formData = $(this).serialize(); //serialize form data
+                console.log("uyguyg");
+                console.log(formData);
+                $.ajax({
+                    type: 'POST',
+                    url: '/add_address',
+                    data: formData,
+                    success: function (response) {
+                        $('#reloadDiv').load('/checkout #reloadDiv')
+                        console.log(response);
+                        Swal.fire({
+                            title: 'Added!',
+                            text: 'Your address Added',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                    },
+                    error: function (xhr, status, error) {
+                        //handle error response
+                    }
+                });
+            });
+        });
+
+    </script>
+
+    <script>
+
+        (() => {
+            'use strict';
+
+
+            const forms = document.querySelectorAll('.needs-validation');
+
+
+            Array.prototype.slice.call(forms).forEach((form) => {
+                form.addEventListener('submit', (event) => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+
+
+
+    </script>
+
+    <script>
+        $('#checkout_form').submit((x) => {
+            console.log("dfsaf");
+            x.preventDefault()
+            $.ajax({
+                url: "/place_order",
+                method: "post",
+                data: $('#checkout_form').serialize(),
+                success: (response) => {
+                    if (response.status) {
+                        location.href = "/order_success"
+                    } else if (response.viewRazorpay) {
+                        razorpayPayment(response.order)
+
+
+                    }
+
+                }
+            })
+        })
+
+      
+        function razorpayPayment(order) {
+            var options = {
+                "key": "rzp_test_qZcUWE6G8eHzSR", // Enter the Key ID generated from the Dashboard
+                "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Ego.ft", //your business name
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+                    // alert(response.razorpay_payment_id);
+                    // alert(response.razorpay_order_id);
+                    // alert(response.razorpay_signature)
+                    console.log(+'dfdsfs');
+                    verifyPayment(response, order)
+                },
+                "prefill": {
+                    "name": "Sharath kumar A", //your customer's name
+                    "email": "sharathkannanakz@gmail.com",
+                    "contact": "9000090000"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                },
+                "modal": {
+                    escape: false,
+                    onDismiss: () => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Payment failed.',
+                        })
+
+                    }
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+        function verifyPayment(payment, order) {
+            console.log('from verifyPayment');
+            $.ajax({
+                url: '/verify-payment',
+                data: {
+                    payment,
+                    order
+                }, method: 'post',
+                success: (response) => {
+                   
+                    if (response.status == true) {
+                        window.location.hrefv = "/order_success"
+                    } else {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'payment failed',
+                            showConfirmButton: false,
+                            timer: 5000
+                        })
+                    }
+                }
+            })
+        }
+
+        $(document).ready(function () {
+            $('#apply_coupon').submit(function (event) {
+                event.preventDefault(); //prevent default form submit action
+                var formData = $(this).serialize(); //serialize form data
+                $.ajax({
+                    type: 'POST',
+                    url: '/apply_coupon',
+                    data: formData,
+                    success: function (response) {
+                        if(response.success){
+                            $('#reloadDiv').load('/checkout #reloadDiv')
+                            document.getElementById('discountt').innerHTML = 'discount amount : '
+                            document.getElementById('discount').innerHTML = "₹" + response.discount_value
+                            document.getElementById('newtotal').innerHTML = 'new total'
+                            document.getElementById('newwtotal').innerHTML = "₹" + response.value
+                        Swal.fire({
+                            title: 'Coupon Applied SuccessFully!',
+                            text: `You saved your ${response.discount_value}. Your new totel is ${response.value} `,
+                            icon: 'success',
+                            timer: 1000
+                        })
+                    }else if(response.used){
+                        Swal.fire({
+                            title: 'Coupon Already Used!',
+                            text: `You Already Used this coupon `,
+                            icon: 'error',
+                            timer: 1000
+                        })
+                    }else if(response.lessamount){
+                        Swal.fire({
+                            title: 'Coupon Not Applicable!',
+                            text: `The order totel is not sufficent to use this coupon`,
+                            icon: 'error',
+                            timer: 1000
+                        })
+                    }else if(response.expired){
+                        Swal.fire({
+                            title: 'Coupon Expired!',
+                            text: `The Coupon has Expired`,
+                            icon: 'error',
+                            timer: 1000
+                        })
+                    }else if(response.invalid){
+                        Swal.fire({
+                            title: 'Invalid Coupon!',
+                            text: `The Coupon code you enterd is in valid`,
+                            icon: 'error',
+                            timer: 1000
+                        })
+                    }
+                    },
+                    error: function (xhr, status, error) {
+                        //handle error response
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    </body>
+
+    <%- include('../layouts/footer.ejs') %>

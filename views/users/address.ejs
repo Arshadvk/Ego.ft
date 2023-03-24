@@ -1,0 +1,761 @@
+<%- include('../layouts/header.ejs') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <!-- PAGE LOADING
+    ================================================== -->
+    <div id="preloader"></div>
+
+    <!-- MAIN WRAPPER
+    ================================================== -->
+    <div class="main-wrapper mp-pusher" id="mp-pusher">
+
+        <!-- HEADER
+        ================================================== -->
+        <%- include('../layouts/nav.ejs') %>
+
+            <!-- CATEGORY MP-MENU
+        ================================================== -->
+            <div id="mp-menu" class="mp-menu">
+                <div class="mp-level">
+                    <h2>All Categories</h2>
+                    <ul>
+                        <li class="mp-has-sub">
+                            <a href="#">Devices</a>
+                            <div class="mp-level">
+                                <h2>Devices</h2>
+                                <a class="mp-back" href="#">back</a>
+                                <ul>
+                                    <li class="mp-has-sub">
+                                        <a href="#">Mobiles Phones</a>
+                                        <div class="mp-level">
+                                            <h2>Mobile Phones</h2>
+                                            <a class="mp-back" href="#">back</a>
+                                            <ul>
+                                                <li><a href="#">Apple Mobile</a></li>
+                                                <li><a href="#">OnePlus Mobile</a></li>
+                                                <li><a href="#">Lenovo Mobile</a></li>
+                                                <li><a href="#">Micromax Mobile</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="mp-has-sub">
+                                        <a href="#">Laptops</a>
+                                        <div class="mp-level">
+                                            <h2>Laptops</h2>
+                                            <a class="mp-back" href="#">back</a>
+                                            <ul>
+                                                <li><a href="#">Thin Laptops</a></li>
+                                                <li><a href="#">2-in-1 Laptops</a></li>
+                                                <li><a href="#">Gaming Laptops</a></li>
+                                                <li><a href="#">Budget Laptops</a></li>
+                                                <li><a href="#">Light Laptops</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="mp-has-sub">
+                                        <a href="#">Televisions</a>
+                                        <div class="mp-level">
+                                            <h2>Televisions</h2>
+                                            <a class="mp-back" href="#">back</a>
+                                            <ul>
+                                                <li><a href="#">Smart TV</a></li>
+                                                <li><a href="#">Full HD TV</a></li>
+                                                <li><a href="#">Android TV</a></li>
+                                                <li><a href="#">4K TV</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="mp-has-sub">
+                            <a href="#">Beauty &amp; Health</a>
+                            <div class="mp-level">
+                                <h2>Beauty &amp; Health</h2>
+                                <a class="mp-back" href="#">back</a>
+                                <ul>
+                                    <li><a href="#">Grooming</a></li>
+                                    <li><a href="#">Luxury Beauty</a></li>
+                                    <li><a href="#">Make-up</a></li>
+                                    <li><a href="#">Personal Care</a></li>
+                                    <li><a href="#">Nutrition Care</a></li>
+                                    <li><a href="#">Health Care</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="mp-has-sub">
+                            <a href="#">Store</a>
+                            <div class="mp-level">
+                                <h2>Store</h2>
+                                <a class="mp-back" href="#">back</a>
+                                <ul>
+                                    <li class="mp-has-sub">
+                                        <a class="icon icon-t-shirt" href="#">Clothes</a>
+                                        <div class="mp-level">
+                                            <h2 class="icon icon-t-shirt">Clothes</h2>
+                                            <a class="mp-back" href="#">back</a>
+                                            <ul>
+                                                <li>
+                                                    <a class="icon icon-female" href="#">Women's Clothing</a>
+                                                </li>
+                                                <li>
+                                                    <a class="icon icon-male" href="#">Men's Clothing</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="icon icon-diamond" href="#">Watches</a>
+                                    </li>
+                                    <li>
+                                        <a class="icon icon-music" href="#">Shoes</a>
+                                    </li>
+                                    <li>
+                                        <a class="icon icon-food" href="#">Jewellery</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="#">Books &amp; Audible</a></li>
+                        <li><a href="#">Movies &amp; Games</a></li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <!-- PAGE TITLE
+        ================================================== -->
+            <section class="page-title-section bg-img cover-background" data-background="img/bg/page-title.jpg">
+                <div class="container">
+
+                    <div class="title-info">
+                        <h1>Your Addresses</h1>
+                    </div>
+                    <div class="breadcrumbs-info">
+                        <ul class="ps-0">
+
+                            <li><a href="/home">Home</a></li>
+                            <li><a href="/profile">Profile</a></li>
+                            <li><a href="#">Your Addresses</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- CHECKOUT
+        ================================================== -->
+            <section class="md">
+                <div class="container">
+                    <div class="row">
+
+
+
+
+
+                        <div class="row text-center mt-n4">
+                            <% if(user[0].address.length>0 ){
+                                user[0].address.forEach((x)=>{ %>
+                                <div class="col-md-3 mt-4">
+                                    <div class="border px-1-6 py-1-9 p-lg-1-9 h-100">
+                                        <strong>
+                                            <%= x.name %>
+                                        </strong> <br>
+                                        <%= x.building %> <br>
+                                            <%= x.street %> <br>
+                                                <%= x.state %> <br>
+                                                    <%= x.number %> <br>
+                                                        <%= x.pincode %> <br>
+
+
+                                                            <hr>
+                                                            <button style="border: none;" class="btn btn-dark"
+                                                                onclick="delete_address('<%= x._id %>')">
+                                                                Remove </button>
+
+
+
+                                                            <button type="button" class="btn btn-warning"
+                                                                data-bs-toggle="modal" data-bs-target="#add<%=x._id%>">
+                                                                Edit
+                                                            </button>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="add<%= x._id%>" tabindex="-1"
+                                                                role="dialog" aria-labelledby="exampleModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="exampleModalLabel">
+                                                                                Edit
+                                                                                Address</h5>
+                                                                            <button type="button" class="btn-close"
+                                                                                data-bs-dismiss="modal"
+                                                                                aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form method="post" id="myform"
+                                                                                class="row g-3 needs-validation"
+                                                                                action="/edit-address" novalidate>
+
+                                                                                <div class="row">
+
+                                                                                    <div class="col-sm-6">
+
+                                                                                        <div class="form-group">
+                                                                                            <label>Full Name</label>
+                                                                                            <input type="text"
+                                                                                                class="form-control"
+                                                                                                name="name"
+                                                                                                value="<%= x.name %>"
+                                                                                                required>
+                                                                                            <div
+                                                                                                class="invalid-feedback">
+                                                                                                Please Enter Name</div>
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                    <div class="col-sm-6">
+
+                                                                                        <div class="form-group">
+                                                                                            <label>Phone Number</label>
+                                                                                            <input type="text"
+                                                                                                class="form-control"
+                                                                                                name="number"
+                                                                                                value="<%= x.number %>"
+                                                                                                required>
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                </div>
+
+                                                                                <div class="row">
+
+                                                                                    <div class="col-sm-6">
+                                                                                        <input name="id" type="hidden"
+                                                                                            value="<%= x._id %>">
+                                                                                        <div class="form-group">
+                                                                                            <label>Pincode</label>
+                                                                                            <input type="text"
+                                                                                                class="form-control"
+                                                                                                name="pincode"
+                                                                                                value="<%= x.pincode %> ">
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                    <div class="col-sm-6">
+
+                                                                                        <div class="form-group">
+                                                                                            <label>State</label>
+                                                                                            <select
+                                                                                                class="form-control form-select"
+                                                                                                name="state">
+                                                                                                <option
+                                                                                                    value="<%= x.state %>"
+                                                                                                    selected="selected">
+                                                                                                    <%= x.state %>
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Andhra Pradesh">
+                                                                                                    Andhra Pradesh
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Arunachal Pradesh">
+                                                                                                    Arunachal Pradesh
+                                                                                                </option>
+                                                                                                <option value="Assam">
+                                                                                                    Assam
+                                                                                                </option>
+                                                                                                <option value="Bihar">
+                                                                                                    Bihar
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Chhattisgarh">
+                                                                                                    Chhattisgarh
+                                                                                                </option>
+                                                                                                <option value="Goa ">Goa
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Gujarat ">
+                                                                                                    Gujarat
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Haryana ">
+                                                                                                    Haryana
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Himachal Pradesh ">
+                                                                                                    Himachal Pradesh
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Jharkhand ">
+                                                                                                    Jharkhand
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Karnataka ">
+                                                                                                    Karnataka
+                                                                                                </option>
+                                                                                                <option value="Kerala ">
+                                                                                                    Kerala
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Madhya Pradesh ">
+                                                                                                    Madhya Pradesh
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Maharashtra ">
+                                                                                                    Maharashtra
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Manipur ">
+                                                                                                    Manipur
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Meghalaya ">
+                                                                                                    Meghalaya
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Mizoram ">
+                                                                                                    Mizoram
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Nagaland ">
+                                                                                                    Nagaland
+                                                                                                </option>
+                                                                                                <option value="Odisha ">
+                                                                                                    Odisha
+                                                                                                </option>
+                                                                                                <option value="Punjab ">
+                                                                                                    Punjab
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Rajasthan ">
+                                                                                                    Rajasthan
+                                                                                                </option>
+                                                                                                <option value="Sikkim ">
+                                                                                                    Sikkim
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Tamil Nadu ">
+                                                                                                    Tamil
+                                                                                                    Nadu </option>
+                                                                                                <option
+                                                                                                    value="Telangana ">
+                                                                                                    Telangana
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Tripura ">
+                                                                                                    Tripura
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    value="Uttar Pradesh">
+                                                                                                    Uttar
+                                                                                                    Pradesh</option>
+                                                                                                <option
+                                                                                                    value="Uttarakhand">
+                                                                                                    Uttarakhand</option>
+                                                                                                <option
+                                                                                                    value="West Bengal ">
+                                                                                                    West
+                                                                                                    Bengal </option>
+                                                                                            </select>
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                </div>
+
+                                                                                <div class="row">
+
+                                                                                    <div class="col-sm-6">
+
+                                                                                        <div class="form-group">
+                                                                                            <label>District </label>
+                                                                                            <input type="text"
+                                                                                                class="form-control"
+                                                                                                name="street"
+                                                                                                value=" <%= x.district %>">
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                    <div class="col-sm-6">
+
+                                                                                        <div class="form-group">
+                                                                                            <label>City / Town </label>
+                                                                                            <input type="text"
+                                                                                                class="form-control"
+                                                                                                name="street"
+                                                                                                value=" <%= x.street %>">
+                                                                                        </div>
+
+                                                                                    </div>
+
+
+
+                                                                                </div>
+
+                                                                                <div class="row">
+
+                                                                                    <div class="col-sm-6">
+
+                                                                                        <div class="form-group">
+                                                                                            <label>Place name </label>
+                                                                                            <input type="text"
+                                                                                                class="form-control"
+                                                                                                name="place"
+                                                                                                value=" <%= x.street %>">
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                    <div class="col-sm-6">
+
+                                                                                        <div class="form-group">
+                                                                                            <label>Hosue No / Building
+                                                                                                no
+                                                                                            </label>
+                                                                                            <input type="text"
+                                                                                                class="form-control"
+                                                                                                name="building"
+                                                                                                placeholder="Hosue No / Building Name "
+                                                                                                value=" <%= x.building %>">
+                                                                                        </div>
+
+                                                                                    </div>
+
+
+
+                                                                                </div>
+
+
+                                                                                <button type="submit"
+                                                                                    class="btn btn-dark float-end"
+                                                                                    data-bs-dismiss="modal">Save</button>
+
+
+
+                                                                            </form>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                    </div>
+
+                                </div>
+                                <% })} %>
+
+                        </div>
+
+                        <div class="buttons-set">
+                            <td> <button type="button" class="butn-style2 dark" data-bs-toggle="modal"
+                                    data-bs-target="#add_address" style="border: none;">Add Address </button></td>
+
+
+                            <br>
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER
+        ================================================== -->
+            <%- include('../layouts/foot.ejs') %>
+    </div>
+
+    <div class="modal fade" id="add_address" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add
+                        Address</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="add">
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" class="form-control" name="name">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="text" class="form-control" name="number">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <input name="id" type="hidden">
+                                <div class="form-group">
+                                    <label>Pincode</label>
+                                    <input type="text" class="form-control" name="pincode">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <select class="form-control form-select" name="state">
+                                        <option selected="selected">
+
+                                        </option>
+                                        <option value="Andhra Pradesh">
+                                            Andhra Pradesh</option>
+                                        <option value="Arunachal Pradesh">
+                                            Arunachal Pradesh</option>
+                                        <option value="Assam">Assam
+                                        </option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chhattisgarh">
+                                            Chhattisgarh</option>
+                                        <option value="Goa ">Goa </option>
+                                        <option value="Gujarat ">Gujarat
+                                        </option>
+                                        <option value="Haryana ">Haryana
+                                        </option>
+                                        <option value="Himachal Pradesh ">
+                                            Himachal Pradesh </option>
+                                        <option value="Jharkhand ">Jharkhand
+                                        </option>
+                                        <option value="Karnataka ">Karnataka
+                                        </option>
+                                        <option value="Kerala ">Kerala
+                                        </option>
+                                        <option value="Madhya Pradesh ">
+                                            Madhya Pradesh </option>
+                                        <option value="Maharashtra ">
+                                            Maharashtra </option>
+                                        <option value="Manipur ">Manipur
+                                        </option>
+                                        <option value="Meghalaya ">Meghalaya
+                                        </option>
+                                        <option value="Mizoram ">Mizoram
+                                        </option>
+                                        <option value="Nagaland ">Nagaland
+                                        </option>
+                                        <option value="Odisha ">Odisha
+                                        </option>
+                                        <option value="Punjab ">Punjab
+                                        </option>
+                                        <option value="Rajasthan ">Rajasthan
+                                        </option>
+                                        <option value="Sikkim ">Sikkim
+                                        </option>
+                                        <option value="Tamil Nadu ">Tamil
+                                            Nadu </option>
+                                        <option value="Telangana ">Telangana
+                                        </option>
+                                        <option value="Tripura ">Tripura
+                                        </option>
+                                        <option value="Uttar Pradesh">Uttar
+                                            Pradesh</option>
+                                        <option value="Uttarakhand">
+                                            Uttarakhand</option>
+                                        <option value="West Bengal ">West
+                                            Bengal </option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>City / Town </label>
+                                    <input type="text" class="form-control" name="street">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>Place name </label>
+                                    <input type="text" class="form-control" name="place">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>Hosue No / Building Name </label>
+                                    <input type="text" class="form-control" name="building"
+                                        placeholder="Hosue No / Building Name ">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <button type="submit" class="btn btn-dark float-end" data-bs-dismiss="modal">Save</button>
+
+
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SCROLL TO TOP
+    ================================================== -->
+    <a href="#" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
+
+    <script>
+
+        $(document).ready(function () {
+            $('#add').submit(function (event) {
+                event.preventDefault(); //prevent default form submit action
+                var formData = $(this).serialize(); //serialize form data
+                console.log("uyguyg");
+                console.log(formData);
+                $.ajax({
+                    type: 'POST',
+                    url: '/add_address',
+                    data: formData,
+                    success: function (response) {
+                        $('#reloadDiv').load('/checkout #reloadDiv')
+                        console.log(response);
+                        Swal.fire({
+                            title: 'Added!',
+                            text: 'Your address Added',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                    },
+                    error: function (xhr, status, error) {
+                        //handle error response
+                    }
+                });
+            });
+        });
+
+
+        function delete_address(add_id) {
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You wan't to delete!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'yes, delete!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "/delete_address",
+                        data: {
+                            address: add_id
+                        },
+                        method: 'post',
+                        success: (response) => {
+                            console.log("waoring")
+
+                            $('#reloadDiv').load('/address #reloadDiv')
+                            console.log(response);
+                            Swal.fire({
+                                title: 'deleted!',
+                                text: 'Your deleted',
+                                icon: 'success',
+                                showConfirmButton: false
+                            })
+                            //  setTimeout(()=>{
+                            //     location.reload()
+                            //  },1000);
+
+                        }
+
+                    })
+                }
+            })
+        }
+
+
+        $(document).ready(function () {
+            $('#myform').submit(function (event) {
+                event.preventDefault(); //prevent default form submit action
+                var formData = $(this).serialize(); //serialize form data
+                $.ajax({
+                    type: 'POST',
+                    url: '/edit-address',
+                    data: formData,
+                    success: function (response) {
+                        $('#reloadDiv').load('/address #reloadDiv')
+                        Swal.fire({
+                            title: 'Edited!',
+                            text: 'Your address edited',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                    },
+                    error: function (xhr, status, error) {
+                        //handle error response
+                    }
+                });
+            });
+        });
+
+        (() => {
+            'use strict';
+
+
+            const forms = document.querySelectorAll('.needs-validation');
+
+
+            Array.prototype.slice.call(forms).forEach((form) => {
+                form.addEventListener('submit', (event) => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+
+    </body>
+    <%- include('../layouts/footer.ejs') %>

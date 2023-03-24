@@ -1,0 +1,527 @@
+<%- include('../layouts/header.ejs') %>
+    <%- include('../layouts/nav.ejs') %>
+
+        <!-- PAGE TITLE
+        ================================================== -->
+        <section class="page-title-section bg-img cover-background" data-background="img/bg/page-title.jpg">
+            <div class="container">
+
+                <div class="title-info">
+                    <h1>Shop Product Detail</h1>
+                </div>
+                <div class="breadcrumbs-info">
+                    <ul class="ps-0">
+                        <li><a href="home-shop-1.html">Home</a></li>
+                        <li><a href="#">Shop Product Detail</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PRODUCT DETAILS
+        ================================================== -->
+        <section class="md">
+            <div class="container">
+
+                <!-- product section -->
+                <div class="row mb-6 mb-md-7 mb-lg-9">
+                    <div class="col-lg-5 text-center text-lg-start mb-1-9 mb-lg-0">
+
+                        <!-- product left start -->
+                        <div class="xzoom-container">
+                            <img class="xzoom5 mb-1-9" id="xzoom-magnific" src="product_img/<%=product[0].image[0] %>"
+                                xoriginal="product_img/<%=product[0].image[0] %>" alt="..." />
+                            <div class="xzoom-thumbs no-margin">
+
+                                <% if(product[0].image.length> 0){
+                                    for (let i = 0; i <product[0].image.length; i++) { %>
+
+                                        <a href="product_img/<%=product[0].image[i] %>"><img class="xzoom-gallery5"
+                                                width="80" src="product_img/<%=product[0].image[i] %>"
+                                                title="The description goes here"></a>
+                                        <% } } %>
+
+                            </div>
+
+                        </div>
+                        <!-- product left end -->
+
+                    </div>
+                    <div class="col-lg-7 ps-lg-2-3">
+                        <div class="product-detail">
+                            <h2 class="mb-1">
+                                <%=product[0].product_name %> <span
+                                        class="label-sale bg-primary text-white text-uppercase display-31">Sale</span>
+                            </h2>
+                            <div class="bg-primary separator-line-horrizontal-full mb-4"></div>
+                            <p class="rating-text"><span>SKU:</span> <span class="font-500 theme-color">290397</span>
+                            </p>
+                            <p>Lorem ipsum dolor ut sit ame dolore adipiscing elit, sed nonumy nibh sed euismod laoreet
+                                dolore magna aliquarm erat volutpat Nostrud duis molestie at dolore.</p>
+
+                            <div class="mb-4">
+
+                                <div class="d-inline-block me-3 pe-3 borders-end border-color-extra-medium-gray">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+
+                                <div class="d-inline-block">
+                                    <a class="text-primary" href="#">Write a review</a>
+                                </div>
+
+                            </div>
+                            <div class="mb-4">
+                                <span class="me-3 display-26 font-weight-600 offer-price">₹<%= product[0].offer_price %>
+                                </span>
+                                <span class="display-26 font-weight-700 text-primary">₹<%= product[0].price %></span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-5 col-md-3">
+                                    <label>Size:</label>
+
+                                    <select class="mb-4 form-control medium form-select">
+                                        <% for(let i=0 ; i<product[0].size.length; i++){ %>
+                                            <option value="<%= product[0].size[i] %>">
+                                                <%= product[0].size[i] %>
+                                            </option>
+
+                                            <% } %>
+                                    </select>
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-4 col-lg-2">
+                                    <label>Qty:</label>
+                                    <input type="text" value="1" placeholder="1" class="form-control medium mb-4">
+                                </div>
+
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-lg-12">
+                                    <button onclick="addtocart('<%= product[0]._id %>','<%= product[0].price %>')"
+                                        class="butn-style2 me-3 mb-2 mb-md-0"><span><i
+                                                class="fas fa-shopping-cart me-1"></i> Add to Cart</span></button>
+                                    <button onclick="addtowishlist('<%= product[0]._id %>')"
+                                        class="butn-style2 dark"><span><i class="fas fa-heart me-1"></i> Add to
+                                            wishlist</span></button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-lg-7">
+
+                                    <label class="font-weight-600">Share on:</label>
+                                    <ul class="social-icon-style1 ps-0">
+                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    </ul>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end product section -->
+
+                <!-- product description -->
+                <div class="row justify-content-center mb-6 mb-md-7">
+
+                    <div class="col-12">
+                        <div class="horizontaltab tab-style-two">
+                            <ul class="resp-tabs-list hor_1 text-start">
+                                <li><i class="ti-line-dashed d-md-block d-none"></i>Description</li>
+                                <li><i class="ti-more d-md-block d-none"></i>Additional Info</li>
+                                <li><i class="ti-star d-md-block d-none"></i>Reviews (2)</li>
+                            </ul>
+                            <div class="resp-tabs-container hor_1">
+                                <div>
+
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+                                        veritatis et quasi architecto in ea voluptate velit. Sed ut perspiciatis unde
+                                        omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
+                                        rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto in
+                                        ea voluptate velit.</p>
+                                    <ul class="primary-list mb-4 ps-0">
+                                        <li>Sed ut perspiciatis unde omnis iste</li>
+                                        <li>Inventore veritatis et quasi architecto</li>
+                                        <li>Voluptatem accusantium doloremque</li>
+                                        <li>Quasi architecto in ea voluptate veli</li>
+                                    </ul>
+                                    <p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                                        inventore veritatis et quasi architecto in ea voluptate velit.</p>
+
+                                </div>
+                                <div>
+                                    <div class="row">
+                                        <div class="col-lg-6 mb-1-9 mb-lg-0">
+
+                                            <h3 class="display-29">Information:</h3>
+                                            <ul class="primary-list mb-1-9">
+                                                <li><strong>Weight:</strong> 15 grams</li>
+                                                <li><strong>Dimensions:</strong> 8.03 x 1.27 x 2.54 Cm</li>
+                                                <li><strong>Size:</strong> 64 GB</li>
+                                                <li><strong>Color:</strong> White</li>
+                                                <li><strong>Guarantee:</strong> 5 Years</li>
+                                            </ul>
+
+                                            <p class="mb-0">Sed ut perspiciatis unde omnis iste natus error sit
+                                                voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+                                                ipsa quae ab illo inventore veritatis et quasi architecto in ea
+                                                voluptate velit.</p>
+
+                                        </div>
+                                        <div class="col-lg-6 ps-lg-1-9">
+
+                                            <div class="table-responsive">
+                                                <table class="table bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Shipping Options</th>
+                                                            <th>Delivery Time</th>
+                                                            <th>Price</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                Standard Shipping
+                                                            </td>
+                                                            <td>
+                                                                Delivery in 5 - 7 working days
+                                                            </td>
+                                                            <td>
+                                                                $8.00
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Express Shipping
+                                                            </td>
+                                                            <td>
+                                                                28 August 2022
+                                                            </td>
+                                                            <td>
+                                                                $12.00
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                1 - 2 day Shipping
+                                                            </td>
+                                                            <td>
+                                                                27 August 2022
+                                                            </td>
+                                                            <td>
+                                                                $12.00
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Free Shipping
+                                                            </td>
+                                                            <td>
+                                                                25 August 2022
+                                                            </td>
+                                                            <td>
+                                                                $0.00
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <div class="row">
+
+                                        <div class="col-lg-6 order-lg-2 mb-1-9 mb-lg-0">
+                                            <div class="common-block">
+
+                                                <div class="mb-2-3 pb-2-3 border-bottom">
+
+                                                    <div class="media mb-4 product-review">
+                                                        <img class="me-3 rounded-circle w-60px"
+                                                            src="/userr/img/avatar/t-1.jpg" alt="...">
+                                                        <div class="media-body">
+                                                            <a href="#"
+                                                                class="mb-1 font-weight-600 text-extra-dark-gray">Jonal
+                                                                Doe</a>
+                                                            <span class="d-block text-primary">Sep 15, 2018</span>
+                                                        </div>
+
+                                                        <span class="text-primary">
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star-half-alt"></i>
+                                                        </span>
+
+                                                    </div>
+
+                                                    <p class="mb-0">Consectetur adipisicing elit, sed do eiusmod tempor
+                                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                                        veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                        aliquip.</p>
+
+                                                </div>
+
+                                                <div class="pb-4">
+
+                                                    <div class="media mb-4 product-review">
+                                                        <img class="me-3 rounded-circle w-60px"
+                                                            src="/userr/img/avatar/t-2.jpg" alt="...">
+                                                        <div class="media-body">
+                                                            <a href="#"
+                                                                class="mb-1 font-weight-600 text-extra-dark-gray">Marina
+                                                                Modra</a>
+                                                            <span class="d-block text-primary">Sep 15, 2018</span>
+                                                        </div>
+
+                                                        <span class="text-primary">
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star-half-alt"></i>
+                                                        </span>
+
+                                                    </div>
+
+                                                    <p class="mb-0">Excepteur sint occaecat cupidatat non proident, sunt
+                                                        in culpa qui officia deserunt mollit anim id est laborum. Sed ut
+                                                        perspiciatis unde omnis iste natus error sit voluptatem.</p>
+
+                                                </div>
+
+                                                <div class="text-start">
+                                                    <a href="#" class="butn-style2 small">Load More Reviews</a>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-6 order-lg-1">
+
+                                            <div class="common-block">
+
+                                                <div class="inner-title">
+                                                    <h4 class="mb-0">Leave Review</h4>
+                                                    <p class="mb-0">Leave review takes it to the next level.</p>
+                                                </div>
+
+                                                <form>
+
+                                                    <div class="row">
+
+                                                        <div class="col-sm-6">
+
+                                                            <div class="form-group">
+                                                                <label>Your Name</label>
+                                                                <input type="text" class="form-control" name="name"
+                                                                    placeholder="Your name here">
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+
+                                                            <div class="form-group">
+                                                                <label>Your Email</label>
+                                                                <input type="email" class="form-control" name="email"
+                                                                    placeholder="Your email here">
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12 mb-2">
+
+                                                            <div class="form-group">
+                                                                <label>Rating</label>
+                                                                <select class="form-control form-select">
+                                                                    <option>5 Stars</option>
+                                                                    <option>4 Stars</option>
+                                                                    <option>3 Stars</option>
+                                                                    <option>2 Stars</option>
+                                                                    <option>1 Star</option>
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+
+                                                        <div class="col-12 mb-4">
+
+                                                            <label>Comment</label>
+                                                            <div class="form-group mb-1">
+                                                                <textarea rows="2" class="form-control"
+                                                                    placeholder="Tell us a few words"></textarea>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <button type="button" class="butn-style2">Submit Review</button>
+
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end product description -->
+
+                <!-- related product -->
+                <div class="inner-title">
+                    <h3 class="mb-0">Related Products</h3>
+                </div>
+
+                <div class="product-grid-slide owl-carousel owl-theme">
+
+                    <% products.forEach(x=> { %>
+
+
+                        <div class="product-grid">
+                            <div class="product-img">
+                                <a href="shop-product-detail.html"><img src="product_img/<%=x.image[0] %>"
+                                        alt="..."></a>
+                            </div>
+                            <div class="product-description">
+                                <h3><a href="shop-product-detail.html">
+                                        <%= x.product_name %>
+                                    </a></h3>
+                                <h4 class="price">
+                                    <span class="offer-price">
+                                        <%= x.offer_price %>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="product-buttons">
+                                <ul class="ps-0">
+                                    <li><button type="button" style="border: none;"
+                                            onclick="addtowishlist('<%= x._id %>')" class="btn btn-link"
+                                            title="Add To Wishlist"><i class="far fa-heart"></i></button></li>
+                                    <li><button type="button" style="border: none;"
+                                            onclick="addtocart('<%= x._id %>','<%= x.offer_price %>','<%= x.price %>')"
+                                            class="btn btn-link" title="Add To Wishlist">Add to
+                                            Cart</button></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <% }); %>
+
+
+
+
+                </div>
+                <!-- end related product -->
+
+            </div>
+        </section>
+
+        <!-- FOOTER
+        ================================================== -->
+        <%- include('../layouts/foot.ejs') %>
+
+        </div>
+
+        <!-- BUY TEMPLATE
+    ================================================== -->
+        <div class="buy-theme alt-font d-none d-lg-inline-block"><a
+                href="https://wrapbootstrap.com/theme/smartshop-multipurpose-ecommerce-template-WB0N7CT4D"
+                target="_blank"><i class="fas fa-cart-plus"></i><span>Buy Template</span></a></div>
+
+        <div class="all-demo alt-font d-none d-lg-inline-block"><a href="https://www.chitrakootweb.com/contact.html"
+                target="_blank"><i class="far fa-envelope"></i><span>Quick Question?</span></a></div>
+
+        <!-- SCROLL TO TOP
+    ================================================== -->
+        <a href="#" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
+
+        <script>
+
+            function addtowishlist(proid) {
+
+                $.ajax({
+                    url: '/add_to_wishlist',
+                    data: {
+                        productId: proid
+                    },
+                    method: 'post',
+
+                    success: (response) => {
+                        console.log("waoring")
+
+                        console.log(response);
+                        Swal.fire({
+                            title: 'added',
+                            text: 'product added to whilist',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+
+                    }
+                })
+
+            }
+            function addtocart(proid,pro_price) {
+
+                $.ajax({
+                    url: '/add_cart',
+                    data: {
+                        productId: proid,
+                        price: pro_price
+                    },
+                    method: 'post',
+
+                    success: (res) => {
+                        Swal.fire({
+                            title: 'Added',
+                            text: 'product added to cart',
+                            icon: 'success',
+                            showConfirmButton: false
+                        })
+                    }
+                })
+
+            }
+        </script>
+
+        <%- include('../layouts/footer.ejs') %>

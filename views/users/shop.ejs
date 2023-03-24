@@ -1,0 +1,279 @@
+<%- include('../layouts/header.ejs') %>
+    <div id="preloader"></div>
+    <div class="main-wrapper mp-pusher" id="mp-pusher">
+        <%- include('../layouts/nav.ejs') %>
+
+            <section class="page-title-section bg-img cover-background" data-background="img/bg/page-title.jpg">
+                <div class="container">
+
+                    <div class="title-info">
+                        <h1>
+                            <%= category_name %>
+                        </h1>
+                    </div>
+                    <div class="breadcrumbs-info">
+                        <ul class="ps-0">
+                            <li><a href="home-shop-1.html">Home</a></li>
+                            <li><a href="#">Shop Product Grid</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- PRODUCT GRID
+        ================================================== -->
+            <section class="md">
+                <div class="container">
+                    <div class="row">
+
+                        <!-- sidebar panel -->
+                        <div class="col-lg-3 col-12 side-bar order-2 order-lg-1">
+                            <div class="widget">
+                                <div id="accordion" class="accordion-style2">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseOne" aria-expanded="true"
+                                                    aria-controls="collapseOne">Categories</button>
+                                                <br>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                            data-bs-parent="#accordion">
+                                            <div class="card-body">
+                                                <ul class="list-unstyled">
+                                                    <% if(category.length>0){
+                                                        for(let i=0 ; i<category.length ; i++) {%>
+                                                            <li><a href="/category?name=<%= category[i]._id %>">
+                                                                    <%= category[i].category_name %>
+                                                                </a></li>
+                                                            <% } } %>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h5>Price Range</h5>
+                                </div>
+                                <input type="text" class="price-range" name="my_range" value="">
+                                <a href="#" class="butn-style2 small mt-1-9">Filter</a>
+                            </div>
+
+
+
+
+
+                            <div class="offer-slider owl-carousel owl-theme">
+                                <% coupon.forEach(x=> { %>
+                                    <div class="offer-banner-slider"
+                                        style="background-image:url(img/offer-banner/offer-slide-01.jpg);">
+                                        <div class="offer-text">
+                                            <h6 class="mb-1 text-white font-weight-500">
+                                                <%= x.coupon_name %>
+                                            </h6>
+
+                                            <h4 class="font-weight-500"><a href="#">Up to <%= x.discountpercentage %>%
+                                                        Off</a></h4>
+                                            <p>
+                                                <%= x.description%>
+                                            </p>
+                                            <a class="butn-style1 fill small" href="#"><span>Buy Now</span></a>
+                                        </div>
+                                    </div>
+                                    <% }); %>
+                            </div>
+
+                        </div>
+                        <!-- end sidebar panel -->
+
+                        <!-- right panel section -->
+                        <div class="col-lg-9 col-12 ps-lg-1-9 order-1 order-lg-2 mb-1-9 mb-lg-0">
+
+                            <div class="row g-0 align-items-center bg-light rounded p-3 mb-1-9">
+
+                                <div class="col-12 col-md my-1 my-md-0 text-center text-md-start font-weight-600">
+                                    Showing
+                                    1–9 of 27 results</div>
+
+                                <div class="col-12 col-md-auto">
+
+                                    <div class="row justify-content: flex-start">
+
+                                        <div class="col-auto my-1 my-md-0">
+                                            <label class="m-0">Show:</label>
+                                            <select class="w-auto d-inline-block form-select">
+                                                <option value="#?limit=24" selected="selected">24</option>
+                                                <option value="#?limit=25">25</option>
+                                                <option value="#?limit=50">50</option>
+                                                <option value="#?limit=75">75</option>
+                                                <option value="#?limit=100">100</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-auto my-1 my-md-0">
+                                            <label class="m-0">Sort By:</label>
+                                            <select class="w-auto d-inline-block form-select">
+                                                <option value="#?sort=p.sort_order&amp;order=ASC">Default</option>
+                                                <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
+                                                <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
+                                                <option value="?sort=p.priceorder=ASC" selected="">Price (Low &gt;
+                                                    High)</option>
+                                                <option value="/sort?sort=priceDESC">Price (High &gt; Low)
+                                                </option>
+                                                <option value="#?sort=rating&amp;order=DESC">Rating (Highest)</option>
+                                                <option value="#?sort=rating&amp;order=ASC">Rating (Lowest)</option>
+                                                <option value="#?sort=p.model&amp;order=ASC">Model (A - Z)</option>
+                                                <option value="#?sort=p.model&amp;order=DESC">Model (Z - A)</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row justify-content-flex-start">
+
+                                <% if(product.length> 0){
+
+                                    for(let i=0; i<product.length; i++){ %>
+
+                                        <div class="col-11 col-sm-6 col-xl-4 mb-1-9">
+                                            <div class="product-grid">
+                                                <div class="product-img">
+                                                    <a href="/product_view?name=<%= product[i]._id %>">
+                                                        <div class="label-offer bg-red">Sale</div><img
+                                                            src="/product_img/<%= product[i].image[0] %>" alt="...">
+                                                    </a>
+                                                </div>
+                                                <div class="product-description">
+                                                    <h3><a href="/product_view?name=<%= product[i]._id %>">
+                                                            <%= product[i].product_name %>
+                                                        </a></h3>
+                                                    <h4 class="price">
+                                                        <span class="regular-price line-through">₹ <%= product[i].price
+                                                                %></span>
+                                                        <span class="offer-price">₹ <%= product[i].offer_price %></span>
+                                                    </h4>
+                                                </div>
+                                                <div class="product-buttons">
+                                                    <ul class="ps-0">
+                                                        <li><button type="button" style="border: none;"
+                                                                onclick="addtowishlist('<%= product[i]._id %>')"
+                                                                class="btn btn-link" title="Add To Wishlist"><i
+                                                                    class="far fa-heart"></i></button></li>
+                                                        <li><button type="button" style="border: none;"
+                                                                onclick="addtocart('<%= product[i]._id %>','<%= product[i].price %>')"
+                                                                class="btn btn-link" title="Add To Wishlist">Add to
+                                                                Cart</button></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <% }} %>
+
+                            </div>
+
+                            <!-- pagination -->
+                            <div class="pagination text-small text-uppercase text-extra-dark-gray mt-4">
+                                <ul>
+                                    <li><a href="#"><i
+                                                class="fas fa-long-arrow-alt-left me-1 d-none d-sm-inline-block"></i>
+                                            Prev</a></li>
+                                    <% for(let i=1;i<=countpro;i++){%>
+                                        <li class="active"><a href="?page=<%=i%>">
+                                                <%=i%>
+                                            </a></li>
+                                        <% }%>
+                                            <li><a href="#">Next <i
+                                                        class="fas fa-long-arrow-alt-right ms-1 d-none d-sm-inline-block"></i></a>
+                                            </li>
+                                </ul>
+                            </div>
+                            <!-- end pagination -->
+
+                        </div>
+                        <!-- end right panel section -->
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER
+        ================================================== -->
+            <%- include('../layouts/foot.ejs') %>
+
+    </div>
+
+    <!-- SCROLL TO TOP
+    ================================================== -->
+    <a href="#" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
+
+    <script>
+
+        function addtowishlist(proid) {
+
+            $.ajax({
+                url: '/add_to_wishlist',
+                data: {
+                    productId: proid
+                },
+                method: 'post',
+
+                success: (response) => {
+                    console.log("waoring")
+
+                    console.log(response);
+                    Swal.fire({
+                        title: 'added',
+                        text: 'product added to whilist',
+                        icon: 'success',
+                        showConfirmButton: false
+                    })
+                    //  setTimeout(()=>{
+                    //     location.reload()
+                    //  },1000);
+
+                }
+            })
+
+        }
+        function addtocart(proid, pro_price) {
+
+            $.ajax({
+                url: '/add_cart',
+                data: {
+                    productId: proid,
+                    price: pro_price
+                },
+                method: 'post',
+
+                success: (res) => {
+                    console.log(res);
+                    console.log(response);
+                    Swal.fire({
+                        title: 'Added',
+                        text: 'product added to cart',
+                        icon: 'success',
+                        showConfirmButton: false
+                    })
+                }
+            })
+
+        }
+    </script>
+
+    <%- include('../layouts/footer.ejs') %>
