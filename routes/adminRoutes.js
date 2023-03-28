@@ -8,6 +8,7 @@ const admincontroller = require('../controllers/admin');
 const product_controller = require('../controllers/product');
 const category_controller = require('../controllers/category');
 const order_controller = require('../controllers/order');
+const Banner = require('../models/banner');
 
 const upload = config.Storage()
 
@@ -58,13 +59,14 @@ admin_route.get('/add-category', auth.isLogin, category_controller.loadAddCatego
 admin_route.post('/add-category', upload.single('image'), category_controller.addCategory);
 admin_route.get('/list-category', auth.isLogin, category_controller.listCategory);
 admin_route.get('/delete-category', auth.isLogin, category_controller.deleteCategory);
-admin_route.get('/edit-category', auth.isLogin);
+
 
 //banner managment 
 admin_route.get('/add-banner', auth.isLogin, banner.show_banner)
 admin_route.post('/add-banner', auth.isLogin, upload.single('image'), banner.add_banner)
 admin_route.get('/list-banner', auth.isLogin, banner.show_banner_list)
-admin_route.post('/delete-banner', banner.delete_banner)
+admin_route.post('/delete-banner', banner.delete_banner);
+admin_route.post('/edit-banner',banner.edit_banner);
 
 
 admin_route.get('/add-coupon', auth.isLogin, order_controller.load_coupon);
@@ -72,7 +74,8 @@ admin_route.post('/add-coupon', order_controller.add_coupon);
 admin_route.get('/list-coupon', auth.isLogin, order_controller.list_coupon);
 admin_route.post('/delete-coupon', auth.isLogin, order_controller.delete_coupon)
 admin_route.get('/edit-coupon', auth.isLogin, order_controller.edit_coupon);
-admin_route.post('/edit-coupon', order_controller.editing_coupon)
+admin_route.post('/edit-coupon', order_controller.editing_coupon);
+admin_route.post('/coupon_active',order_controller.coupon_active)
 
 
 admin_route.get('/list-order', auth.isLogin, order_controller.load_order);

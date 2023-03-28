@@ -417,6 +417,20 @@
     const profileReportChart = new ApexCharts(profileReportChartEl, profileReportChartConfig);
     profileReportChart.render();
   }
+  const delivery = document.getElementById('delivery').value
+  const confirm = document.getElementById('confirmed').value
+  const returnn = document.getElementById('returned').value
+  const cancel = document.getElementById('cancelled').value
+  
+  
+ 
+
+  const delivered = parseInt(delivery)
+  const confirmed = parseInt(confirm)
+  const returned = parseInt(returnn)
+  const cancelled = parseInt(cancel)
+
+  
 
   // Order Statistics Chart
   // --------------------------------------------------------------------
@@ -427,8 +441,8 @@
         width: 130,
         type: 'donut'
       },
-      labels: ['Electronic', 'Sports', 'Decor', 'Fashion'],
-      series: [85, 15, 50, 50],
+      labels: ['cancelled', 'delivered', 'confirmed', 'returned'],
+      series: [cancelled, delivered, confirmed, returned],
       colors: [config.colors.primary, config.colors.secondary, config.colors.info, config.colors.success],
       stroke: {
         width: 5,
@@ -494,7 +508,7 @@
     incomeChartConfig = {
       series: [
         {
-          data: [24, 21, 30, 22, 42, 26, 35, 29]
+          data: [40, 21, 30, 22, 42, 26, 35, 29]
         }
       ],
       chart: {

@@ -15,115 +15,6 @@
         ================================================== -->
         <%- include('../layouts/nav.ejs') %>
 
-            <!-- CATEGORY MP-MENU
-        ================================================== -->
-            <div id="mp-menu" class="mp-menu">
-                <div class="mp-level">
-                    <h2>All Categories</h2>
-                    <ul>
-                        <li class="mp-has-sub">
-                            <a href="#">Devices</a>
-                            <div class="mp-level">
-                                <h2>Devices</h2>
-                                <a class="mp-back" href="#">back</a>
-                                <ul>
-                                    <li class="mp-has-sub">
-                                        <a href="#">Mobiles Phones</a>
-                                        <div class="mp-level">
-                                            <h2>Mobile Phones</h2>
-                                            <a class="mp-back" href="#">back</a>
-                                            <ul>
-                                                <li><a href="#">Apple Mobile</a></li>
-                                                <li><a href="#">OnePlus Mobile</a></li>
-                                                <li><a href="#">Lenovo Mobile</a></li>
-                                                <li><a href="#">Micromax Mobile</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="mp-has-sub">
-                                        <a href="#">Laptops</a>
-                                        <div class="mp-level">
-                                            <h2>Laptops</h2>
-                                            <a class="mp-back" href="#">back</a>
-                                            <ul>
-                                                <li><a href="#">Thin Laptops</a></li>
-                                                <li><a href="#">2-in-1 Laptops</a></li>
-                                                <li><a href="#">Gaming Laptops</a></li>
-                                                <li><a href="#">Budget Laptops</a></li>
-                                                <li><a href="#">Light Laptops</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="mp-has-sub">
-                                        <a href="#">Televisions</a>
-                                        <div class="mp-level">
-                                            <h2>Televisions</h2>
-                                            <a class="mp-back" href="#">back</a>
-                                            <ul>
-                                                <li><a href="#">Smart TV</a></li>
-                                                <li><a href="#">Full HD TV</a></li>
-                                                <li><a href="#">Android TV</a></li>
-                                                <li><a href="#">4K TV</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="mp-has-sub">
-                            <a href="#">Beauty &amp; Health</a>
-                            <div class="mp-level">
-                                <h2>Beauty &amp; Health</h2>
-                                <a class="mp-back" href="#">back</a>
-                                <ul>
-                                    <li><a href="#">Grooming</a></li>
-                                    <li><a href="#">Luxury Beauty</a></li>
-                                    <li><a href="#">Make-up</a></li>
-                                    <li><a href="#">Personal Care</a></li>
-                                    <li><a href="#">Nutrition Care</a></li>
-                                    <li><a href="#">Health Care</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="mp-has-sub">
-                            <a href="#">Store</a>
-                            <div class="mp-level">
-                                <h2>Store</h2>
-                                <a class="mp-back" href="#">back</a>
-                                <ul>
-                                    <li class="mp-has-sub">
-                                        <a class="icon icon-t-shirt" href="#">Clothes</a>
-                                        <div class="mp-level">
-                                            <h2 class="icon icon-t-shirt">Clothes</h2>
-                                            <a class="mp-back" href="#">back</a>
-                                            <ul>
-                                                <li>
-                                                    <a class="icon icon-female" href="#">Women's Clothing</a>
-                                                </li>
-                                                <li>
-                                                    <a class="icon icon-male" href="#">Men's Clothing</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="icon icon-diamond" href="#">Watches</a>
-                                    </li>
-                                    <li>
-                                        <a class="icon icon-music" href="#">Shoes</a>
-                                    </li>
-                                    <li>
-                                        <a class="icon icon-food" href="#">Jewellery</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li><a href="#">Books &amp; Audible</a></li>
-                        <li><a href="#">Movies &amp; Games</a></li>
-                    </ul>
-
-                </div>
-            </div>
 
             <!-- PAGE TITLE
         ================================================== -->
@@ -148,7 +39,7 @@
             <!-- CHECKOUT
         ================================================== -->
             <section class="md">
-                <div class="container">
+                <div class="container" id="reloadDiv">
                     <div class="row">
 
 
@@ -157,7 +48,8 @@
 
                         <div class="row text-center mt-n4">
                             <% if(user[0].address.length>0 ){
-                                user[0].address.forEach((x)=>{ %>
+                                user[0].address.forEach((x,index)=>{ %>
+                                    <%console.log(index)%>
                                 <div class="col-md-3 mt-4">
                                     <div class="border px-1-6 py-1-9 p-lg-1-9 h-100">
                                         <strong>
@@ -165,6 +57,7 @@
                                         </strong> <br>
                                         <%= x.building %> <br>
                                             <%= x.street %> <br>
+                                                <%= x.district %> <br>
                                                 <%= x.state %> <br>
                                                     <%= x.number %> <br>
                                                         <%= x.pincode %> <br>
@@ -206,6 +99,7 @@
                                                                                     <div class="col-sm-6">
 
                                                                                         <div class="form-group">
+                                                                                            <input type="hidden" name="addressIndex" value="<%= index%>">
                                                                                             <label>Full Name</label>
                                                                                             <input type="text"
                                                                                                 class="form-control"
@@ -511,7 +405,7 @@
                         <div class="row">
 
                             <div class="col-sm-6">
-                                <input name="id" type="hidden">
+                               
                                 <div class="form-group">
                                     <label>Pincode</label>
                                     <input type="text" class="form-control" name="pincode">
@@ -593,11 +487,26 @@
                             <div class="col-sm-6">
 
                                 <div class="form-group">
+                                    <label>District </label>
+                                    <input type="text" class="form-control" name="district" value="">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
                                     <label>City / Town </label>
                                     <input type="text" class="form-control" name="street">
                                 </div>
 
                             </div>
+
+
+
+                        </div>
+
+                        <div class="row">
 
                             <div class="col-sm-6">
 
@@ -608,16 +517,12 @@
 
                             </div>
 
-                        </div>
-
-                        <div class="row">
-
                             <div class="col-sm-6">
 
                                 <div class="form-group">
                                     <label>Hosue No / Building Name </label>
                                     <input type="text" class="form-control" name="building"
-                                        placeholder="Hosue No / Building Name ">
+                                        >
                                 </div>
 
                             </div>
@@ -654,7 +559,7 @@
                     url: '/add_address',
                     data: formData,
                     success: function (response) {
-                        $('#reloadDiv').load('/checkout #reloadDiv')
+                        $('#reloadDiv').load('/address #reloadDiv')
                         console.log(response);
                         Swal.fire({
                             title: 'Added!',
@@ -722,6 +627,7 @@
                     url: '/edit-address',
                     data: formData,
                     success: function (response) {
+                        console.log(response);
                         $('#reloadDiv').load('/address #reloadDiv')
                         Swal.fire({
                             title: 'Edited!',

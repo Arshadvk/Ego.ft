@@ -30,7 +30,7 @@ const add_cart = async (req, res) => {
 
         let exist = await User.findOne({ _id: id, "cart.product": product });
         if (exist) {
-
+            res.json({ exist: true })
         } else {
             const cartdata = await User.updateOne({ _id: id }, { $push: { cart: { product: product, qty: 1, price: price } } })
             const cart = await User.findOne({ _id: id })
@@ -84,9 +84,9 @@ const Qtychange = async (req, res) => {
             // updating price 
             const currentqty = await User.findOne({ _id: id, 'cart.product': proid }, { _id: 0, 'cart.qty.$': 1 })
 
-            //console.log(currentqty+'ghgfdfdg');
+           
             const totelPrice = price * currentqty.cart[0].qty
-            // console.log(totelPrice+'fgdhvsfd');
+            
             const updatingprice = await User.updateOne({ _id: id, 'cart.product': proid }, { $set: { 'cart.$.price': totelPrice } })
 
             // grand totel  

@@ -38,7 +38,29 @@ const productSchema = new mongoose.Schema({
     size: [{
         type: String,
         required: true
+    }],
+    review :[{
+        name: {
+            type: String
+          
+        }, 
+        email: {
+            type: String
+           
+        }, 
+        rating: {
+            type: Number
+           
+        },
+        comment:{
+            type: String
+        },
+        date:{
+            type: Date,
+            default: Date.now()
+        }
     }]
+
 
 })
 const Product = mongoose.model('Product', productSchema);

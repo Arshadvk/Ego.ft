@@ -13,7 +13,7 @@ const orderSchema = new mongoose.Schema({
 
     },
     deliveryAddress: {
-        type:  mongoose.Schema.Types.ObjectId,
+        type:  String ,
         required: true
     },
     date: {

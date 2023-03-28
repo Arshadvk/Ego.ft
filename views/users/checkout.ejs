@@ -100,12 +100,14 @@
                                                 <% if(user[0].address.length>0 ){
                                                     user[0].address.forEach((x)=>{ %>
 
-                                                    <option value="<%= x._id %>">
+                                                    <option
+                                                        value="<%= x.name %> , (<%= x.number %>),  <%= x.building %> ,<%= x.street %> ,<%= x.district %> , <%= x.state %> ,<%= x.pincode %> ">
                                                         <strong>
                                                             <%= x.name %>
                                                         </strong>
                                                         <%= x.building %>
                                                             <%= x.street %>
+                                                            <%= x.district %>
                                                                 <%= x.state %>
                                                                     <%= x.pincode %>
                                                                         <%= x.number %>
@@ -122,22 +124,21 @@
 
                                             <hr>
                                             <label class="col-sm-2 col-form-label"
-                                                for="basic-default-company">Payment</label>
-                                            <div class="invalid-feedback">Please Choose one</div>
+                                                for="basic-default-company"><strong>Payment</strong></label>
+                                            <div class="feedback">How would you like to pay?</div>
+                                            <br>
                                             <ul>
 
-                                                <li> <input class="form-check-input" type="radio" value="UPI"
-                                                        name="shipping_method" id="shipping-method"
-                                                        required><span><strong>
-                                                            UPI </strong> </span></li>
+                                                <input class="form-check-input" type="radio" value="UPI"
+                                                    name="payment_method" checked required><span><strong>
+                                                        UPI </strong> </span><br>
 
-                                                <li> <input class="form-check-input" type="radio" value="COD"
-                                                        name="shipping_method"><span><strong> COD </strong> </span></li>
+                                                <input class="form-check-input" type="radio" value="COD"
+                                                    name="payment_method" required><span><strong> COD </strong> </span><br>
 
-                                                <li> <input class="form-check-input" type="radio" value="WALLET"
-                                                        name="shipping_method" id="shipping-method"
-                                                        required><span><strong>
-                                                            WALLET</strong> </span></li>
+                                                <input class="form-check-input" type="radio" value="WALLET"
+                                                    name="payment_method" required><span><strong>
+                                                        WALLET</strong> </span><br>
 
                                             </ul>
 
@@ -217,10 +218,10 @@
                             </div>
 
                             <table class="table classic">
-                                <tbody >
+                                <tbody>
                                     <tr>
                                         <th>Cart Subtotal:</th>
-                                        <td class="text-gray-dark" >₹ <%= user[0].cartTotel %>
+                                        <td class="text-gray-dark">₹ <%= user[0].cartTotel %>
                                         </td>
                                     </tr>
                                     <tr>
@@ -281,13 +282,15 @@
                                                                     name="couponcode"
                                                                     placeholder="Enter Your Coupon Code">
                                                             </div>
-                                                            <input type="hidden" name="cartTotel" value="<%= user[0].cartTotel %>">
+                                                            <input type="hidden" name="cartTotel"
+                                                                value="<%= user[0].cartTotel %>">
 
                                                         </div>
 
                                                     </div>
 
-                                                    <button type="submit" class="butn-style2 dark" onclick="">Apply Code</button>
+                                                    <button type="submit" class="butn-style2 dark" onclick="">Apply
+                                                        Code</button>
 
                                                 </form>
 
@@ -432,11 +435,26 @@
                             <div class="col-sm-6">
 
                                 <div class="form-group">
+                                    <label>District </label>
+                                    <input type="text" class="form-control" name="district">
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
                                     <label>City / Town </label>
                                     <input type="text" class="form-control" name="street">
                                 </div>
 
                             </div>
+
+
+
+                        </div>
+
+                        <div class="row">
 
                             <div class="col-sm-6">
 
@@ -447,19 +465,16 @@
 
                             </div>
 
-                        </div>
-
-                        <div class="row">
-
                             <div class="col-sm-6">
 
                                 <div class="form-group">
                                     <label>Hosue No / Building Name </label>
-                                    <input type="text" class="form-control" name="building"
-                                        placeholder="Hosue No / Building Name ">
+                                    <input type="text" class="form-control" name="building">
                                 </div>
 
                             </div>
+
+
 
                         </div>
 
@@ -488,7 +503,6 @@
             $('#add').submit(function (event) {
                 event.preventDefault(); //prevent default form submit action
                 var formData = $(this).serialize(); //serialize form data
-                console.log("uyguyg");
                 console.log(formData);
                 $.ajax({
                     type: 'POST',
@@ -540,26 +554,32 @@
 
     <script>
         $('#checkout_form').submit((x) => {
-            console.log("dfsaf");
+
             x.preventDefault()
             $.ajax({
                 url: "/place_order",
                 method: "post",
                 data: $('#checkout_form').serialize(),
                 success: (response) => {
+                    console.log(response);
                     if (response.status) {
                         location.href = "/order_success"
                     } else if (response.viewRazorpay) {
                         razorpayPayment(response.order)
 
 
+                    } else if (response.wallet_pay) {
+                        console.log("walletPayment");
+                        walletPayment()
                     }
 
                 }
             })
         })
 
-      
+        function walletPayment() {
+
+        }
         function razorpayPayment(order) {
             var options = {
                 "key": "rzp_test_qZcUWE6G8eHzSR", // Enter the Key ID generated from the Dashboard
@@ -567,7 +587,7 @@
                 "currency": "INR",
                 "name": "Ego.ft", //your business name
                 "description": "Test Transaction",
-                "image": "https://example.com/your_logo",
+                "image": "/userr/img/logos/ego.png",
                 "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                 "handler": function (response) {
                     // alert(response.razorpay_payment_id);
@@ -611,10 +631,8 @@
                     order
                 }, method: 'post',
                 success: (response) => {
-                   
-                    if (response.status == true) {
-                        window.location.hrefv = "/order_success"
-                    } else {
+
+                    if (response.status) {
                         Swal.fire({
                             position: 'center',
                             icon: 'error',
@@ -622,6 +640,9 @@
                             showConfirmButton: false,
                             timer: 5000
                         })
+                    } else {
+                       
+                        location.href = "/order_success"
                     }
                 }
             })
@@ -636,47 +657,47 @@
                     url: '/apply_coupon',
                     data: formData,
                     success: function (response) {
-                        if(response.success){
+                        if (response.success) {
                             $('#reloadDiv').load('/checkout #reloadDiv')
                             document.getElementById('discountt').innerHTML = 'discount amount : '
                             document.getElementById('discount').innerHTML = "₹" + response.discount_value
                             document.getElementById('newtotal').innerHTML = 'new total'
                             document.getElementById('newwtotal').innerHTML = "₹" + response.value
-                        Swal.fire({
-                            title: 'Coupon Applied SuccessFully!',
-                            text: `You saved your ${response.discount_value}. Your new totel is ${response.value} `,
-                            icon: 'success',
-                            timer: 1000
-                        })
-                    }else if(response.used){
-                        Swal.fire({
-                            title: 'Coupon Already Used!',
-                            text: `You Already Used this coupon `,
-                            icon: 'error',
-                            timer: 1000
-                        })
-                    }else if(response.lessamount){
-                        Swal.fire({
-                            title: 'Coupon Not Applicable!',
-                            text: `The order totel is not sufficent to use this coupon`,
-                            icon: 'error',
-                            timer: 1000
-                        })
-                    }else if(response.expired){
-                        Swal.fire({
-                            title: 'Coupon Expired!',
-                            text: `The Coupon has Expired`,
-                            icon: 'error',
-                            timer: 1000
-                        })
-                    }else if(response.invalid){
-                        Swal.fire({
-                            title: 'Invalid Coupon!',
-                            text: `The Coupon code you enterd is in valid`,
-                            icon: 'error',
-                            timer: 1000
-                        })
-                    }
+                            Swal.fire({
+                                title: 'Coupon Applied SuccessFully!',
+                                text: `You saved your ${response.discount_value}. Your new totel is ${response.value} `,
+                                icon: 'success',
+                                timer: 1000
+                            })
+                        } else if (response.used) {
+                            Swal.fire({
+                                title: 'Coupon Already Used!',
+                                text: `You Already Used this coupon `,
+                                icon: 'error',
+                                timer: 1000
+                            })
+                        } else if (response.lessamount) {
+                            Swal.fire({
+                                title: 'Coupon Not Applicable!',
+                                text: `The order totel is not sufficent to use this coupon`,
+                                icon: 'error',
+                                timer: 1000
+                            })
+                        } else if (response.expired) {
+                            Swal.fire({
+                                title: 'Coupon Expired!',
+                                text: `The Coupon has Expired`,
+                                icon: 'error',
+                                timer: 1000
+                            })
+                        } else if (response.invalid) {
+                            Swal.fire({
+                                title: 'Invalid Coupon!',
+                                text: `The Coupon code you enterd is in valid`,
+                                icon: 'error',
+                                timer: 1000
+                            })
+                        }
                     },
                     error: function (xhr, status, error) {
                         //handle error response

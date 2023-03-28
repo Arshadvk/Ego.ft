@@ -25,7 +25,7 @@
                         </div>
                         <div class="breadcrumbs-info">
                             <ul class="ps-0">
-                                <li><a href="home-shop-1.html">Home</a></li>
+                                <li><a href="/home">Home</a></li>
                                 <li><a href="#">Order Details</a></li>
                             </ul>
                         </div>
@@ -65,7 +65,7 @@
 
                       <tr>
                         <td><strong>
-
+                          <%= order[0].deliveryAddress %>
                           </strong></td>
                         <td><strong>
                             <%= order[0].paymentType %>
@@ -177,13 +177,11 @@
                             },
                             method: 'post',
                             success: (response) => {
-                                console.log("waoring")
-
                                 $('#reloadDiv').load('/wishlist #reloadDiv')
                                 console.log(response);
                                 Swal.fire({
-                                    title: 'deleted!',
-                                    text: 'Your deleted',
+                                    title: 'Success!',
+                                    text: 'Your order is pending return list',
                                     icon: 'success',
                                     showConfirmButton: false
                                 })
@@ -218,8 +216,8 @@
                                 $('#reloadDiv').load('/orders#reloadDiv')
                                 console.log(response);
                                 Swal.fire({
-                                    title: 'deleted!',
-                                    text: 'Your deleted',
+                                    title: 'Success!',
+                                    text: 'Your Order Cancelled',
                                     icon: 'success',
                                     showConfirmButton: false
                                 })

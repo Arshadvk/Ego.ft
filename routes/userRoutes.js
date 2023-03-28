@@ -35,6 +35,9 @@ user_route.get('/', auth.isLogout, userController.loadHome);
 user_route.get('/home', auth.islogin, userController.userhome);
 
 user_route.get('/faq',userController.loadfaq)
+user_route.get('/privacy-policy',userController.privacy_policy);
+user_route.get('/about_us',userController.aboutUs)
+
 
 //profile
 user_route.get('/profile', auth.islogin, profile.show_profile);
@@ -65,7 +68,9 @@ user_route.post('/otp', otp.verifyOtp)
 user_route.get('/shop', userController.loadshop);
 user_route.get('/category/:id', userController.loadbycategory)
 user_route.get('/product_view', product_controller.product_view);
-user_route.get('/sort', product_controller.sort_az)
+user_route.get('/sort', product_controller.sort_az);
+user_route.post('/add_review',product_controller.add_review);
+user_route.post('/search', product_controller.search_product)
 
 
 

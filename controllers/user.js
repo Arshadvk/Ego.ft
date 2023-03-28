@@ -100,6 +100,31 @@ const loadfaq = async ( req , res)=>{
     }
 }
 
+const privacy_policy = async (req, res)=>{
+    try {
+        const category = await Category.find()
+        let user 
+        if (req.session.user) {
+            user = true
+        }
+        res.render('privacy-policy',{category,user});
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+const aboutUs = async (req, res)=>{
+    try {
+        const category = await Category.find()
+        let user 
+        if (req.session.user) {
+            user = true
+        }
+        res.render('about_us',{category,user});
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 const loadRegister = async (req, res) => {
     try {
         res.render('register');
@@ -276,7 +301,7 @@ const VerifyMail = async (req, res) => {
 
         const updateInfo = await User.updateOne({ _id: req.query.id }, { $set: { is_verified: 1 } });
 
-        console.log(updateInfo);
+       
         res.render('email-verified');
 
     } catch (error) {
@@ -477,5 +502,7 @@ module.exports = {
     change_password,
     loadshop,
     loadbycategory,
-    loadfaq
+    loadfaq,
+    privacy_policy,
+    aboutUs
 }

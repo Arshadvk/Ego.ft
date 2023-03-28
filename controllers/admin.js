@@ -142,7 +142,8 @@ const logout = async (req, res) => {
 }
 const addAdmin = async (req, res) => {
     try {
-        res.render('add-admin');
+        const user = req.session.admin
+        res.render('add-admin',{user});
 
     } catch (error) {
 
@@ -162,8 +163,7 @@ const insertAdmin = async (req, res) => {
 
     try {
 
-        console.log(req.body.pas);
-        console.log(req.body.pass);
+       
         if (req.body.pas != "" || req.body.name != "" || req.body.email != "" || req.body.number != "") {
 
             const email = await User.findOne({ email: req.body.email });
@@ -174,7 +174,7 @@ const insertAdmin = async (req, res) => {
                 if (req.body.pass === req.body.pas) {
 
                     const spass = await securePassword(req.body.pass);
-                    console.log(spass);
+                    const admin = req.session.admin
 
                     const user = new User({
                         name: req.body.name,
@@ -187,21 +187,21 @@ const insertAdmin = async (req, res) => {
                     })
                     const userData = await user.save();
                     if (userData) {
-                        res.render('add-admin', { success: "your registration has been successfully." })
+                        res.render('add-admin', { success: "your registration has been successfully." ,user:admin})
                     } else {
-                        res.render('add-admin', { message: "your registration has failed." })
+                        res.render('add-admin', { message: "your registration has failed.",user:admin })
                     }
                 }
                 else {
-                    res.render('add-admin', { message: "your both password not same" })
+                    res.render('add-admin', { message: "your both password not same" ,user:admin})
                 }
 
             } else {
-                res.render('add-admin', { message: "This email already taken" })
+                res.render('add-admin', { message: "This email already taken",user:admin })
             }
 
         } else {
-            res.render('add-admin', { message: "fill your form" })
+            res.render('add-admin', { message: "fill your form",user:admin })
         }
 
 
@@ -216,7 +216,7 @@ const loadUserlist = async (req, res) => {
     try {
         const user = req.session.admin
         const userData = await User.find({ is_admin: 0 });
-        res.render('tableofuser', { users: userData, user })
+        res.render('list-users', { users: userData, user })
     } catch (error) {
         console.log(error.message);
     }
@@ -226,7 +226,7 @@ const loadadmin = async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.session.admin })
         const userData = await User.find({ is_admin: 1 });
-        res.render('tableofuser', { users: userData, user })
+        res.render('list-users', { users: userData, user })
     } catch (error) {
         console.log(error.message);
     }
@@ -236,48 +236,45 @@ const loadadmin = async (req, res) => {
 const loadHome = async (req, res) => {
 
     try {
-        // total sales
-        const totalsales = await Order.find({status : "Delivered"})
-        let sum = 0
-        for(var i=0 ; i<totalsales.length ; i++){
-            sum = sum+totalsales[i].totel
-        }
-        const salescount = await Order.find({}).count()
+        // // total sales
+        // const totalsales = await Order.find({status : "Delivered"})
+        // let sum = 0
+        // for(var i=0 ; i<totalsales.length ; i++){
+        //     sum = sum+totalsales[i].totel
+        // }
+        // const salescount = await Order.find({}).count()
 
         
-        const cod = await Order.find({paymentType:"COD"})
-        let cod_sum = 0
-        for(var i=0 ; i<cod.length ; i++){
-            cod_sum = cod_sum+cod[i].totel
-        }
-        const upi = await Order.find({paymentType:"UPI"})
+        // const cod = await Order.find({paymentType:"COD"})
+        // let cod_sum = 0
+        // for(var i=0 ; i<cod.length ; i++){
+        //     cod_sum = cod_sum+cod[i].totel
+        // }
+        // const upi = await Order.find({paymentType:"UPI"})
 
-        let upi_sum = 0
-        for(var i=0 ; i<upi.length ; i++){
-            upi_sum = upi_sum+upi[i].totel
-        }
+        // let upi_sum = 0
+        // for(var i=0 ; i<upi.length ; i++){
+        //     upi_sum = upi_sum+upi[i].totel
+        // }
 
-        const wallet = await Order.find({paymentType:"WALLET"})
+        // const wallet = await Order.find({paymentType:"WALLET"})
 
-        let wallet_sum = 0
-        for(var i=0 ; i<wallet.length ; i++){
-            wallet_sum = wallet_sum+upi[i].totel
-        }
+        // let wallet_sum = 0
+        // for(var i=0 ; i<wallet.length ; i++){
+        //     wallet_sum = wallet_sum+upi[i].totel
+        // }
 
         
         const deliveryCount = await Order.find({status:"Delivered"}).count()
         const confirmedCount = await Order.find({status:"Confirmed"}).count()
         const cancelledCount = await Order.find({status:"Cancelled"}).count()
-        const returnedCount = await Order.find({status:"Delivered"}).count()
+        const returnedCount = await Order.find({status:"Return"}).count()
 
        
         const user = await User.findOne({ _id: req.session.admin })
         res.render('home', { user ,
-            sum ,
-           upi: upi_sum ,
-           cod : cod_sum, 
-           wallet : wallet_sum ,
-            salescount,
+    
+       
             deliveryCount,
             cancelledCount,
             returnedCount ,

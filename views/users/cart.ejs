@@ -41,19 +41,19 @@
 
 
             <section class="md">
-                <div class="container">
+                <div class="container" id="reloadDiv">
                     <div class="row">
 
 
                         <!-- left pannel section -->
                         <div class="col-lg-8 col-md-12 ps-1-1 mb-1-9 mb-lg-0">
 
-                            <div class="common-block">
+                            <div class="common-block" >
 
 
                                 <% if(cart.length> 0) { %>
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table" >
                                             <thead>
                                                 <tr>
                                                     <th class="first"></th>
@@ -71,7 +71,7 @@
 
                                                 <% cart.forEach(x=> { %>
 
-                                                    <tr id="reloadDiv">
+                                                    <tr>
 
                                                         <td>
                                                             <a href="#"><img

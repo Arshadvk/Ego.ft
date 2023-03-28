@@ -38,9 +38,9 @@
                                             src="/userr/img/avatar/t-3.jpg" alt="...">
                                     </div>
                                     <h6 class="mb-0 display-28"><%= user.name %></h6>
-                                    <small>Joined February 06, 2017</small>
+                                    <small>Joined <%= user.join_date.toLocaleDateString() %></small>
                                     <div class="reward-points">
-                                        <i class="ti-star text-primary pe-1"></i> Points: 7386
+                                        <i class="ti-star text-primary pe-1"></i> Wallet: <%= user.wallet %>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                        
                                             <% for (let i = 0; i < wishlist.length; i++) { %>
 
-                                                <tr id="reloadDiv">
+                                                <tr>
 
                                                     <td>
                                                         <a href="#"><img

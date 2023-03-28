@@ -82,7 +82,7 @@
                             <% if(category.length> 0){
 
                                 for(let i=0; i<category.length; i++){ %>
-                                    <a href="/category?name=<%= category[i]._id %>">
+                                    <a href="/category/<%= category[i]._id %>">
                                         <img src="/product_img/<%= category[i].image %>" alt="...">
                                         <h3 class="h5 mb-0 mt-3">
                                             <%= category[i].category_name %>
@@ -121,14 +121,15 @@
                                 <div class="product-hover">
                                     <div class="cart-button">
                                         <div class="d-inline-block">
+                                            
                                             <button type="button" style="border: none;"
                                                 onclick="addtocart('<%= product[i]._id %>','<%= product[i].price %>')"
-                                                class="btn btn-link" title="Add To Wishlist"> <a
+                                                class="btn" title="Add To Wishlist"> <a
                                                     style="text-decoration: none;">+ Add to Cart</a>
                                             </button>
                                         </div>
                                         <div class="btn-group float-end">
-                                            <% if (user===true) { %>
+                                            <% if (user) { %>
                                                 <button style="border: none;"
                                                     onclick="addtowishlist('<%= product[i]._id  %>')"><i
                                                         class="ti-heart"></i></button>
@@ -152,28 +153,24 @@
                 <div class="row mt-n4">
                     <div class="col-md-6 mt-4">
                         <div class="offer-style02">
-                            <img src="/userr/img/bg/bg-5.jpg" alt="...">
+                            <img src="/product_img/<%= banner[0].Image %>" alt="...">
                             <div class="text-center position-absolute top-10 start-0 end-0">
                                 <span
-                                    class="text-uppercase font-weight-500 text-white letter-spacing-2 d-block mb-2 mb-sm-3">new
-                                    arrivals</span>
-                                <h2 class="h1 mb-2 text-white">Featured Deals</h2>
-                                <p class="text-white font-weight-600 display-29 d-none d-sm-block">Save on what's hot
-                                    right now.</p>
+                                    class="text-uppercase font-weight-500 text-white letter-spacing-2 d-block mb-2 mb-sm-3"><%= banner[0].caption %></span>
+                                <h2 class="h1 mb-2 text-white"><%= banner[0].title %></h2>
+                                <p class="text-white font-weight-600 display-29 d-none d-sm-block"><%= banner[0].sub_title %></p>
                                 <a href="/shop" class="butn-style4 sm">Shop Now<span></span></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 mt-4">
                         <div class="offer-style02">
-                            <img src="/userr/img/bg/bg-6.jpg" alt="...">
+                            <img src="/product_img/<%= banner[1].Image %>" alt="...">
                             <div class="text-center position-absolute top-10 start-0 end-0">
                                 <span
-                                    class="text-uppercase font-weight-600 text-white letter-spacing-2 d-block mb-2 mb-sm-3">up
-                                    to 50% off</span>
-                                <h2 class="h1 mb-2 text-white">Summer Sale</h2>
-                                <p class="text-white font-weight-600 display-29 d-none d-sm-block">Save on what's hot
-                                    right now.</p>
+                                    class="text-uppercase font-weight-600 text-white letter-spacing-2 d-block mb-2 mb-sm-3"><%= banner[0].caption %></span>
+                                <h2 class="h1 mb-2 text-white"><%= banner[0].title %></h2>
+                                <p class="text-white font-weight-600 display-29 d-none d-sm-block"><%= banner[0].sub_title %></p>
                                 <a href="/shop" class="butn-style4 sm">Shop Now<span></span></a>
                             </div>
                         </div>
@@ -191,7 +188,7 @@
                         <div class="text-center">
                             <img src="/userr/img/icons/icon-10.png" class="mb-3" alt="...">
                             <h3 class="h5">Free Shipping</h3>
-                            <p class="mb-0">Free shipping over $100</p>
+               
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-3 mt-4">
@@ -205,7 +202,7 @@
                         <div class="text-center">
                             <img src="userr/img/icons/icon-12.png" class="mb-3" alt="...">
                             <h3 class="h5">Gift Voucher</h3>
-                            <p class="mb-0">Get $15 off your order</p>
+                          
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-3 mt-4">
@@ -332,15 +329,23 @@
                     },
                     method: 'post',
 
-                    success: (res) => {
-                        console.log(res);
+                    success: (response) => {
+                        if(response.success){
                         Swal.fire({
-                            title: 'Added!',
-                            text: 'item add into cart ',
-                            icon: 'success',
-                            showConfirmButton: false
+                        title: 'added',
+                        text: 'product added to whilist',
+                        icon: 'success',
+                        showConfirmButton: false
+                    })
+                    }else{
+                        Swal.fire({
+                            title: 'Already Exist',
+                            text :'Product Already in Wishlist',
+                            icon: 'info',
+                            showConfirmButton: false,
+                            timer : 1000
                         })
-
+                    }
                     }
                 })
 
@@ -356,13 +361,24 @@
                     method: 'post',
 
                     success: (res) => {
-                        console.log(res);
+                        if (res.success) {
                         Swal.fire({
-                            title: 'Added',
-                            text: 'iteam added into cart',
-                            icon: 'success',
-                            showConfirmButton: false
+                        title: 'Added',
+                        text: 'product added to cart',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer : 2000
+                    })
+                    }else{
+                        Swal.fire({
+                            title: 'Already Exist',
+                            text :'Product Already in Cart',
+                            icon: 'info',
+                            showConfirmButton: false,
+                            timer : 1000
                         })
+                        
+                    }
                     }
                 })
 

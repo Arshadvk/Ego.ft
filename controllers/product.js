@@ -5,6 +5,7 @@ let Product = require("../models/productModel");
 const {
     TrustProductsEntityAssignmentsContextImpl,
 } = require("twilio/lib/rest/trusthub/v1/trustProducts/trustProductsEntityAssignments");
+const Coupon = require("../models/coupon");
 
 const loadAddProduct = async (req, res) => {
     try {
@@ -40,23 +41,26 @@ const addProduct = async (req, res) => {
             res.redirect("/admin/add-product");
         } 
         }else{
-            console.log("not saved");
+     
         }
         
     } catch (error) {
         console.log(error.message);
     }
 };
+
 const productlist = async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.session.admin });
         const product = await Product.find().populate("category");
 
-        res.render("listofproducts", { product, user });
+        res.render("list-products", { product, user });
     } catch (error) {
         console.log(error.message);
     }
 };
+
+
 const editproduct = async (req, res) => {
     try {
         const user = req.session.admin;
@@ -67,6 +71,8 @@ const editproduct = async (req, res) => {
         console.log(error.message);
     }
 };
+
+
 const unlistproduct = async (req, res) => {
     try {
         const product_id = req.body.productId;
@@ -80,6 +86,7 @@ const unlistproduct = async (req, res) => {
         console.log(error.message);
     }
 };
+
 
 const listproduct = async (req, res) => {
     try {
@@ -117,6 +124,26 @@ const updateproduct = async (req, res) => {
         console.log(error.message);
     }
 };
+
+const add_review = async ( req, res )=>{
+
+    try {
+        const proid = req.body.proid
+
+        const review = await Product.updateOne({_id : proid},{$push:{review:{
+            name:req.body.name,
+            email:req.body.email,
+            comment:req.body.comment,
+            rating: req.body.rate
+        }}})
+
+        res.json({success})
+
+    } catch (error) {
+
+        console.log(error.message);
+    }
+}
 const product_view = async (req, res) => {
     try {
         let user;
@@ -150,6 +177,30 @@ const sort_az = async (req, res) => {
         console.log(error.message);
     }
 };
+
+const search_product = async (req , res )=>{
+    
+    try {
+        let user 
+        if(req.session.user){
+            user = true
+        }else{
+            user = false
+        }
+        const input = req.body.s
+        const result = new RegExp(input,'i')
+        const product = await Product.find({product_name:result}).populate('category')
+        const coupon = await  Coupon.find({active:true})
+        const category = await Category.find()
+       
+        
+        res.render('shop',{category,product,user,category_name:"search" ,coupon,countpro:''})
+    } catch (error) {
+
+        console.log(error.message);
+    }
+}
+
 module.exports = {
     loadAddProduct,
     addProduct,
@@ -160,4 +211,6 @@ module.exports = {
     updateproduct,
     product_view,
     sort_az,
+    add_review,
+    search_product
 };

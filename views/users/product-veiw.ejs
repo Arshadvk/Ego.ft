@@ -7,11 +7,11 @@
             <div class="container">
 
                 <div class="title-info">
-                    <h1>Shop Product Detail</h1>
+                    <h1><%=product[0].product_name %></h1>
                 </div>
                 <div class="breadcrumbs-info">
                     <ul class="ps-0">
-                        <li><a href="home-shop-1.html">Home</a></li>
+                        <li><a href="/home">Home</a></li>
                         <li><a href="#">Shop Product Detail</a></li>
                     </ul>
                 </div>
@@ -57,8 +57,7 @@
                             <div class="bg-primary separator-line-horrizontal-full mb-4"></div>
                             <p class="rating-text"><span>SKU:</span> <span class="font-500 theme-color">290397</span>
                             </p>
-                            <p>Lorem ipsum dolor ut sit ame dolore adipiscing elit, sed nonumy nibh sed euismod laoreet
-                                dolore magna aliquarm erat volutpat Nostrud duis molestie at dolore.</p>
+                            <p><%=product[0].description %> </p>
 
                             <div class="mb-4">
 
@@ -139,22 +138,16 @@
                 <!-- product description -->
                 <div class="row justify-content-center mb-6 mb-md-7">
 
-                    <div class="col-12">
-                        <div class="horizontaltab tab-style-two">
+                    <div class="col-12" >
+                        <div class="horiifzontaltab tab-style-two">
                             <ul class="resp-tabs-list hor_1 text-start">
                                 <li><i class="ti-line-dashed d-md-block d-none"></i>Description</li>
-                                <li><i class="ti-more d-md-block d-none"></i>Additional Info</li>
                                 <li><i class="ti-star d-md-block d-none"></i>Reviews (2)</li>
                             </ul>
                             <div class="resp-tabs-container hor_1">
                                 <div>
 
-                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                                        veritatis et quasi architecto in ea voluptate velit. Sed ut perspiciatis unde
-                                        omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-                                        rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto in
-                                        ea voluptate velit.</p>
+                                    <p><%=product[0].description %> </p>
                                     <ul class="primary-list mb-4 ps-0">
                                         <li>Sed ut perspiciatis unde omnis iste</li>
                                         <li>Inventore veritatis et quasi architecto</li>
@@ -166,105 +159,25 @@
                                         inventore veritatis et quasi architecto in ea voluptate velit.</p>
 
                                 </div>
-                                <div>
-                                    <div class="row">
-                                        <div class="col-lg-6 mb-1-9 mb-lg-0">
-
-                                            <h3 class="display-29">Information:</h3>
-                                            <ul class="primary-list mb-1-9">
-                                                <li><strong>Weight:</strong> 15 grams</li>
-                                                <li><strong>Dimensions:</strong> 8.03 x 1.27 x 2.54 Cm</li>
-                                                <li><strong>Size:</strong> 64 GB</li>
-                                                <li><strong>Color:</strong> White</li>
-                                                <li><strong>Guarantee:</strong> 5 Years</li>
-                                            </ul>
-
-                                            <p class="mb-0">Sed ut perspiciatis unde omnis iste natus error sit
-                                                voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
-                                                ipsa quae ab illo inventore veritatis et quasi architecto in ea
-                                                voluptate velit.</p>
-
-                                        </div>
-                                        <div class="col-lg-6 ps-lg-1-9">
-
-                                            <div class="table-responsive">
-                                                <table class="table bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Shipping Options</th>
-                                                            <th>Delivery Time</th>
-                                                            <th>Price</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                Standard Shipping
-                                                            </td>
-                                                            <td>
-                                                                Delivery in 5 - 7 working days
-                                                            </td>
-                                                            <td>
-                                                                $8.00
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Express Shipping
-                                                            </td>
-                                                            <td>
-                                                                28 August 2022
-                                                            </td>
-                                                            <td>
-                                                                $12.00
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                1 - 2 day Shipping
-                                                            </td>
-                                                            <td>
-                                                                27 August 2022
-                                                            </td>
-                                                            <td>
-                                                                $12.00
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Free Shipping
-                                                            </td>
-                                                            <td>
-                                                                25 August 2022
-                                                            </td>
-                                                            <td>
-                                                                $0.00
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
+                                
                                 <div>
                                     <div class="row">
 
                                         <div class="col-lg-6 order-lg-2 mb-1-9 mb-lg-0">
                                             <div class="common-block">
-
-                                                <div class="mb-2-3 pb-2-3 border-bottom">
+                                                <%if(product[0].review.length>0) {
+                                                    product[0].review.forEach(x => {  %>
+                                                        
+                                               
+                                                <div class="pb-2-3">
 
                                                     <div class="media mb-4 product-review">
                                                         <img class="me-3 rounded-circle w-60px"
                                                             src="/userr/img/avatar/t-1.jpg" alt="...">
                                                         <div class="media-body">
                                                             <a href="#"
-                                                                class="mb-1 font-weight-600 text-extra-dark-gray">Jonal
-                                                                Doe</a>
-                                                            <span class="d-block text-primary">Sep 15, 2018</span>
+                                                                class="mb-1 font-weight-600 text-extra-dark-gray"><%= x.name %></a>
+                                                            <span class="d-block text-primary"><%= x.date.toLocaleDateString() %></span>
                                                         </div>
 
                                                         <span class="text-primary">
@@ -277,44 +190,12 @@
 
                                                     </div>
 
-                                                    <p class="mb-0">Consectetur adipisicing elit, sed do eiusmod tempor
-                                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                        veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                        aliquip.</p>
+                                                    <p class="mb-0"><%= x.comment %></p>
 
                                                 </div>
+                                                <% })}%>
+                                                
 
-                                                <div class="pb-4">
-
-                                                    <div class="media mb-4 product-review">
-                                                        <img class="me-3 rounded-circle w-60px"
-                                                            src="/userr/img/avatar/t-2.jpg" alt="...">
-                                                        <div class="media-body">
-                                                            <a href="#"
-                                                                class="mb-1 font-weight-600 text-extra-dark-gray">Marina
-                                                                Modra</a>
-                                                            <span class="d-block text-primary">Sep 15, 2018</span>
-                                                        </div>
-
-                                                        <span class="text-primary">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star-half-alt"></i>
-                                                        </span>
-
-                                                    </div>
-
-                                                    <p class="mb-0">Excepteur sint occaecat cupidatat non proident, sunt
-                                                        in culpa qui officia deserunt mollit anim id est laborum. Sed ut
-                                                        perspiciatis unde omnis iste natus error sit voluptatem.</p>
-
-                                                </div>
-
-                                                <div class="text-start">
-                                                    <a href="#" class="butn-style2 small">Load More Reviews</a>
-                                                </div>
 
                                             </div>
 
@@ -329,7 +210,7 @@
                                                     <p class="mb-0">Leave review takes it to the next level.</p>
                                                 </div>
 
-                                                <form>
+                                                <form id="review_form">
 
                                                     <div class="row">
 
@@ -342,7 +223,7 @@
                                                             </div>
 
                                                         </div>
-
+                                                        <input type="hidden" name="proid" value="<%= product[0]._id %>">
                                                         <div class="col-sm-6">
 
                                                             <div class="form-group">
@@ -361,12 +242,12 @@
 
                                                             <div class="form-group">
                                                                 <label>Rating</label>
-                                                                <select class="form-control form-select">
-                                                                    <option>5 Stars</option>
-                                                                    <option>4 Stars</option>
-                                                                    <option>3 Stars</option>
-                                                                    <option>2 Stars</option>
-                                                                    <option>1 Star</option>
+                                                                <select name="rate" class="form-control form-select">
+                                                                    <option value="5">5 Stars</option>
+                                                                    <option value="4">4 Stars</option>
+                                                                    <option value="3">3 Stars</option>
+                                                                    <option value="2">2 Stars</option>
+                                                                    <option value="1">1 Star</option>
                                                                 </select>
                                                             </div>
 
@@ -380,15 +261,15 @@
 
                                                             <label>Comment</label>
                                                             <div class="form-group mb-1">
-                                                                <textarea rows="2" class="form-control"
-                                                                    placeholder="Tell us a few words"></textarea>
+                                                                <textarea name="comment" maxlength="200 words" rows="2" class="form-control"
+                                                                    placeholder="Tell us a few words (maximum 200 words)"></textarea>
                                                             </div>
 
                                                         </div>
 
                                                     </div>
 
-                                                    <button type="button" class="butn-style2">Submit Review</button>
+                                                    <button type="submit" class="butn-style2">Submit Review</button>
 
                                                 </form>
 
@@ -418,16 +299,16 @@
 
                         <div class="product-grid">
                             <div class="product-img">
-                                <a href="shop-product-detail.html"><img src="product_img/<%=x.image[0] %>"
+                                <a href="/product_view?name=<%= x._id %>"><img src="product_img/<%=x.image[0] %>"
                                         alt="..."></a>
                             </div>
                             <div class="product-description">
-                                <h3><a href="shop-product-detail.html">
+                                <h3><a href="/product_view?name=<%= x._id %>">
                                         <%= x.product_name %>
                                     </a></h3>
                                 <h4 class="price">
                                     <span class="offer-price">
-                                        <%= x.offer_price %>
+                                        ₹ <%= x.offer_price %>
                                     </span>
                                 </h4>
                             </div>
@@ -461,15 +342,8 @@
 
         </div>
 
-        <!-- BUY TEMPLATE
-    ================================================== -->
-        <div class="buy-theme alt-font d-none d-lg-inline-block"><a
-                href="https://wrapbootstrap.com/theme/smartshop-multipurpose-ecommerce-template-WB0N7CT4D"
-                target="_blank"><i class="fas fa-cart-plus"></i><span>Buy Template</span></a></div>
-
-        <div class="all-demo alt-font d-none d-lg-inline-block"><a href="https://www.chitrakootweb.com/contact.html"
-                target="_blank"><i class="far fa-envelope"></i><span>Quick Question?</span></a></div>
-
+     
+       
         <!-- SCROLL TO TOP
     ================================================== -->
         <a href="#" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
@@ -486,16 +360,23 @@
                     method: 'post',
 
                     success: (response) => {
-                        console.log("waoring")
-
-                        console.log(response);
+                        
+                        if(response.success){
                         Swal.fire({
-                            title: 'added',
-                            text: 'product added to whilist',
-                            icon: 'success',
+                        title: 'added',
+                        text: 'product added to whilist',
+                        icon: 'success',
+                        showConfirmButton: false
+                    })
+                    }else{
+                        Swal.fire({
+                            title: 'Already Exist',
+                            text :'Product Already in Wishlist',
+                            icon: 'info',
                             showConfirmButton: false,
-                            timer: 1000
+                            timer : 1000
                         })
+                    }
 
                     }
                 })
@@ -512,16 +393,41 @@
                     method: 'post',
 
                     success: (res) => {
+                        if (res.success) {
                         Swal.fire({
-                            title: 'Added',
-                            text: 'product added to cart',
-                            icon: 'success',
-                            showConfirmButton: false
+                        title: 'Added',
+                        text: 'product added to cart',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer : 2000
+                    })
+                    }else{
+                        Swal.fire({
+                            title: 'Already Exist',
+                            text :'Product Already in Cart',
+                            icon: 'info',
+                            showConfirmButton: false,
+                            timer : 1000
                         })
+                        
+                    }
                     }
                 })
 
             }
+
+            $('#review_form').submit((x) => {
+            x.preventDefault()
+            $.ajax({
+                url: "/add_review",
+                method: "post",
+                data: $('#review_form').serialize(),
+                success: (response) => {
+                
+                }
+            })
+        })
+
         </script>
 
         <%- include('../layouts/footer.ejs') %>

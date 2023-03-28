@@ -33,7 +33,7 @@ const addCategory = async (req, res) => {
             if (result) {
                 res.redirect('/admin/add-category');
             } else {
-                console.log('not saved');
+                
             }
 
         }
@@ -69,10 +69,10 @@ const listCategory = async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.session.admin })
         const category = await Category.find()
-        res.render('list_category', { category, user })
+        res.render('list-category', { category, user })
     } catch (error) {
 
-        console.log('');
+        console.log(error.message);
     }
 }
 

@@ -18,13 +18,15 @@ const add_banner = async (req, res) => {
         const title = req.body.title
         const image = req.file.filename
         const sub_title = req.body.sub_title
+        const caption = req.body.caption
 
         if (image !== "" && sub_title.trim() !== "" && title.trim() !== "" ) {
             const banner = new Banner({
                 title: title,
                 Image: image,
-                sub_title: sub_title
-
+                sub_title: sub_title,
+                caption : caption
+ 
             })
 
             const bannerData = await banner.save();
@@ -69,9 +71,33 @@ const delete_banner = async (req, res) => {
 
 
 }
+
+const edit_banner = async (req , res )=>{
+    try {
+        const id = req.body.id
+        const caption = req.body.caption
+        const title = req.body.title
+        const sub_title = req.body.sub_title
+
+        
+    
+        const upadate = await Banner.updateOne({_id : id },{
+            $set:{
+                caption: caption,
+                title : title,
+                sub_title : sub_title
+            }
+        })
+        res.json({ success:true })
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 module.exports = {
     show_banner,
     add_banner,
     show_banner_list,
-    delete_banner
+    delete_banner,
+    edit_banner
 }

@@ -1,6 +1,6 @@
 const sessionSecret = "mysecretsession";
-const emailUser = process.env.EMAIL;
-const emailPass = process.env.PASSWORD ;
+const emailUser = "egoftverify@gmail.com";
+const emailPass = "oiidvnwqrcrbfdpz"
 
 const mongoose = require('mongoose');
 

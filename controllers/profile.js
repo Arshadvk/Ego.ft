@@ -41,7 +41,7 @@ const edit_profile = async (req, res) => {
 const add_address = async (req, res) => {
 
     try {
-        
+
         const id = req.session.user._id
 
         const address = await User.updateOne({ _id: id }, {
@@ -61,7 +61,7 @@ const add_address = async (req, res) => {
                 }
             }
         })
-        
+
         res.redirect('/address')
 
 
@@ -78,7 +78,7 @@ const showAddress = async (req, res) => {
         const id = req.session.user._id
         const user = await User.find({ _id: id })
 
-        res.render('address', { user , category })
+        res.render('address', { user, category })
 
     } catch (error) {
         console.log(error.message);
@@ -90,7 +90,6 @@ const edit_address = async (req, res) => {
 
         const user = req.session.user._id
         const address_id = req.body.id
-        console.log(address_id);
         const name = req.body.name
         const number = req.body.number
         const pincode = req.body.pincode
@@ -99,22 +98,41 @@ const edit_address = async (req, res) => {
         const street = req.body.street
         const building = req.body.building
 
-        const data = await User.updateOne({ _id: user, 'address.$._id': address_id },
-            {
-                $set: {
-                    address:
-                    {
-                        name: name,
-                        number: number,
-                        pincode: pincode,
-                        state: state,
-                        place: place,
-                        street: street,
-                        building: building
-                    }
-                }
-            }
+        console.log(req.body.name);
+
+        // const data = await User.updateOne({ _id: user, 'address._id': address_id },
+        //     {
+        //         $set: {
+        //             "address.$":
+        //             {
+        //                 name: name,
+        //                 number: number,
+        //                 pincode: pincode,
+        //                 state: state,
+        //                 place: place,
+        //                 street: street,
+        //                 building: building
+        //             }
+        //         }
+        //     }
+        // )
+
+        const data = await User.updateOne({ _id: user, 'address._id': address_id }, {
+            $set: 
+                
+                {
+                    name: name,
+                    number: number,
+                    pincode: pincode,
+                    state: state,
+                    place: place,
+                    street: street,
+                    building: building
+                },
+            
+        },
         )
+        console.log(data);
 
         const userr = req.session.user
         res.json({ success: true })

@@ -54,9 +54,9 @@
                                             <h6 class="mb-0 display-28">
                                                 <%= user.name %>
                                             </h6>
-                                            <small>Joined February 06, 2017</small>
+                                            <small>Joined <%= user.join_date.toLocaleDateString() %></small>
                                             <div class="reward-points">
-                                                <i class="ti-star text-primary pe-1"></i> Points: 7386
+                                                <i class="ti-star text-primary pe-1"></i> Wallet:<%= user.wallet %>
                                             </div>
                                         </div>
                                     </div>
@@ -123,7 +123,7 @@
                                                                     </strong>
                                                                     <% }else if (x.status=='Processing' ){ %>
                                                                         <span
-                                                                            class="fas fa-circle text-primary small mr-1"></span><strong>
+                                                                            class="fas fa-circle text-warning small mr-1"></span><strong>
                                                                             <%= x.status %>
                                                                         </strong>
                                                                         <% }else if (x.status=='Shipped' ){ %>
@@ -172,8 +172,7 @@
 
                                                 </tbody>
                                         </table>
-                                    </div>
-                                    <a class="butn-style2 mt-3" href=""><span>Show All Orders</span></a>
+                                    </div
                                 </div>
 
                             </div>
