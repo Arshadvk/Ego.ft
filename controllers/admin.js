@@ -143,7 +143,7 @@ const logout = async (req, res) => {
 const addAdmin = async (req, res) => {
     try {
         const user = req.session.admin
-        res.render('add-admin',{user});
+        res.render('add-admin', { user });
 
     } catch (error) {
 
@@ -163,7 +163,7 @@ const insertAdmin = async (req, res) => {
 
     try {
 
-       
+
         if (req.body.pas != "" || req.body.name != "" || req.body.email != "" || req.body.number != "") {
 
             const email = await User.findOne({ email: req.body.email });
@@ -187,21 +187,21 @@ const insertAdmin = async (req, res) => {
                     })
                     const userData = await user.save();
                     if (userData) {
-                        res.render('add-admin', { success: "your registration has been successfully." ,user:admin})
+                        res.render('add-admin', { success: "your registration has been successfully.", user: admin })
                     } else {
-                        res.render('add-admin', { message: "your registration has failed.",user:admin })
+                        res.render('add-admin', { message: "your registration has failed.", user: admin })
                     }
                 }
                 else {
-                    res.render('add-admin', { message: "your both password not same" ,user:admin})
+                    res.render('add-admin', { message: "your both password not same", user: admin })
                 }
 
             } else {
-                res.render('add-admin', { message: "This email already taken",user:admin })
+                res.render('add-admin', { message: "This email already taken", user: admin })
             }
 
         } else {
-            res.render('add-admin', { message: "fill your form",user:admin })
+            res.render('add-admin', { message: "fill your form", user: admin })
         }
 
 
@@ -236,50 +236,109 @@ const loadadmin = async (req, res) => {
 const loadHome = async (req, res) => {
 
     try {
-        // // total sales
-        // const totalsales = await Order.find({status : "Delivered"})
-        // let sum = 0
-        // for(var i=0 ; i<totalsales.length ; i++){
-        //     sum = sum+totalsales[i].totel
-        // }
-        // const salescount = await Order.find({}).count()
+        // total sales
+        const totalsales = await Order.find({ status: "Delivered" })
+        let sum = 0
+        for (let i = 0; i < totalsales.length; i++) {
+            sum = sum + totalsales[i].totel
+        }
+        const salescount = await Order.find({ status: "Delivered" }).count()
+
+
+        const cod = await Order.find({ paymentType: "COD" , status: "Delivered"  })
+        let cod_sum = 0
+        for (var i = 0; i < cod.length; i++) {
+            cod_sum = cod_sum + cod[i].totel
+        }
+
+        const upi = await Order.find({ paymentType: "UPI" , status: "Delivered"  })
+
+        let upi_sum = 0
+        for (var i = 0; i < upi.length; i++) {
+            upi_sum = upi_sum + upi[i].totel
+        }
+
+        const wallet = await Order.find({ paymentType: "WALLET" , status: "Delivered" })
+
+        let wallet_sum = 0
+        console.log(upi[0]?.totel);
+        for (var i = 0; i < wallet.length; i++) {
+            wallet_sum = wallet_sum + wallet[i].totel
+        }
 
         
-        // const cod = await Order.find({paymentType:"COD"})
-        // let cod_sum = 0
-        // for(var i=0 ; i<cod.length ; i++){
-        //     cod_sum = cod_sum+cod[i].totel
-        // }
-        // const upi = await Order.find({paymentType:"UPI"})
 
-        // let upi_sum = 0
-        // for(var i=0 ; i<upi.length ; i++){
-        //     upi_sum = upi_sum+upi[i].totel
-        // }
+        const methodtotal = cod_sum + upi_sum + wallet_sum
 
-        // const wallet = await Order.find({paymentType:"WALLET"})
+        const upi_percentage = upi_sum / methodtotal * 100
+        const wallet_percentage = wallet_sum / methodtotal * 100
+        const cod_percentage = cod_sum / methodtotal * 100
 
-        // let wallet_sum = 0
-        // for(var i=0 ; i<wallet.length ; i++){
-        //     wallet_sum = wallet_sum+upi[i].totel
-        // }
+        const deliveryCount = await Order.find({ status: "Delivered" }).count()
+        const confirmedCount = await Order.find({ status: "Confirmed" }).count()
+        const cancelledCount = await Order.find({ status: "Cancelled" }).count()
+        const returnedCount = await Order.find({ status: "Return" }).count()
 
-        
-        const deliveryCount = await Order.find({status:"Delivered"}).count()
-        const confirmedCount = await Order.find({status:"Confirmed"}).count()
-        const cancelledCount = await Order.find({status:"Cancelled"}).count()
-        const returnedCount = await Order.find({status:"Return"}).count()
-
-       
-        const user = await User.findOne({ _id: req.session.admin })
-        res.render('home', { user ,
     
-       
+
+        const salesChart = await Order.aggregate([
+          
+            {
+                $match: { status: "Delivered" } // Add $match stage to filter by status
+              },
+              {
+                
+              $group: {
+                _id: { $dateToString: { format: '%Y-%m-%d', date: '$date' } },
+
+                sales: { $sum: '$totel' },
+              },
+            },
+            {
+              $sort: { _id: -1 },
+            },
+            {
+              $limit: 7,
+            },
+          ]);
+          
+
+          const dates = salesChart.map((item) => {
+            return item._id;
+          })
+      
+          const sale = salesChart.map((item) => {
+            return item.sales;
+          });
+
+
+      const salesr = sale.map((x)=>{
+        return x
+      })
+
+      const date = dates.reverse()
+
+      const sales = salesr.reverse()
+
+      console.log('date', date);
+      console.log('sales', sales);
+
+        const user = await User.findOne({ _id: req.session.admin })
+        res.render('home', {
+            user,
+            date , 
+            sales ,
+            catacount:"",
             deliveryCount,
             cancelledCount,
-            returnedCount ,
-            confirmedCount
-            
+            returnedCount,
+            confirmedCount,
+            sum, cod_sum, upi_sum, wallet_sum,
+            salescount,
+            upi_percentage,
+            cod_percentage,
+            wallet_percentage
+
         })
 
     } catch (error) {
@@ -304,40 +363,37 @@ const blockuser = async (req, res) => {
 
     try {
         const userId = req.query.id;
-        const userData = await User.findByIdAndUpdate({ _id: userId }, { $set: { status: false } })
-        if (userData) {
-            console.log('blocking is susscess full');
-            sendBlockMail(userData.name, userData.email)
-            res.redirect('/admin/userlist')
-        } else {
-            console.log('unblocking is susscess full');
-        }
 
+        const userData = await User.findByIdAndUpdate({ _id: userId }, { $set: { status: false } });
+
+        sendBlockMail(userData.name, userData.email);
+
+        res.redirect('/admin/userlist');
 
     } catch (error) {
+
         console.log(error.message);
+
     }
-
-
 }
+
 const unblockuser = async (req, res) => {
 
     try {
-        const userId = req.query.id;
-        const userData = await User.findByIdAndUpdate({ _id: userId }, { $set: { status: true } })
-        if (userData) {
-            console.log('unblocking is susscess full');
-            sendunBlockMail(userData.name, userData.email);
-            res.redirect('/admin/userlist')
-        } else {
-            console.log('blocking is susscess full');
-        }
 
+        const userId = req.query.id;
+
+        const userData = await User.findByIdAndUpdate({ _id: userId }, { $set: { status: true } })
+
+        sendunBlockMail(userData.name, userData.email);
+
+        res.redirect('/admin/userlist');
 
     } catch (error) {
-        console.log(error.message);
-    }
 
+        console.log(error.message);
+
+    }
 
 }
 

@@ -66,7 +66,7 @@ admin_route.get('/add-banner', auth.isLogin, banner.show_banner)
 admin_route.post('/add-banner', auth.isLogin, upload.single('image'), banner.add_banner)
 admin_route.get('/list-banner', auth.isLogin, banner.show_banner_list)
 admin_route.post('/delete-banner', banner.delete_banner);
-admin_route.post('/edit-banner',banner.edit_banner);
+admin_route.post('/edit-banner', banner.edit_banner);
 
 
 admin_route.get('/add-coupon', auth.isLogin, order_controller.load_coupon);
@@ -75,13 +75,13 @@ admin_route.get('/list-coupon', auth.isLogin, order_controller.list_coupon);
 admin_route.post('/delete-coupon', auth.isLogin, order_controller.delete_coupon)
 admin_route.get('/edit-coupon', auth.isLogin, order_controller.edit_coupon);
 admin_route.post('/edit-coupon', order_controller.editing_coupon);
-admin_route.post('/coupon_active',order_controller.coupon_active)
+admin_route.post('/coupon_active', order_controller.coupon_active)
 
 
 admin_route.get('/list-order', auth.isLogin, order_controller.load_order);
 admin_route.get('/view-order', auth.isLogin, order_controller.view_order_admin)
 admin_route.post('/update_status', auth.isLogin, order_controller.updateStatus);
-admin_route.post('/confirm_return',order_controller.confirm_return)
+admin_route.post('/confirm_return', order_controller.confirm_return)
 
 
 admin_route.get('*', (req, res) => {

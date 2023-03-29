@@ -49,304 +49,331 @@
                         <div class="row text-center mt-n4">
                             <% if(user[0].address.length>0 ){
                                 user[0].address.forEach((x,index)=>{ %>
-                                    <%console.log(index)%>
-                                <div class="col-md-3 mt-4">
-                                    <div class="border px-1-6 py-1-9 p-lg-1-9 h-100">
-                                        <strong>
-                                            <%= x.name %>
-                                        </strong> <br>
-                                        <%= x.building %> <br>
-                                            <%= x.street %> <br>
-                                                <%= x.district %> <br>
-                                                <%= x.state %> <br>
-                                                    <%= x.number %> <br>
-                                                        <%= x.pincode %> <br>
+                                <%console.log(index)%>
+                                    <div class="col-md-3 mt-4">
+                                        <div class="border px-1-6 py-1-9 p-lg-1-9 h-100">
+                                            <strong>
+                                                <%= x.name %>
+                                            </strong> <br>
+                                            <%= x.building %> <br>
+                                                <%= x.street %> <br>
+                                                    <%= x.district %> <br>
+                                                        <%= x.state %> <br>
+                                                            <%= x.number %> <br>
+                                                                <%= x.pincode %> <br>
 
 
-                                                            <hr>
-                                                            <button style="border: none;" class="btn btn-dark"
-                                                                onclick="delete_address('<%= x._id %>')">
-                                                                Remove </button>
+                                                                    <hr>
+                                                                    <button style="border: none;" class="btn btn-dark"
+                                                                        onclick="delete_address('<%= x._id %>')">
+                                                                        Remove </button>
+                                                                    <button type="button" class="btn btn-warning"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#add<%=x._id%>">
+                                                                        Edit
+                                                                    </button>
+                                                                    <!-- Modal -->
+                                                                    <div class="modal fade" id="add<%= x._id%>"
+                                                                        tabindex="-1" role="dialog"
+                                                                        aria-labelledby="exampleModalLabel"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title"
+                                                                                        id="exampleModalLabel">
+                                                                                        Edit
+                                                                                        Address</h5>
+                                                                                    <button type="button"
+                                                                                        class="btn-close"
+                                                                                        data-bs-dismiss="modal"
+                                                                                        aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <form method="post" id="myform"
+                                                                                        class="row g-3 needs-validation"
+                                                                                        action="/edit-address"
+                                                                                        novalidate>
+
+                                                                                        <div class="row">
+
+                                                                                            <div class="col-sm-6">
+
+                                                                                                <div class="form-group">
+                                                                                                    <input type="hidden"
+                                                                                                        name="addressIndex"
+                                                                                                        value="<%= index%>">
+                                                                                                    <label>Full
+                                                                                                        Name</label>
+                                                                                                    <input type="text"
+                                                                                                        class="form-control"
+                                                                                                        name="name"
+                                                                                                        value="<%= x.name %>"
+                                                                                                        required>
+                                                                                                    <div
+                                                                                                        class="invalid-feedback">
+                                                                                                        Please Enter
+                                                                                                        Name</div>
+                                                                                                </div>
+
+                                                                                            </div>
+
+                                                                                            <div class="col-sm-6">
+
+                                                                                                <div class="form-group">
+                                                                                                    <label>Phone
+                                                                                                        Number</label>
+                                                                                                    <input type="text"
+                                                                                                        class="form-control"
+                                                                                                        name="number"
+                                                                                                        value="<%= x.number %>"
+                                                                                                        required>
+                                                                                                </div>
+
+                                                                                            </div>
+
+                                                                                        </div>
+
+                                                                                        <div class="row">
+
+                                                                                            <div class="col-sm-6">
+                                                                                                <input name="id"
+                                                                                                    type="hidden"
+                                                                                                    value="<%= x._id %>">
+                                                                                                <div class="form-group">
+                                                                                                    <label>Pincode</label>
+                                                                                                    <input type="text"
+                                                                                                        class="form-control"
+                                                                                                        name="pincode"
+                                                                                                        value="<%= x.pincode %> ">
+                                                                                                </div>
+
+                                                                                            </div>
+
+                                                                                            <div class="col-sm-6">
+
+                                                                                                <div class="form-group">
+                                                                                                    <label>State</label>
+                                                                                                    <select
+                                                                                                        class="form-control form-select"
+                                                                                                        name="state">
+                                                                                                        <option
+                                                                                                            value="<%= x.state %>"
+                                                                                                            selected="selected">
+                                                                                                            <%= x.state
+                                                                                                                %>
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Andhra Pradesh">
+                                                                                                            Andhra
+                                                                                                            Pradesh
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Arunachal Pradesh">
+                                                                                                            Arunachal
+                                                                                                            Pradesh
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Assam">
+                                                                                                            Assam
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Bihar">
+                                                                                                            Bihar
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Chhattisgarh">
+                                                                                                            Chhattisgarh
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Goa ">
+                                                                                                            Goa
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Gujarat ">
+                                                                                                            Gujarat
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Haryana ">
+                                                                                                            Haryana
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Himachal Pradesh ">
+                                                                                                            Himachal
+                                                                                                            Pradesh
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Jharkhand ">
+                                                                                                            Jharkhand
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Karnataka ">
+                                                                                                            Karnataka
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Kerala ">
+                                                                                                            Kerala
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Madhya Pradesh ">
+                                                                                                            Madhya
+                                                                                                            Pradesh
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Maharashtra ">
+                                                                                                            Maharashtra
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Manipur ">
+                                                                                                            Manipur
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Meghalaya ">
+                                                                                                            Meghalaya
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Mizoram ">
+                                                                                                            Mizoram
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Nagaland ">
+                                                                                                            Nagaland
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Odisha ">
+                                                                                                            Odisha
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Punjab ">
+                                                                                                            Punjab
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Rajasthan ">
+                                                                                                            Rajasthan
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Sikkim ">
+                                                                                                            Sikkim
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Tamil Nadu ">
+                                                                                                            Tamil
+                                                                                                            Nadu
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Telangana ">
+                                                                                                            Telangana
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Tripura ">
+                                                                                                            Tripura
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Uttar Pradesh">
+                                                                                                            Uttar
+                                                                                                            Pradesh
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="Uttarakhand">
+                                                                                                            Uttarakhand
+                                                                                                        </option>
+                                                                                                        <option
+                                                                                                            value="West Bengal ">
+                                                                                                            West
+                                                                                                            Bengal
+                                                                                                        </option>
+                                                                                                    </select>
+                                                                                                </div>
+
+                                                                                            </div>
+
+                                                                                        </div>
+
+                                                                                        <div class="row">
+
+                                                                                            <div class="col-sm-6">
+
+                                                                                                <div class="form-group">
+                                                                                                    <label>District
+                                                                                                    </label>
+                                                                                                    <input type="text"
+                                                                                                        class="form-control"
+                                                                                                        name="street"
+                                                                                                        value=" <%= x.district %>">
+                                                                                                </div>
+
+                                                                                            </div>
+
+                                                                                            <div class="col-sm-6">
+
+                                                                                                <div class="form-group">
+                                                                                                    <label>City / Town
+                                                                                                    </label>
+                                                                                                    <input type="text"
+                                                                                                        class="form-control"
+                                                                                                        name="street"
+                                                                                                        value=" <%= x.street %>">
+                                                                                                </div>
+
+                                                                                            </div>
 
 
 
-                                                            <button type="button" class="btn btn-warning"
-                                                                data-bs-toggle="modal" data-bs-target="#add<%=x._id%>">
-                                                                Edit
-                                                            </button>
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="add<%= x._id%>" tabindex="-1"
-                                                                role="dialog" aria-labelledby="exampleModalLabel"
-                                                                aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="exampleModalLabel">
-                                                                                Edit
-                                                                                Address</h5>
-                                                                            <button type="button" class="btn-close"
-                                                                                data-bs-dismiss="modal"
-                                                                                aria-label="Close"></button>
+                                                                                        </div>
+
+                                                                                        <div class="row">
+
+                                                                                            <div class="col-sm-6">
+
+                                                                                                <div class="form-group">
+                                                                                                    <label>Place name
+                                                                                                    </label>
+                                                                                                    <input type="text"
+                                                                                                        class="form-control"
+                                                                                                        name="place"
+                                                                                                        value=" <%= x.street %>">
+                                                                                                </div>
+
+                                                                                            </div>
+
+                                                                                            <div class="col-sm-6">
+
+                                                                                                <div class="form-group">
+                                                                                                    <label>Hosue No /
+                                                                                                        Building
+                                                                                                        no
+                                                                                                    </label>
+                                                                                                    <input type="text"
+                                                                                                        class="form-control"
+                                                                                                        name="building"
+                                                                                                        placeholder="Hosue No / Building Name "
+                                                                                                        value=" <%= x.building %>">
+                                                                                                </div>
+
+                                                                                            </div>
+
+
+
+                                                                                        </div>
+
+
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-dark float-end"
+                                                                                            data-bs-dismiss="modal">Save</button>
+
+
+
+                                                                                    </form>
+                                                                                </div>
+
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="modal-body">
-                                                                            <form method="post" id="myform"
-                                                                                class="row g-3 needs-validation"
-                                                                                action="/edit-address" novalidate>
-
-                                                                                <div class="row">
-
-                                                                                    <div class="col-sm-6">
-
-                                                                                        <div class="form-group">
-                                                                                            <input type="hidden" name="addressIndex" value="<%= index%>">
-                                                                                            <label>Full Name</label>
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                name="name"
-                                                                                                value="<%= x.name %>"
-                                                                                                required>
-                                                                                            <div
-                                                                                                class="invalid-feedback">
-                                                                                                Please Enter Name</div>
-                                                                                        </div>
-
-                                                                                    </div>
-
-                                                                                    <div class="col-sm-6">
-
-                                                                                        <div class="form-group">
-                                                                                            <label>Phone Number</label>
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                name="number"
-                                                                                                value="<%= x.number %>"
-                                                                                                required>
-                                                                                        </div>
-
-                                                                                    </div>
-
-                                                                                </div>
-
-                                                                                <div class="row">
-
-                                                                                    <div class="col-sm-6">
-                                                                                        <input name="id" type="hidden"
-                                                                                            value="<%= x._id %>">
-                                                                                        <div class="form-group">
-                                                                                            <label>Pincode</label>
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                name="pincode"
-                                                                                                value="<%= x.pincode %> ">
-                                                                                        </div>
-
-                                                                                    </div>
-
-                                                                                    <div class="col-sm-6">
-
-                                                                                        <div class="form-group">
-                                                                                            <label>State</label>
-                                                                                            <select
-                                                                                                class="form-control form-select"
-                                                                                                name="state">
-                                                                                                <option
-                                                                                                    value="<%= x.state %>"
-                                                                                                    selected="selected">
-                                                                                                    <%= x.state %>
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Andhra Pradesh">
-                                                                                                    Andhra Pradesh
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Arunachal Pradesh">
-                                                                                                    Arunachal Pradesh
-                                                                                                </option>
-                                                                                                <option value="Assam">
-                                                                                                    Assam
-                                                                                                </option>
-                                                                                                <option value="Bihar">
-                                                                                                    Bihar
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Chhattisgarh">
-                                                                                                    Chhattisgarh
-                                                                                                </option>
-                                                                                                <option value="Goa ">Goa
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Gujarat ">
-                                                                                                    Gujarat
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Haryana ">
-                                                                                                    Haryana
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Himachal Pradesh ">
-                                                                                                    Himachal Pradesh
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Jharkhand ">
-                                                                                                    Jharkhand
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Karnataka ">
-                                                                                                    Karnataka
-                                                                                                </option>
-                                                                                                <option value="Kerala ">
-                                                                                                    Kerala
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Madhya Pradesh ">
-                                                                                                    Madhya Pradesh
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Maharashtra ">
-                                                                                                    Maharashtra
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Manipur ">
-                                                                                                    Manipur
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Meghalaya ">
-                                                                                                    Meghalaya
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Mizoram ">
-                                                                                                    Mizoram
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Nagaland ">
-                                                                                                    Nagaland
-                                                                                                </option>
-                                                                                                <option value="Odisha ">
-                                                                                                    Odisha
-                                                                                                </option>
-                                                                                                <option value="Punjab ">
-                                                                                                    Punjab
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Rajasthan ">
-                                                                                                    Rajasthan
-                                                                                                </option>
-                                                                                                <option value="Sikkim ">
-                                                                                                    Sikkim
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Tamil Nadu ">
-                                                                                                    Tamil
-                                                                                                    Nadu </option>
-                                                                                                <option
-                                                                                                    value="Telangana ">
-                                                                                                    Telangana
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Tripura ">
-                                                                                                    Tripura
-                                                                                                </option>
-                                                                                                <option
-                                                                                                    value="Uttar Pradesh">
-                                                                                                    Uttar
-                                                                                                    Pradesh</option>
-                                                                                                <option
-                                                                                                    value="Uttarakhand">
-                                                                                                    Uttarakhand</option>
-                                                                                                <option
-                                                                                                    value="West Bengal ">
-                                                                                                    West
-                                                                                                    Bengal </option>
-                                                                                            </select>
-                                                                                        </div>
-
-                                                                                    </div>
-
-                                                                                </div>
-
-                                                                                <div class="row">
-
-                                                                                    <div class="col-sm-6">
-
-                                                                                        <div class="form-group">
-                                                                                            <label>District </label>
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                name="street"
-                                                                                                value=" <%= x.district %>">
-                                                                                        </div>
-
-                                                                                    </div>
-
-                                                                                    <div class="col-sm-6">
-
-                                                                                        <div class="form-group">
-                                                                                            <label>City / Town </label>
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                name="street"
-                                                                                                value=" <%= x.street %>">
-                                                                                        </div>
-
-                                                                                    </div>
-
-
-
-                                                                                </div>
-
-                                                                                <div class="row">
-
-                                                                                    <div class="col-sm-6">
-
-                                                                                        <div class="form-group">
-                                                                                            <label>Place name </label>
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                name="place"
-                                                                                                value=" <%= x.street %>">
-                                                                                        </div>
-
-                                                                                    </div>
-
-                                                                                    <div class="col-sm-6">
-
-                                                                                        <div class="form-group">
-                                                                                            <label>Hosue No / Building
-                                                                                                no
-                                                                                            </label>
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                name="building"
-                                                                                                placeholder="Hosue No / Building Name "
-                                                                                                value=" <%= x.building %>">
-                                                                                        </div>
-
-                                                                                    </div>
-
-
-
-                                                                                </div>
-
-
-                                                                                <button type="submit"
-                                                                                    class="btn btn-dark float-end"
-                                                                                    data-bs-dismiss="modal">Save</button>
-
-
-
-                                                                            </form>
-                                                                        </div>
-
                                                                     </div>
-                                                                </div>
-                                                            </div>
 
+                                        </div>
 
                                     </div>
-
-                                </div>
-                                <% })} %>
+                                    <% })} %>
 
                         </div>
 
@@ -405,7 +432,7 @@
                         <div class="row">
 
                             <div class="col-sm-6">
-                               
+
                                 <div class="form-group">
                                     <label>Pincode</label>
                                     <input type="text" class="form-control" name="pincode">
@@ -521,8 +548,7 @@
 
                                 <div class="form-group">
                                     <label>Hosue No / Building Name </label>
-                                    <input type="text" class="form-control" name="building"
-                                        >
+                                    <input type="text" class="form-control" name="building">
                                 </div>
 
                             </div>

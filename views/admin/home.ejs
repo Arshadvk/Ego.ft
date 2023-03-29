@@ -6,93 +6,10 @@
         <div class="col-md-6 col-lg-4 order-2 mb-4">
           <div class="card h-100">
             <div class="card-header d-flex align-items-center justify-content-between">
-              <h5 class="card-title m-0 me-2">Transactions</h5>
-              <div class="dropdown">
-                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true"
-                  aria-expanded="false">
-                  <i class="bx bx-dots-vertical-rounded"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                  <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
-                </div>
-              </div>
+              <h5 class="card-title m-0 me-2">Order Statistics</h5>
             </div>
+            <hr>
             <div class="card-body">
-              <ul class="p-0 m-0">
-                <li class="d-flex mb-4 pb-1">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <img src="../assets/img/icons/unicons/paypal.png" alt="User" class="rounded" />
-                  </div>
-                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                    <div class="me-2">
-                      <small class="text-muted d-block mb-1">UPI</small>
-
-                    </div>
-                    <div class="user-progress d-flex align-items-center gap-1">
-                      <h6 class="mb-0">
-                      </h6>
-
-                    </div>
-                  </div>
-                </li>
-                <li class="d-flex mb-4 pb-1">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <img src="../assets/img/icons/unicons/wallet.png" alt="User" class="rounded" />
-                  </div>
-                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                    <div class="me-2">
-                      <small class="text-muted d-block mb-1">Wallet</small>
-
-                    </div>
-                    <div class="user-progress d-flex align-items-center gap-1">
-                      <h6 class="mb-0">
-                      </h6>
-
-                    </div>
-                  </div>
-                </li>
-                <li class="d-flex mb-4 pb-1">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <img src="../assets/img/icons/unicons/chart.png" alt="User" class="rounded" />
-                  </div>
-                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                    <div class="me-2">
-                      <small class="text-muted d-block mb-1">COD</small>
-                    </div>
-                    <div class="user-progress d-flex align-items-center gap-1">
-                      <h6 class="mb-0">
-                      </h6>
-                    </div>
-                  </div>
-                </li>
-
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Total Revenue -->
-        <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-          <div class="card h-100">
-            <div class="card-header d-flex align-items-center justify-content-between pb-0">
-              <div class="card-title mb-0">
-                <h5 class="m-0 me-2">Order Statistics</h5>
-
-              </div>
-
-            </div>
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <div class="d-flex flex-column align-items-center gap-1">
-                  <h2 class="mb-2">
-
-                  </h2>
-                  <span>Total Orders</span>
-                </div>
-                <div id="orderStatisticsChart"></div>
-              </div>
               <ul class="p-0 m-0">
                 <li class="d-flex mb-4 pb-1">
                   <div class="avatar flex-shrink-0 me-3">
@@ -163,10 +80,103 @@
             </div>
           </div>
         </div>
-        <input type="hidden" id="delivery" value=" <%= deliveryCount %>">
-        <input type="hidden" id="cancelled" value=" <%= cancelledCount %>">
-        <input type="hidden" id="returned" value=" <%= returnedCount %>">
-        <input type="hidden" id="confirmed" value=" <%= confirmedCount %>">
+
+        <!-- Total Revenue -->
+        <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center justify-content-between pb-0">
+              <div class="card-title mb-0">
+                <h5 class="m-0 me-2">Transactions</h5>
+
+              </div>
+
+            </div>
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex flex-column align-items-center gap-1">
+                  <h2 class="mb-2">
+                    <%= salescount %>
+                  </h2>
+                  <span>Total Orders</span>
+                </div>
+                <div id="orderStatisticsChart"></div>
+              </div>
+              <ul class="p-0 m-0">
+                <li class="d-flex mb-4 pb-1">
+                  <div class="avatar flex-shrink-0 me-3">
+                    <img src="../assets/img/icons/unicons/paypal.png" alt="User" class="rounded" />
+                  </div>
+                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                    <div class="me-2">
+                      <small class="text-muted d-block mb-1">UPI</small>
+
+                    </div>
+                    <div class="user-progress d-flex align-items-center gap-1">
+                      <h6 class="mb-0">
+                        ₹  <%= upi_sum %>
+                      </h6>
+
+                    </div>
+                  </div>
+                </li>
+                <li class="d-flex mb-4 pb-1">
+                  <div class="avatar flex-shrink-0 me-3">
+                    <img src="../assets/img/icons/unicons/wallet.png" alt="User" class="rounded" />
+                  </div>
+                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                    <div class="me-2">
+                      <small class="text-muted d-block mb-1">Wallet</small>
+
+                    </div>
+                    <div class="user-progress d-flex align-items-center gap-1">
+                      <h6 class="mb-0">
+                        ₹ <%= wallet_sum %>
+
+                      </h6>
+
+                    </div>
+                  </div>
+                </li>
+                <li class="d-flex mb-4 pb-1">
+                  <div class="avatar flex-shrink-0 me-3">
+                    <img src="../assets/img/icons/unicons/chart.png" alt="User" class="rounded" />
+                  </div>
+                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                    <div class="me-2">
+                      <small class="text-muted d-block mb-1">COD</small>
+                    </div>
+                    <div class="user-progress d-flex align-items-center gap-1">
+                      <h6 class="mb-0">
+                        ₹ <%= cod_sum %>
+                      </h6>
+                    </div>
+                  </div>
+                </li>
+                <li class="d-flex mb-4 pb-1">
+                  <div class="avatar flex-shrink-0 me-3">
+                    
+                  </div>
+                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                    <div class="me-2">
+                      <small class="text-muted d-block mb-1">Total sales</small>
+                    </div>
+                    <div class="user-progress d-flex align-items-center gap-1">
+                      <h6 class="mb-0">
+                        ₹ <%= sum %>
+                      </h6>
+                    </div>
+                  </div>
+                </li>
+
+
+              </ul>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" id="upi" value=" <%= upi_percentage %>">
+        <input type="hidden" id="cod" value=" <%= cod_percentage %>">
+        <input type="hidden" id="wallet" value=" <%= wallet_percentage %>">
+        
 
 
         <div class="col-md-6 col-lg-4 order-1 mb-4">
@@ -180,24 +190,20 @@
                       <img src="../assets/img/icons/unicons/wallet.png" alt="User" />
                     </div>
                     <div>
-                      <small class="text-muted d-block">Total Balance</small>
+                      <h5 class="m-0 me-2">Sales</h5>
+                      <small class="text-muted d-block">Sales In This Week</small>
                       <div class="d-flex align-items-center">
-                        <h6 class="mb-0 me-1">₹459.10</h6>
-                        <small class="text-success fw-semibold">
-                          <i class="bx bx-chevron-up"></i>
-                          42.9%
-                        </small>
+                       
                       </div>
                     </div>
                   </div>
                   <div id="incomeChart"></div>
                   <div class="d-flex justify-content-center pt-4 gap-2">
                     <div class="flex-shrink-0">
-                      <div id="expensesOfWeek"></div>
+                      
                     </div>
                     <div>
-                      <p class="mb-n1 mt-1">Expenses This Week</p>
-                      <small class="text-muted">₹39 less than last week</small>
+                      
                     </div>
                   </div>
                 </div>
@@ -205,58 +211,11 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-4 order-1">
-          <div class="col-lg-6 col-md-12 col-6 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                  <div class="avatar flex-shrink-0">
-                    <img src="/assets/img/icons/unicons/wallet-info.png" alt="Credit Card" class="rounded" />
-                  </div>
-                  <div class="dropdown">
-                    <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                      <i class="bx bx-dots-vertical-rounded"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                      <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                      <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                    </div>
-                  </div>
-                </div>
-                <span>Sales</span>
-                <h3 class="card-title text-nowrap mb-1">
-                </h3>
-                <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-12 col-6 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title d-flex align-items-start justify-content-between">
-                  <div class="avatar flex-shrink-0">
-                    <img src="../assets/img/icons/unicons/chart-success.png" alt="chart success" class="rounded" />
-                  </div>
-                  <div class="dropdown">
-                    <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                      <i class="bx bx-dots-vertical-rounded"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                      <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                      <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                    </div>
-                  </div>
-                </div>
-                <span class="fw-semibold d-block mb-1">Profit</span>
-                <h3 class="card-title mb-2">₹12,628</h3>
-                <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
-              </div>
-            </div>
-          </div>
+        <input type="text" id="date" value="<%= JSON.stringify(date) %>" hidden>
+        <input type="text" id="sales" value="<%= JSON.stringify(sales) %>" hidden>
+       
 
-        </div>
+  
 
 
       </div>
@@ -264,7 +223,7 @@
     </div>
     <!-- / Content -->
 
-    <!-- Footer -->
+ 
     <footer class="content-footer footer bg-footer-theme">
       <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
         <div class="mb-2 mb-md-0">
@@ -273,21 +232,11 @@
             document.write(new Date().getFullYear());
           </script>
           , made with ❤️ by
-          <a href="https://themeselection.com" class="footer-link fw-bolder">ThemeSelection</a>
-        </div>
-        <div>
-          <a href="https://themeselection.com/license/" class="footer-link me-4">License</a>
-          <a href="https://themeselection.com/" class="footer-link me-4">More Themes</a>
-
-          <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-            class="footer-link me-4">Documentation</a>
-
-          <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-            class="footer-link me-4">Support</a>
+          <a href="" class="footer-link fw-bolder">EGO.ft</a>
         </div>
       </div>
     </footer>
-    <!-- / Footer -->
+    
 
     <div class="content-backdrop fade"></div>
     </div>

@@ -417,18 +417,17 @@
     const profileReportChart = new ApexCharts(profileReportChartEl, profileReportChartConfig);
     profileReportChart.render();
   }
-  const delivery = document.getElementById('delivery').value
-  const confirm = document.getElementById('confirmed').value
-  const returnn = document.getElementById('returned').value
-  const cancel = document.getElementById('cancelled').value
+  const upi = document.getElementById('upi').value
+  const cod = document.getElementById('cod').value
+  const wallet = document.getElementById('wallet').value
+
   
   
  
 
-  const delivered = parseInt(delivery)
-  const confirmed = parseInt(confirm)
-  const returned = parseInt(returnn)
-  const cancelled = parseInt(cancel)
+  const upii = parseInt(upi)
+  const codd = parseInt(cod)
+  const wallett = parseInt(wallet)
 
   
 
@@ -441,9 +440,9 @@
         width: 130,
         type: 'donut'
       },
-      labels: ['cancelled', 'delivered', 'confirmed', 'returned'],
-      series: [cancelled, delivered, confirmed, returned],
-      colors: [config.colors.primary, config.colors.secondary, config.colors.info, config.colors.success],
+      labels: ['UPI', 'COD', 'WALLET'],
+      series: [upii, codd, wallett, ],
+      colors: [config.colors.danger, config.colors.info, config.colors.primary, ],
       stroke: {
         width: 5,
         colors: cardColor
@@ -487,9 +486,9 @@
                 show: true,
                 fontSize: '0.8125rem',
                 color: axisColor,
-                label: 'Weekly',
+                label: '',
                 formatter: function (w) {
-                  return '38%';
+                  return '';
                 }
               }
             }
@@ -501,14 +500,39 @@
     const statisticsChart = new ApexCharts(chartOrderStatistics, orderChartConfig);
     statisticsChart.render();
   }
+  const dates = document.getElementById('date').value
+  const sales = document.getElementById('sales').value
+  console.log(sales);
+  console.log(typeof sales);
+  console.log(dates);
+  
+  const sale = JSON.parse(sales);
+  const date = JSON.parse(dates);
 
+
+  // define an array of date strings
+let dateStrings = date;
+
+// define a function that converts a date string to a day of the week string
+function getDayOfWeek(dateStr) {
+ let dateObj = new Date(dateStr);
+ let dateString = dateObj.toDateString();
+ let dayOfWeek = dateString.slice(0, 3);
+ return dayOfWeek;
+}
+
+// use the map() method to apply the getDayOfWeek function to each element of the array
+let dayOfWeekStrings = dateStrings.map(getDayOfWeek);
+
+  
+  
   // Income Chart - Area chart
   // --------------------------------------------------------------------
   const incomeChartEl = document.querySelector('#incomeChart'),
     incomeChartConfig = {
       series: [
         {
-          data: [40, 21, 30, 22, 42, 26, 35, 29]
+          data: sale
         }
       ],
       chart: {
@@ -572,7 +596,7 @@
         }
       },
       xaxis: {
-        categories: ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        categories: dayOfWeekStrings,
         axisBorder: {
           show: false
         },
@@ -592,7 +616,7 @@
           show: false
         },
         min: 10,
-        max: 50,
+        max: 50000,
         tickAmount: 4
       }
     };

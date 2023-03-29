@@ -98,7 +98,6 @@ const edit_address = async (req, res) => {
         const street = req.body.street
         const building = req.body.building
 
-        console.log(req.body.name);
 
         // const data = await User.updateOne({ _id: user, 'address._id': address_id },
         //     {
@@ -132,7 +131,7 @@ const edit_address = async (req, res) => {
             
         },
         )
-        console.log(data);
+   
 
         const userr = req.session.user
         res.json({ success: true })

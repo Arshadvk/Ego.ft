@@ -377,9 +377,9 @@ const apply_coupon = async (req, res) => {
 const place_order = async (req, res) => {
   try {
 
-    if(req.body.payment_method != ""){
-
     const id = req.session.user._id;
+
+    const user = await User.findOne({_id : id })
 
     const productPush = [];
 
@@ -424,7 +424,29 @@ const place_order = async (req, res) => {
     }
 
     // status updating
-    const status = req.body.payment_method == "COD" ? "Confirmed" : "Pending";
+    let status 
+
+    if(req.body.payment_method == "COD"){
+
+      status = "Confirmed"
+
+    }else if (req.body.payment_method == "UPI" ){
+
+      status = "Pending"
+
+    }else if (req.body.payment_method == "WALLET" ){
+      if(user.wallet < orderData.totel ){
+
+        res.json({wallet:false})
+
+        return
+      }
+
+      status = "Confirmed"
+
+    }
+     
+
     const totel = req.body.totel;
     const orderId = `Order#${uuid.v4()}`;
     const order = new Order({
@@ -462,13 +484,17 @@ const place_order = async (req, res) => {
         res.json({ viewRazorpay: true, order });
 
       });
-    }
-  }
-  else if (req.body.payment_method == "WALLET") {
-    console.log("hello");
-    res.json({wallet_pay : true })
+    }else if (req.body.payment_method == "WALLET") {
+      
+      const walupdate = user.wallet - orderData.totel
 
-  } 
+      await User.updateOne({_id : id },{$set:{wallet:walupdate}})
+
+      res.json({status : true })
+  
+    } 
+  
+  
 }catch (error) {
 
     console.log(error.message);

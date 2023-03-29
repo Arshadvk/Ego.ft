@@ -566,11 +566,15 @@
                         location.href = "/order_success"
                     } else if (response.viewRazorpay) {
                         razorpayPayment(response.order)
-
-
-                    } else if (response.wallet_pay) {
-                        console.log("walletPayment");
-                        walletPayment()
+                    } else if (response.wallet == false) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'wallet has insufficient balance !',
+                            showConfirmButton: false,
+                            timer: 5000
+                        })
+                        
                     }
 
                 }
