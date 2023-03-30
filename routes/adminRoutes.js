@@ -29,7 +29,7 @@ admin_route.get('/logout', auth.isLogin, admincontroller.logout);
 
 // dashborad
 admin_route.get('/home', auth.isLogin, admincontroller.loadHome)
-
+admin_route.post('/change-password',admincontroller.change_password)
 
 //user management
 admin_route.get('/userlist', auth.isLogin, admincontroller.loadUserlist);
@@ -40,6 +40,7 @@ admin_route.get('/unblock-user', auth.isLogin, admincontroller.unblockuser);
 
 // admin management
 admin_route.get('/profile', auth.isLogin, admincontroller.loadprofile);
+admin_route.post('/edit-address', admincontroller.edit_profile)
 admin_route.get('/add-admin', auth.isLogin, admincontroller.addAdmin);
 admin_route.post('/add-admin', admincontroller.insertAdmin);
 admin_route.get('/admin_list', auth.isLogin, admincontroller.loadadmin)

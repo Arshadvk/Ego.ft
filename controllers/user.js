@@ -309,6 +309,22 @@ const VerifyMail = async (req, res) => {
         console.log(error.message);
     }
 }
+
+const send_verfymail = async (req , res)=>{
+
+    try {
+       const name = req.body.name
+       const email = req.body.email
+       const id = req.body.id
+     sendVerifyMail( name , email , id );
+     res.json({success:true})
+
+    } catch (error) {
+
+        console.log(error.message);
+    }
+} 
+
 const forgetpasswordload = async (req, res) => {
 
     try {
@@ -504,5 +520,6 @@ module.exports = {
     loadbycategory,
     loadfaq,
     privacy_policy,
-    aboutUs
+    aboutUs,
+    send_verfymail
 }

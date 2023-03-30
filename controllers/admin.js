@@ -45,7 +45,7 @@ const sendBlockMail = async (name, email, user_id) => {
             if (error) {
                 console.log(error);
             } else {
-                console.log("Email has been sent:-", info.response);
+             
             }
         })
     } catch (error) {
@@ -78,7 +78,7 @@ const sendunBlockMail = async (name, email, user_id) => {
             if (error) {
                 console.log(error);
             } else {
-                console.log("Email has been sent:-", info.response);
+              
             }
         })
     } catch (error) {
@@ -112,7 +112,7 @@ const verifyLogin = async (req, res) => {
 
                 if (userData.is_admin === 1) {
 
-                    req.session.admin = userData._id;
+                    req.session.admin = userData;
 
                     res.redirect('/admin/home')
 
@@ -151,14 +151,34 @@ const addAdmin = async (req, res) => {
     }
 
 }
-const verifyAdmin = async (req, res) => {
-
+const change_password = async (req, res) => {
     try {
+        const id = req.session.admin._id
+        const user = req.session.admin
+        const old = req.body.oldPassword
+        const newpassword = req.body.pass
+        const repassword = req.body.pas
+        if (repassword == newpassword) {
+            const passwordMatch = await bcrypt.compare(old, user.pass);
+            if (passwordMatch) {
+                const spass = await securePassword(newpassword);
+                const user = await User.updateOne({ _id: id }, { $set: { pass: spass } });
+
+                res.json({ success: true })
+            }else{
+
+                res.json({success:false})
+            }
+            
+
+
+        }
 
     } catch (error) {
         console.log(error.message);
     }
 }
+
 const insertAdmin = async (req, res) => {
 
     try {
@@ -261,7 +281,7 @@ const loadHome = async (req, res) => {
         const wallet = await Order.find({ paymentType: "WALLET" , status: "Delivered" })
 
         let wallet_sum = 0
-        console.log(upi[0]?.totel);
+       
         for (var i = 0; i < wallet.length; i++) {
             wallet_sum = wallet_sum + wallet[i].totel
         }
@@ -320,8 +340,6 @@ const loadHome = async (req, res) => {
 
       const sales = salesr.reverse()
 
-      console.log('date', date);
-      console.log('sales', sales);
 
         const user = await User.findOne({ _id: req.session.admin })
         res.render('home', {
@@ -343,7 +361,7 @@ const loadHome = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error);
+        console.log(error.message);
     }
 
 }
@@ -358,6 +376,29 @@ const loadprofile = async (req, res) => {
     }
 }
 
+const edit_profile = async (req, res) => {
+
+    try {
+        if (req.body.name.trim() == "" || req.body.number.trim() == "" || req.body.email.trim() == "") {
+
+            res.json({ success: false })
+        } else {
+            const id = req.session.admin._id
+            await User.updateOne({ _id: id }, {
+                $set: {
+                    name: req.body.name,
+                    number: req.body.number,
+                    email: req.body.email
+                }
+            })
+            res.json({ success: true })
+        }
+
+    } catch (error) {
+
+        console.log(error.message);
+    }
+}
 
 const blockuser = async (req, res) => {
 
@@ -411,5 +452,7 @@ module.exports = {
     blockuser,
     unblockuser,
     insertAdmin,
-    loadadmin
+    loadadmin,
+    change_password,
+    edit_profile
 }

@@ -54,8 +54,7 @@ user_route.post('/change-password', userController.change_password);
 
 //verify email
 user_route.get('/verify', userController.VerifyMail);
-user_route.get('/verification');
-user_route.post('/verification');
+user_route.post('/verify_mail', userController.send_verfymail);
 
 
 //otp verify 

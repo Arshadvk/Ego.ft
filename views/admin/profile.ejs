@@ -12,29 +12,31 @@
 
             <hr class="my-0" />
             <div class="card-body">
-              <form id="formAccountSettings" method="POST" onsubmit="return false">
+              <form id="myform" method="post">
                 <div class="row">
                   <div class="mb-3 col-md-6">
                     <label for="firstName" class="form-label">Full Name</label>
-                    <input class="form-control" type="text" id="firstName" name="firstName" value="John" autofocus />
+                    <input class="form-control" type="text" id="firstName" name="name" value="<%= user.name  %>" autofocus />
                   </div>
                   <div class="mb-3 col-md-6">
                     <label for="email" class="form-label">E-mail</label>
-                    <input class="form-control" type="text" id="email" name="email" value="john.doe@example.com"
+                    <input class="form-control" type="text" id="email" name="email" value="<%= user.email%>"
                       placeholder="john.doe@example.com" />
                   </div>
                   <div class="mb-3 col-md-6">
                     <label class="form-label" for="phoneNumber">Phone Number</label>
                     <div class="input-group input-group-merge">
-                      <span class="input-group-text">US (+1)</span>
-                      <input type="text" id="phoneNumber" name="phoneNumber" class="form-control"
-                        placeholder="202 555 0111" />
+                      <span class="input-group-text">(+91)</span>
+                      <input type="text" id="phoneNumber" name="number" class="form-control"
+                        placeholder="<%= user.number %>" />
                     </div>
                   </div>
                 </div>
                 <div class="mt-2">
                   <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                  <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                  <button type="reset" class="btn btn-outline-secondary" style="border: none;" >Cancel</button>
+                  <button type="button" class="btn btn-outline-secondary float-end" data-bs-toggle="modal"
+                    data-bs-target="#change_password" style="border: none;">Change Password </button>
                 </div>
               </form>
             </div>
@@ -46,41 +48,136 @@
     </div>
     <!-- / Content -->
 
-    <!-- Footer -->
-    <footer class="content-footer footer bg-footer-theme">
-      <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-        <div class="mb-2 mb-md-0">
-          ©
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          , made with ❤️ by
-          <a href="https://themeselection.com" class="footer-link fw-bolder">ThemeSelection</a>
-        </div>
-        <div>
-          <a href="https://themeselection.com/license/" class="footer-link me-4">License</a>
-          <a href="https://themeselection.com/" class="footer-link me-4">More Themes</a>
+    <div class="modal fade" id="change_password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">change Password</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="post" id="password">
 
-          <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-            class="footer-link me-4">Documentation</a>
+              <div class="row">
 
-          <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-            class="footer-link me-4">Support</a>
+                <div class="col-sm-12">
+
+                  <div class="form-group">
+                    <label>Old Password</label>
+                    <input type="text" class="form-control" minlength="6" name="oldPassword">
+                  </div>
+
+                </div>
+
+
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-sm-6">
+                  <input name="id" type="hidden">
+                  <div class="form-group">
+                    <label>New password</label>
+                    <input type="text" class="form-control" minlength="6" name="pass">
+                  </div>
+
+                </div>
+
+                <div class="col-sm-6">
+
+                  <div class="form-group">
+                    <label>Renter password</label>
+                    <input type="text" class="form-control" minlength="6" name="pas">
+                  </div>
+
+                </div>
+
+              </div>
+
+
+
+
+
+              <button type="submit" class="btn btn-dark float-end" data-bs-dismiss="modal">Save</button>
+
+
+
+            </form>
+          </div>
+
         </div>
       </div>
-    </footer>
-    <!-- / Footer -->
+    </div>
+    
+    <script>
+         $(document).ready(function () {
+            $('#password').submit(function (event) {
+                event.preventDefault(); //prevent default form submit action
+                var formData = $(this).serialize(); //serialize form data
+            
+                $.ajax({
+                    type: 'POST',
+                    url: '/admin/change-password',
+                    data: formData,
+                    success: function (response) {
+                        if(response.success == true){
+                            Swal.fire({
+                            title: 'Changed!',
+                            text: 'Your Password Changed',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                        }else{
+                            Swal.fire({
+                            title: 'Not Changed!',
+                            text: 'Enter correct Password',
+                            icon: 'warning',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                        }
+                        
+                    },
+                    error: function (xhr, status, error) {
+                        //handle error response
+                    }
+                });
+            });
+        });
 
-    <div class="content-backdrop fade"></div>
-    </div>
-    <!-- Content wrapper -->
-    </div>
-    <!-- / Layout page -->
-    </div>
+        $(document).ready(function () {
+                $('#myform').submit(function (event) {
+                    event.preventDefault(); //prevent default form submit action
+                    var formData = $(this).serialize(); //serialize form data
+                    $.ajax({
+                        type: 'POST',
+                        url: '/admin/edit-profile',
+                        data: formData,
+                        success: function (response) {
+                            if (response.success == true) {
+                                $('#reloadDiv').load('/profile #reloadDiv')
+                                console.log(response);
+                                Swal.fire({
+                                    title: 'Edited!',
+                                    text: 'Your profile edited',
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                })
+                            } else {
+                                document.getElementById('validation').innerHTML = 'please fill your form'
+                            }
 
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
+                        },
+                        error: function (xhr, status, error) {
+                            //handle error response
+                        }
+                    });
+                });
+            });
 
+    </script>
     <%- include('../layouts/adminfooter.ejs') %>

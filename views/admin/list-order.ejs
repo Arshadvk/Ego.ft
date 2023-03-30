@@ -116,21 +116,17 @@
                                   </div>
                                 </div>
                               </td>
-
                               <% }else{%>
-
-                                <td><strong>
+                                <td>
+                                  <strong>
                                     <%= x.status %>
-                                  </strong></td>
+                                  </strong>
+                                </td>
 
                                 <% }%>
-                                  <td> <a class="dropdown-item" href="/admin/view-order?id=<%= x._id %>"><i
-                                        class="bx bx-show me-1"></i> view </a></td>
-
-
-
-
-
+                                  <td><a class="dropdown-item" href="/admin/view-order?id=<%= x._id %>">
+                                      <i class="bx bx-show me-1"></i> view </a>
+                                  </td>
                   </tr>
                   <% }) } else{ %>
                     <tr>
@@ -138,50 +134,12 @@
                     </tr>
                     <% } %>
             </tbody>
-
-            <!-- <td><span class="badge bg-label-success me-1">Completed</span></td>
-                        
-                        <td><span class="badge bg-label-info me-1">Scheduled</span></td>
-                       
-                        <td><span class="badge bg-label-warning me-1">Pending</span></td> -->
-
           </table>
         </div>
       </div>
-      <!--/ Basic Bootstrap Table -->
+     
 
       <hr class="my-5" />
-
-
-
-
-      <!-- / Content -->
-
-      <!-- Footer -->
-      <footer class="content-footer footer bg-footer-theme">
-        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-
-          ©
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          ego.ft
-        </div>
-      </footer>
-      <!-- / Footer -->
-
-      <div class="content-backdrop fade"></div>
-    </div>
-    <!-- Content wrapper -->
-    </div>
-    <!-- / Layout page -->
-    </div>
-
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
-
 
     <script>
       function updateStatus(orderId, status) {

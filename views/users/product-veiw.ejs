@@ -7,7 +7,9 @@
             <div class="container">
 
                 <div class="title-info">
-                    <h1><%=product[0].product_name %></h1>
+                    <h1>
+                        <%=product[0].product_name %>
+                    </h1>
                 </div>
                 <div class="breadcrumbs-info">
                     <ul class="ps-0">
@@ -57,7 +59,9 @@
                             <div class="bg-primary separator-line-horrizontal-full mb-4"></div>
                             <p class="rating-text"><span>SKU:</span> <span class="font-500 theme-color">290397</span>
                             </p>
-                            <p><%=product[0].description %> </p>
+                            <p>
+                                <%=product[0].description %>
+                            </p>
 
                             <div class="mb-4">
 
@@ -138,46 +142,49 @@
                 <!-- product description -->
                 <div class="row justify-content-center mb-6 mb-md-7">
 
-                    <div class="col-12" >
-                        <div class="horiifzontaltab tab-style-two">
+                    <div class="col-12">
+                        <div class="horizontaltab tab-style-two">
                             <ul class="resp-tabs-list hor_1 text-start">
                                 <li><i class="ti-line-dashed d-md-block d-none"></i>Description</li>
-                                <li><i class="ti-star d-md-block d-none"></i>Reviews (2)</li>
+                                <li><i class="ti-star d-md-block d-none"></i>Reviews </li>
                             </ul>
                             <div class="resp-tabs-container hor_1">
                                 <div>
 
-                                    <p><%=product[0].description %> </p>
+                                    <p><%=product[0].description %>.</p>
                                     <ul class="primary-list mb-4 ps-0">
-                                        <li>Sed ut perspiciatis unde omnis iste</li>
-                                        <li>Inventore veritatis et quasi architecto</li>
-                                        <li>Voluptatem accusantium doloremque</li>
-                                        <li>Quasi architecto in ea voluptate veli</li>
+                                        <li>Dry clean Onlt </li>
+                                        <li>French Terry</li>
+                                        <li>Shell: Cotton 60%, Polyester 40%</li>
+                                        <li>Elastic rib: Cotton 95%, Elastane 5%</li>
                                     </ul>
-                                    <p class="m-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                                        inventore veritatis et quasi architecto in ea voluptate velit.</p>
+                                    <p class="m-0">This information is based on sample of the product displayed on website.
+                                         There may be change in the information on label attached to the product delivered 
+                                         to the customer due to size chosen, date of import, name of manufacturer 
+                                         (in case of manufacturing in India), country of manufacture, etc. The exact detail 
+                                         relevant to the product delivered to the customer will reflect in the label attached 
+                                         to the product so delivered</p>
 
                                 </div>
-                                
                                 <div>
                                     <div class="row">
 
                                         <div class="col-lg-6 order-lg-2 mb-1-9 mb-lg-0">
                                             <div class="common-block">
+
+
                                                 <%if(product[0].review.length>0) {
-                                                    product[0].review.forEach(x => {  %>
-                                                        
-                                               
-                                                <div class="pb-2-3">
+                                                    product[0].review.forEach(x => { %>
+
+                                                <div class="pb-4" id="reloadDiv'">
 
                                                     <div class="media mb-4 product-review">
-                                                        <img class="me-3 rounded-circle w-60px"
-                                                            src="/userr/img/avatar/t-1.jpg" alt="...">
+                                                        <img class="me-3 rounded-circle w-60px" src="/userr/img/avatar/t-1.jpg"
+                                                            alt="...">
                                                         <div class="media-body">
                                                             <a href="#"
-                                                                class="mb-1 font-weight-600 text-extra-dark-gray"><%= x.name %></a>
-                                                            <span class="d-block text-primary"><%= x.date.toLocaleDateString() %></span>
+                                                                class="mb-1 font-weight-600 text-extra-dark-gray"> <%= x.name %> </a>
+                                                            <span class="d-block text-primary"> <%= x.date.toLocaleDateString() %></span>
                                                         </div>
 
                                                         <span class="text-primary">
@@ -190,12 +197,13 @@
 
                                                     </div>
 
-                                                    <p class="mb-0"><%= x.comment %></p>
+                                                    <p class="mb-0"> <%= x.comment %> </p>
 
                                                 </div>
-                                                <% })}%>
-                                                
 
+                                                <% })}%>
+
+                                                
 
                                             </div>
 
@@ -261,7 +269,8 @@
 
                                                             <label>Comment</label>
                                                             <div class="form-group mb-1">
-                                                                <textarea name="comment" maxlength="200 words" rows="2" class="form-control"
+                                                                <textarea name="comment" maxlength="200 words" rows="2"
+                                                                    class="form-control"
                                                                     placeholder="Tell us a few words (maximum 200 words)"></textarea>
                                                             </div>
 
@@ -340,94 +349,94 @@
         ================================================== -->
         <%- include('../layouts/foot.ejs') %>
 
-        </div>
+            </div>
 
-     
-       
-        <!-- SCROLL TO TOP
+
+
+            <!-- SCROLL TO TOP
     ================================================== -->
-        <a href="#" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
+            <a href="#" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
 
-        <script>
+            <script>
 
-            function addtowishlist(proid) {
+                function addtowishlist(proid) {
 
-                $.ajax({
-                    url: '/add_to_wishlist',
-                    data: {
-                        productId: proid
-                    },
-                    method: 'post',
+                    $.ajax({
+                        url: '/add_to_wishlist',
+                        data: {
+                            productId: proid
+                        },
+                        method: 'post',
 
-                    success: (response) => {
-                        
-                        if(response.success){
-                        Swal.fire({
-                        title: 'added',
-                        text: 'product added to whilist',
-                        icon: 'success',
-                        showConfirmButton: false
+                        success: (response) => {
+
+                            if (response.success) {
+                                Swal.fire({
+                                    title: 'added',
+                                    text: 'product added to whilist',
+                                    icon: 'success',
+                                    showConfirmButton: false
+                                })
+                            } else {
+                                Swal.fire({
+                                    title: 'Already Exist',
+                                    text: 'Product Already in Wishlist',
+                                    icon: 'info',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                })
+                            }
+
+                        }
                     })
-                    }else{
-                        Swal.fire({
-                            title: 'Already Exist',
-                            text :'Product Already in Wishlist',
-                            icon: 'info',
-                            showConfirmButton: false,
-                            timer : 1000
-                        })
-                    }
 
-                    }
-                })
-
-            }
-            function addtocart(proid,pro_price) {
-
-                $.ajax({
-                    url: '/add_cart',
-                    data: {
-                        productId: proid,
-                        price: pro_price
-                    },
-                    method: 'post',
-
-                    success: (res) => {
-                        if (res.success) {
-                        Swal.fire({
-                        title: 'Added',
-                        text: 'product added to cart',
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer : 2000
-                    })
-                    }else{
-                        Swal.fire({
-                            title: 'Already Exist',
-                            text :'Product Already in Cart',
-                            icon: 'info',
-                            showConfirmButton: false,
-                            timer : 1000
-                        })
-                        
-                    }
-                    }
-                })
-
-            }
-
-            $('#review_form').submit((x) => {
-            x.preventDefault()
-            $.ajax({
-                url: "/add_review",
-                method: "post",
-                data: $('#review_form').serialize(),
-                success: (response) => {
-                
                 }
-            })
-        })
+                function addtocart(proid, pro_price) {
 
-        </script>
+                    $.ajax({
+                        url: '/add_cart',
+                        data: {
+                            productId: proid,
+                            price: pro_price
+                        },
+                        method: 'post',
 
-        <%- include('../layouts/footer.ejs') %>
+                        success: (res) => {
+                            if (res.success) {
+                                Swal.fire({
+                                    title: 'Added',
+                                    text: 'product added to cart',
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                })
+                            } else {
+                                Swal.fire({
+                                    title: 'Already Exist',
+                                    text: 'Product Already in Cart',
+                                    icon: 'info',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                })
+
+                            }
+                        }
+                    })
+
+                }
+
+                $('#review_form').submit((x) => {
+                    x.preventDefault()
+                    $.ajax({
+                        url: "/add_review",
+                        method: "post",
+                        data: $('#review_form').serialize(),
+                        success: (response) => {
+                            $('#reloadDiv').load('/product_view #reloadDiv')
+                        }
+                    })
+                })
+
+            </script>
+
+            <%- include('../layouts/footer.ejs') %>
