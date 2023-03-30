@@ -60,6 +60,7 @@ admin_route.get('/add-category', auth.isLogin, category_controller.loadAddCatego
 admin_route.post('/add-category', upload.single('image'), category_controller.addCategory);
 admin_route.get('/list-category', auth.isLogin, category_controller.listCategory);
 admin_route.get('/delete-category', auth.isLogin, category_controller.deleteCategory);
+admin_route.get('/edit-category',auth.isLogin , category_controller.editCategory)
 
 
 //banner managment 

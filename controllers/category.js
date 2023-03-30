@@ -65,6 +65,16 @@ const deleteCategory = async (req, res) => {
         console.log(error.message);
     }
 }
+
+const editCategory = async (req , res)=>{
+    try {
+        const user = await User.findOne({ _id: req.session.admin })
+
+    } catch (error) {
+
+        console.log(error.message);
+    }
+}
 const listCategory = async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.session.admin })
@@ -80,5 +90,6 @@ module.exports = {
     loadAddCategory,
     addCategory,
     deleteCategory,
-    listCategory
+    listCategory,
+    editCategory
 }

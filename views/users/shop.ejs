@@ -4,9 +4,9 @@
         <div class="main-wrapper mp-pusher" id="mp-pusher">
 
             <header class="menu_area-light header-light-nav header-02">
-        
+
                 <div class="navbar-default">
-        
+
                     <!-- top search -->
                     <div class="top-search bg-primary">
                         <div class="container-fluid">
@@ -16,8 +16,8 @@
                                         <button class="search-form_submit fas fa-search display-27 text-white"
                                             type="submit"></button>
                                     </span>
-                                    <input type="text" class="search-form_input form-control" name="s" autocomplete="off"
-                                        placeholder="Type & hit enter...">
+                                    <input type="text" class="search-form_input form-control" name="s"
+                                        autocomplete="off" placeholder="Type & hit enter...">
                                     <span class="input-group-addon close-search"><i
                                             class="fas fa-times display-27 mt-2"></i></span>
                                 </div>
@@ -25,32 +25,32 @@
                         </div>
                     </div>
                     <!-- end top search -->
-        
+
                     <div class="container">
                         <div class="row align-items-center g-0">
                             <div class="col-12 col-lg-12">
                                 <div class="menu_area alt-font">
                                     <nav class="navbar navbar-expand-lg navbar-light p-0">
-        
+
                                         <div class="navbar-header navbar-header-custom">
                                             <!-- logo -->
                                             <a href="home-shop-1.html" class="navbar-brand logodefault"><img id="logo"
                                                     src="/userr/img/logos/ego.png" alt="logo"></a>
                                             <!-- end logo -->
                                         </div>
-        
+
                                         <!-- menu toggler -->
                                         <div class="navbar-toggler"></div>
                                         <!-- end menu toggler -->
-        
+
                                         <!-- menu area -->
                                         <ul class="navbar-nav mx-auto" id="nav" style="display: none;">
-        
+
                                             <li><a href="/">Home</a></li>
                                             <li><a href="#">Shop</a>
                                                 <ul>
                                                     <li>
-        
+
                                                     <li><a href="/shop">All Products</a></li>
                                                     <% if(category.length> 0){
                                                         for(let i=0; i<category.length; i++){ %>
@@ -58,7 +58,7 @@
                                                                     <%= category[i].category_name %>
                                                                 </a></li>
                                                             <% }} %>
-        
+
                                             </li>
                                         </ul>
                                         </li>
@@ -72,23 +72,23 @@
                                         <% if(user){ %>
                                             <li><a href="#">Account</a>
                                                 <ul>
-        
+
                                                     <li><a href="/logout">Logout</a></li>
                                                     <li><a href="/forget">Password Recovery</a></li>
                                                     <li><a href="/orders">Orders List</a></li>
                                                     <li><a href="/wishlist">Wishlist</a></li>
                                                     <li><a href="/profile">Profile Page</a></li>
                                                     <li><a href="/address">Contact / Shipping Address</a></li>
-        
+
                                                 </ul>
                                             </li>
                                             <% } else{ %>
                                                 <li><a href="/login">Login / Register</a></li>
                                                 <% }%>
-        
+
                                                     </ul>
                                                     <!-- end menu area -->
-        
+
                                                     <!-- attribute navigation -->
                                                     <div class="attr-nav">
                                                         <ul>
@@ -112,15 +112,15 @@
                                                         </ul>
                                                     </div>
                                                     <!-- end attribute navigation -->
-        
+
                                     </nav>
                                 </div>
                             </div>
                         </div>
                     </div>
-        
+
                 </div>
-        
+
             </header>
 
             <section class="page-title-section bg-img cover-background" data-background="img/bg/page-title.jpg">
@@ -134,7 +134,9 @@
                     <div class="breadcrumbs-info">
                         <ul class="ps-0">
                             <li><a href="home-shop-1.html">Home</a></li>
-                            <li><a href="#">Shop Product Grid</a></li>
+                            <li><a href="#">
+                                    <%= category_name %>
+                                </a></li>
                         </ul>
                     </div>
 
@@ -157,7 +159,7 @@
                                                 <button class="btn btn-link" data-bs-toggle="collapse"
                                                     data-bs-target="#collapseOne" aria-expanded="true"
                                                     aria-controls="collapseOne">Categories</button>
-                                               <hr>
+                                                <hr>
                                             </h5>
                                         </div>
                                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
@@ -166,7 +168,7 @@
                                                 <ul class="list-unstyled">
                                                     <% if(category.length>0){
                                                         for(let i=0 ; i<category.length ; i++) {%>
-                                                            <li><a href="/category?name=<%= category[i]._id %>">
+                                                            <li><a href="/category/<%= category[i]._id %>">
                                                                     <%= category[i].category_name %>
                                                                 </a></li>
                                                             <% } } %>
@@ -222,30 +224,18 @@
                                     <div class="row justify-content: flex-start">
 
                                         <div class="col-auto my-1 my-md-0">
-                                            <label class="m-0">Show:</label>
-                                            <select class="w-auto d-inline-block form-select">
-                                                <option value="#?limit=24" selected="selected">24</option>
-                                                <option value="#?limit=25">25</option>
-                                                <option value="#?limit=50">50</option>
-                                                <option value="#?limit=75">75</option>
-                                                <option value="#?limit=100">100</option>
-                                            </select>
                                         </div>
 
                                         <div class="col-auto my-1 my-md-0">
                                             <label class="m-0">Sort By:</label>
                                             <select class="w-auto d-inline-block form-select">
-                                                <option value="#?sort=p.sort_order&amp;order=ASC">Default</option>
+                                                <option value="#?sort=p.sort_order&amp;order=ASC" selected="">Latest
+                                                </option>
                                                 <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
                                                 <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
-                                                <option value="?sort=p.priceorder=ASC" selected="">Price (Low &gt;
-                                                    High)</option>
-                                                <option value="/sort?sort=priceDESC">Price (High &gt; Low)
-                                                </option>
-                                                <option value="#?sort=rating&amp;order=DESC">Rating (Highest)</option>
-                                                <option value="#?sort=rating&amp;order=ASC">Rating (Lowest)</option>
-                                                <option value="#?sort=p.model&amp;order=ASC">Model (A - Z)</option>
-                                                <option value="#?sort=p.model&amp;order=DESC">Model (Z - A)</option>
+                                                <option value="?sort=p.priceorder=ASC">Price (Low &gt;High)</option>
+                                                <option value="/sort?sort=priceDESC">Price (High &gt; Low)</option>
+
                                             </select>
                                         </div>
 
@@ -274,8 +264,8 @@
                                                             <%= product[i].product_name %>
                                                         </a></h3>
                                                     <h4 class="price">
-                                                        <span class="regular-price line-through">₹ <%= product[i].offer_price
-                                                                %></span>
+                                                        <span class="regular-price line-through">₹ <%=
+                                                                product[i].offer_price %></span>
                                                         <span class="offer-price">₹ <%= product[i].price %></span>
                                                     </h4>
                                                 </div>
@@ -285,10 +275,17 @@
                                                                 onclick="addtowishlist('<%= product[i]._id %>')"
                                                                 class="btn btn-link" title="Add To Wishlist"><i
                                                                     class="far fa-heart"></i></button></li>
-                                                        <li><button type="button" style="border: none;"
-                                                                onclick="addtocart('<%= product[i]._id %>','<%= product[i].price %>')"
-                                                                class="btn btn-link" title="Add To Wishlist">Add to
-                                                                Cart</button></li>
+                                                        <% if(product[i].quantity > 0 ){ %>
+                                                            <li><button type="button" style="border: none;"
+                                                                    onclick="addtocart('<%= product[i]._id %>','<%= product[i].price %>')"
+                                                                    class="btn btn-link" title="Add To Wishlist">Add to
+                                                                    Cart</button></li>
+                                                                    
+                                                            <% }else{ %>
+                                                                <button class="btn btn-danger"> Out Of Stock
+                                                                    </span></button>
+
+                                                                <% } %>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -328,81 +325,81 @@
         ================================================== -->
             <%- include('../layouts/foot.ejs') %>
 
-    </div>
+        </div>
 
-    <!-- SCROLL TO TOP
+        <!-- SCROLL TO TOP
     ================================================== -->
-    <a href="#" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
+        <a href="#" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
 
-    <script>
+        <script>
 
-        function addtowishlist(proid) {
+            function addtowishlist(proid) {
 
-            $.ajax({
-                url: '/add_to_wishlist',
-                data: {
-                    productId: proid
-                },
-                method: 'post',
+                $.ajax({
+                    url: '/add_to_wishlist',
+                    data: {
+                        productId: proid
+                    },
+                    method: 'post',
 
-                success: (response) => {
-    
-                    if(response.success){
-                        Swal.fire({
-                        title: 'added',
-                        text: 'product added to whilist',
-                        icon: 'success',
-                        showConfirmButton: false
-                    })
-                    }else{
-                        Swal.fire({
-                            title: 'Already Exist',
-                            text :'Product Already in Wishlist',
-                            icon: 'info',
-                            showConfirmButton: false,
-                            timer : 1000
-                        })
+                    success: (response) => {
+
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'added',
+                                text: 'product added to whilist',
+                                icon: 'success',
+                                showConfirmButton: false
+                            })
+                        } else {
+                            Swal.fire({
+                                title: 'Already Exist',
+                                text: 'Product Already in Wishlist',
+                                icon: 'info',
+                                showConfirmButton: false,
+                                timer: 1000
+                            })
+                        }
+
+
                     }
-                   
-                   
-                }
-            })
+                })
 
-        }
-        function addtocart(proid, pro_price) {
+            }
+            function addtocart(proid, pro_price) {
 
-            $.ajax({
-                url: '/add_cart',
-                data: {
-                    productId: proid,
-                    price: pro_price
-                },
-                method: 'post',
+                $.ajax({
+                    url: '/add_cart',
+                    data: {
+                        productId: proid,
+                        price: pro_price
+                    },
+                    method: 'post',
 
-                success: (res) => {
-                    if (res.success) {
-                        Swal.fire({
-                        title: 'Added',
-                        text: 'product added to cart',
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer : 2000
-                    })
-                    }else{
-                        Swal.fire({
-                            title: 'Already Exist',
-                            text :'Product Already in Cart',
-                            icon: 'info',
-                            showConfirmButton: false,
-                            timer : 1000
-                        })
-                        
+                    success: (res) => {
+                        if (res.success) {
+                            Swal.fire({
+                                title: 'Added',
+                                text: 'product added to cart',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                        } else {
+                            Swal.fire({
+                                title: 'Already Exist',
+                                text: 'Product Already in Cart',
+                                icon: 'info',
+                                showConfirmButton: false,
+                                timer: 1000
+                            })
+
+                        }
+
                     }
-                   
-                }
-            })
+                })
 
-        }
-    </script>
+            }
+        </script>
 
-    <%- include('../layouts/footer.ejs') %>
+        <%- include('../layouts/footer.ejs') %>

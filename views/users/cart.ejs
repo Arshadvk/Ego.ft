@@ -107,6 +107,7 @@
                                                         </td>
                                                         <td class="pro<%= x.product._id %>">₹<%= x.price %>
                                                         </td>
+                                                        <input type="hidden" id="stock" value="<%= x.product.quantity %>">
                                                         <td class="product-remove text-center">
                                                             <button onclick="deletecart('<%= x.product._id %>')"
                                                                 style="border: none;"><i
@@ -241,10 +242,15 @@
 
                     function quty_change(proid, count, productPrice) {
                         let quantity = document.getElementById('pro' + proid).innerHTML
+                        let stock = document.getElementById('stock').value
+                        console.log(stock);
+                        console.log(quantity);
                         // let count = parseInt(count)
-                        if (quantity <= 1 && count == -1) {
+                        if (quantity <= 1 && count == -1 ) {
                             //just dont do anything
-                        } else {
+                        } else if(quantity > stock && count == 1) {
+                           
+                        }else{
                             $.ajax({
                                 url: "/changeqty",
                                 data: {
