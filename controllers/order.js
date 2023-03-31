@@ -554,7 +554,7 @@ const order_success = async (req, res) => {
         { $inc: { quantity: -order.product[i].qty } }
       );
     }
-    console.log(order);
+
     const category = await Category.find();
     res.render("order_success", { user, category, order, userdata });
   } catch (error) {
