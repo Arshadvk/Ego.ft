@@ -546,7 +546,7 @@ const order_success = async (req, res) => {
 
     const order = await Order.findOne()
       .sort({ date: -1 })
-      .populate("product.productid");
+      .populate({path:'product', populate:{path:'productid', model:'Product'}})
 
     for (let i = 0; i < order.product.length; i++) {
       await Product.updateOne(
@@ -554,7 +554,7 @@ const order_success = async (req, res) => {
         { $inc: { quantity: -order.product[i].qty } }
       );
     }
-
+    console.log(order);
     const category = await Category.find();
     res.render("order_success", { user, category, order, userdata });
   } catch (error) {
@@ -565,9 +565,8 @@ const order_success = async (req, res) => {
 const load_order = async (req, res) => {
   try {
     const user = req.session.admin;
-    const order = await Order.find();
-    const user_id = await Order.find().populate("userId");
-   
+    const order = await Order.find().populate("userId");
+    const user_id = await Order.find()
     res.render("list-order", { order, user, user_id });
   } catch (error) {
     console.log(error.message);

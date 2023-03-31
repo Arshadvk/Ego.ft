@@ -61,7 +61,7 @@ admin_route.post('/add-category', upload.single('image'), category_controller.ad
 admin_route.get('/list-category', auth.isLogin, category_controller.listCategory);
 admin_route.get('/delete-category', auth.isLogin, category_controller.deleteCategory);
 admin_route.get('/edit-category',auth.isLogin , category_controller.editCategory)
-
+admin_route.post('/edit-category',category_controller.upadte_category)
 
 //banner managment 
 admin_route.get('/add-banner', auth.isLogin, banner.show_banner)
@@ -69,6 +69,7 @@ admin_route.post('/add-banner', auth.isLogin, upload.single('image'), banner.add
 admin_route.get('/list-banner', auth.isLogin, banner.show_banner_list)
 admin_route.post('/delete-banner', banner.delete_banner);
 admin_route.post('/edit-banner', banner.edit_banner);
+
 
 
 admin_route.get('/add-coupon', auth.isLogin, order_controller.load_coupon);

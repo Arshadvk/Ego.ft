@@ -69,10 +69,26 @@ const deleteCategory = async (req, res) => {
 const editCategory = async (req , res)=>{
     try {
         const user = await User.findOne({ _id: req.session.admin })
-
+        const id = req.query.id;
+        const category = await Category.findOne({_id : id })
+        res.render("edit-category",{user , category })
     } catch (error) {
 
         console.log(error.message);
+    }
+}
+
+const upadte_category = async (req , res)=>{
+    try {
+        
+        const id = req.body.id
+        const name = req.body.name
+        const description = req.body.description
+
+        
+
+    } catch (error) {
+      console.log(error.message);  
     }
 }
 const listCategory = async (req, res) => {
@@ -91,5 +107,6 @@ module.exports = {
     addCategory,
     deleteCategory,
     listCategory,
-    editCategory
+    editCategory,
+    upadte_category
 }
