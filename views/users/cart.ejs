@@ -48,12 +48,12 @@
                         <!-- left pannel section -->
                         <div class="col-lg-8 col-md-12 ps-1-1 mb-1-9 mb-lg-0">
 
-                            <div class="common-block" >
+                            <div class="common-block">
 
 
                                 <% if(cart.length> 0) { %>
                                     <div class="table-responsive">
-                                        <table class="table" >
+                                        <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th class="first"></th>
@@ -91,7 +91,7 @@
                                                                     Stock out
                                                                     <% } %>
                                                         </td>
-
+                                                        <input type="hidden" value="<%= x.product.quantity %>" id="stock">
                                                         <td class="quantity__item">
                                                             <span>
                                                                 <button type="button"
@@ -145,46 +145,47 @@
 
                         <!-- right pannel section -->
                         <% if(cart.length> 0) { %>
-                        <div class="col-lg-4 col-12 side-bar">
+                            <div class="col-lg-4 col-12 side-bar">
 
 
 
-                            <div class="widget">
+                                <div class="widget">
 
-                                <div class="widget-title">
-                                    <h5>Cart Summary</h5>
+                                    <div class="widget-title">
+                                        <h5>Cart Summary</h5>
+                                    </div>
+
+                                    <table class="table classic">
+                                        <tbody>
+                                            <tr>
+                                                <th>Cart Subtotal:</th>
+                                                <td class="carttotel">₹ <%= totel %>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Shipping:</th>
+                                                <td class="text-gray-dark">Free</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Total:</th>
+                                                <td class="carttotel">₹ <%= totel %>
+                                                </td>
+                                                <input type="hidden" name="totel" value="">
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
                                 </div>
+                                <a href="/checkout" class="butn-style2 dark float-end"
+                                    style="border: none;">Checkout</a>
 
-                                <table class="table classic">
-                                    <tbody>
-                                        <tr>
-                                            <th>Cart Subtotal:</th>
-                                            <td class="carttotel">₹ <%= totel %>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Shipping:</th>
-                                            <td class="text-gray-dark">Free</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Total:</th>
-                                            <td class="carttotel">₹ <%= totel %>
-                                            </td>
-                                            <input type="hidden" name="totel" value="">
-                                        </tr>
-                                    </tbody>
-                                </table>
 
 
                             </div>
-                            <a href="/checkout" class="butn-style2 dark float-end" style="border: none;">Checkout</a>
+                            <% } %>
 
-
-
-                        </div>
-                        <% }  %>
-
-                        <!-- end right pannel section -->
+                                <!-- end right pannel section -->
 
                     </div>
                 </div>
@@ -227,10 +228,7 @@
                                             showConfirmButton: false,
                                             timer: 1000
                                         })
-                                        //  setTimeout(()=>{
-                                        //     location.reload()
-                                        //  },1000);
-
+                                        
                                     }
 
                                 })
@@ -241,10 +239,26 @@
 
                     function quty_change(proid, count, productPrice) {
                         let quantity = document.getElementById('pro' + proid).innerHTML
-                        // let count = parseInt(count)
+                        let stock = document.getElementById('stock').value
+                   
                         if (quantity <= 1 && count == -1) {
-                            //just dont do anything
-                        } else {
+                            Swal.fire({
+                                title: 'Invalid quantity',
+                                text: "Quantity cannot be less than one",
+                                icon: 'warning',
+                                confirmButtonColor: 'false',
+                            })
+                        } else if (count == 1 && stock == quantity ) {
+
+                            Swal.fire({
+                                title: 'out of stock',
+                                text: "sorry currently unavailable!",
+                                icon: 'warning',
+                                confirmButtonColor: 'false',
+                            })
+
+                        }
+                        else {
                             $.ajax({
                                 url: "/changeqty",
                                 data: {

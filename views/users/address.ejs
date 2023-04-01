@@ -67,9 +67,9 @@
                                                                     <button style="border: none;" class="btn btn-dark"
                                                                         onclick="delete_address('<%= x._id %>')">
                                                                         Remove </button>
-                                                                    <button type="button" class="btn btn-warning"
+                                                                    <button type="" class="btn btn-warning"
                                                                         data-bs-toggle="modal"
-                                                                        data-bs-target="#add<%=x._id%>">
+                                                                        data-bs-target="#add<%= x._id%>">
                                                                         Edit
                                                                     </button>
                                                                     <!-- Modal -->
@@ -298,7 +298,7 @@
                                                                                                     </label>
                                                                                                     <input type="text"
                                                                                                         class="form-control"
-                                                                                                        name="street"
+                                                                                                        name="district"
                                                                                                         value=" <%= x.district %>">
                                                                                                 </div>
 
@@ -578,13 +578,11 @@
             $('#add').submit(function (event) {
                 event.preventDefault(); //prevent default form submit action
                 var formData = $(this).serialize(); //serialize form data
-                console.log("uyguyg");
-                console.log(formData);
                 $.ajax({
                     type: 'POST',
                     url: '/add_address',
                     data: formData,
-                    success: function (response) {
+                    success:function (response) {
                         $('#reloadDiv').load('/address #reloadDiv')
                         console.log(response);
                         Swal.fire({
@@ -595,9 +593,6 @@
                             timer: 1000
                         })
                     },
-                    error: function (xhr, status, error) {
-                        //handle error response
-                    }
                 });
             });
         });
@@ -622,19 +617,17 @@
                         },
                         method: 'post',
                         success: (response) => {
-                            console.log("waoring")
+                           
 
                             $('#reloadDiv').load('/address #reloadDiv')
-                            console.log(response);
+                           
                             Swal.fire({
                                 title: 'deleted!',
                                 text: 'Your deleted',
                                 icon: 'success',
                                 showConfirmButton: false
                             })
-                            //  setTimeout(()=>{
-                            //     location.reload()
-                            //  },1000);
+                            
 
                         }
 
@@ -653,7 +646,6 @@
                     url: '/edit-address',
                     data: formData,
                     success: function (response) {
-                        console.log(response);
                         $('#reloadDiv').load('/address #reloadDiv')
                         Swal.fire({
                             title: 'Edited!',

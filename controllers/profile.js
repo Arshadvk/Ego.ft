@@ -86,9 +86,8 @@ const showAddress = async (req, res) => {
 }
 const edit_address = async (req, res) => {
     try {
-
-
-        const user = req.session.user._id
+      
+        const id = req.session.user._id
         const address_id = req.body.id
         const name = req.body.name
         const number = req.body.number
@@ -96,45 +95,29 @@ const edit_address = async (req, res) => {
         const state = req.body.state
         const place = req.body.place
         const street = req.body.street
+        const district = req.body.district
         const building = req.body.building
 
-
-        // const data = await User.updateOne({ _id: user, 'address._id': address_id },
-        //     {
-        //         $set: {
-        //             "address.$":
-        //             {
-        //                 name: name,
-        //                 number: number,
-        //                 pincode: pincode,
-        //                 state: state,
-        //                 place: place,
-        //                 street: street,
-        //                 building: building
-        //             }
-        //         }
-        //     }
-        // )
-
-        const data = await User.updateOne({ _id: user, 'address._id': address_id }, {
+        const data = await User.updateOne({ _id: id , 'address._id': address_id }, {
             $set: 
                 
                 {
-                    name: name,
-                    number: number,
-                    pincode: pincode,
-                    state: state,
-                    place: place,
-                    street: street,
-                    building: building
+                    "address.$.name": name,
+                    "address.$.number": number,
+                    "address.$.pincode": pincode,
+                    "address.$.state": state,
+                    "address.$.place": place,
+                    "address.$.district": district,
+                    "address.$.building": building,
+                    "address.$.street": street
                 },
             
         },
-        )
+        ).then((res)=>{
+            res.json({success: true})
+        })
    
-
-        const userr = req.session.user
-        res.json({ success: true })
+        
 
 
 
