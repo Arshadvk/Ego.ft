@@ -13,6 +13,8 @@ const show_otp = async (req, res) => {
     try {
         res.render("otp", { message: "" })
     } catch (error) {
+
+        res.render('500');
         console.log(error.message);
     }
 }
@@ -21,6 +23,8 @@ const mobileCheck = async (req, res) => {
     try {
         res.render("mobileCheck", { message: "" })
     } catch (error) {
+
+        res.render('500');
         console.log(error.message);
     }
 }
@@ -41,6 +45,8 @@ const verifyPhone = async (req, res) => {
         }
 
     } catch (error) {
+
+        res.render('500');
         console.log(error.message);
     }
 }
@@ -67,6 +73,8 @@ const verifyOtp = async (req, res) => {
         }
 
     } catch (error) {
+
+        res.render('500');
         console.log(error.message);
     }
 }

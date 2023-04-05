@@ -507,7 +507,9 @@ const place_order = async (req, res) => {
 
   } catch (error) {
 
+    res.render('500');
     console.log(error.message);
+    
   }
 };
 
@@ -540,7 +542,10 @@ const verify_payment = async (req, res) => {
 
     }
   } catch (error) {
+
+    res.render('500');
     console.log(error.message);
+
   }
 };
 
@@ -567,7 +572,10 @@ const order_success = async (req, res) => {
     const category = await Category.find();
     res.render("order_success", { user, category, order, userdata });
   } catch (error) {
+
+    res.render('500');
     console.log(error.message);
+
   }
 };
 
@@ -578,7 +586,10 @@ const load_order = async (req, res) => {
     const user_id = await Order.find()
     res.render("list-order", { order, user, user_id });
   } catch (error) {
+
+    res.render('500');
     console.log(error.message);
+
   }
 };
 
@@ -603,6 +614,7 @@ const cancel_order = async (req, res) => {
       res.json({ success: true });
     }
   } catch (error) {
+    res.render('500');
     console.log(error.message);
   }
 };
@@ -616,6 +628,7 @@ const retrun_order = async (req, res) => {
     );
     res.json({ success: true });
   } catch (error) {
+    res.render('500');
     console.log(error.message);
   }
 };
@@ -632,6 +645,7 @@ const updateStatus = async (req, res) => {
     );
     res.json({ success: true });
   } catch (error) {
+    res.render('500');
     console.log(error.message);
   }
 };
@@ -648,6 +662,8 @@ const confirm_return = async (req, res) => {
       { $set: { status: status } }
     );
   } catch (error) {
+
+    res.render('500');
     console.log(error.message);
   }
 };
@@ -665,7 +681,7 @@ const show_orderlist = async (req, res) => {
     res.render("list-orders", { user, category, orders });
 
   } catch (error) {
-
+    res.render('500');
     console.log(error.message);
 
   }
@@ -692,6 +708,7 @@ const view_order_admin = async (req, res) => {
 
   } catch (error) {
 
+    res.render('500');
     console.log(error.message);
 
   }
@@ -718,6 +735,7 @@ const view_order_user = async (req, res) => {
 
   } catch (error) {
 
+    res.render('500');
     console.log(error.message);
 
   }

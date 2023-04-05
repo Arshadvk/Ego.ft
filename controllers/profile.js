@@ -11,6 +11,7 @@ const show_profile = async (req, res) => {
 
         res.render('profile', { user, category });
     } catch (error) {
+        res.render('500');
         console.log(error.message);
     }
 }
@@ -35,6 +36,7 @@ const edit_profile = async (req, res) => {
 
     } catch (error) {
 
+        res.render('500');
         console.log(error.message);
     }
 }
@@ -67,7 +69,8 @@ const add_address = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error.message);
+        res.render('500');
+    console.log(error.message);
     }
 }
 
@@ -81,6 +84,7 @@ const showAddress = async (req, res) => {
         res.render('address', { user, category })
 
     } catch (error) {
+        res.render('500');
         console.log(error.message);
     }
 }
@@ -123,7 +127,8 @@ const edit_address = async (req, res) => {
 
 
     } catch (error) {
-
+        res.render('500');
+        console.log(error.message);
     }
 }
 
@@ -140,6 +145,7 @@ const deleteAddress = async (req, res) => {
         res.json({ success: true })
 
     } catch (error) {
+        res.render('500');
         console.log(error.message);
     }
 }

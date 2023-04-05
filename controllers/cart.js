@@ -13,7 +13,7 @@ const show_cart = async (req, res) => {
         res.render('cart', { product, cart, totel, user, category });
 
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -46,7 +46,7 @@ const add_cart = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -64,7 +64,7 @@ const delete_cart = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -102,7 +102,7 @@ const Qtychange = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 

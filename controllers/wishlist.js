@@ -24,7 +24,10 @@ const show_wishlist = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message)
+                
+        res.render('500');
+        console.log(error.message); 
+
 
     }
 
@@ -56,7 +59,10 @@ const add_wishlist = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
 
     }
 }
@@ -76,7 +82,10 @@ const add_to_cart = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message);
+        c        
+        res.render('500');
+        console.log(error.message); 
+
 
     }
 
@@ -96,7 +105,10 @@ const remove_from_wishlist = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 
 }

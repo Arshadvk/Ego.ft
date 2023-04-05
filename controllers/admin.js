@@ -16,7 +16,7 @@ const securePassword = async (password) => {
         return passwordHash;
 
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -49,7 +49,7 @@ const sendBlockMail = async (name, email, user_id) => {
             }
         })
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -82,7 +82,7 @@ const sendunBlockMail = async (name, email, user_id) => {
             }
         })
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -93,7 +93,7 @@ const loadLogin = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message);
+        res.render('505')
     }
 }
 const verifyLogin = async (req, res) => {
@@ -126,7 +126,7 @@ const verifyLogin = async (req, res) => {
             res.render('login', { message: "Email and password is incorrect !" })
         }
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -137,7 +137,7 @@ const logout = async (req, res) => {
         res.redirect("/admin/login")
 
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 const addAdmin = async (req, res) => {
@@ -147,7 +147,7 @@ const addAdmin = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message);
+        res.render('505')
     }
 
 }
@@ -175,7 +175,7 @@ const change_password = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -227,7 +227,7 @@ const insertAdmin = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -238,7 +238,7 @@ const loadUserlist = async (req, res) => {
         const userData = await User.find({ is_admin: 0 });
         res.render('list-users', { users: userData, user })
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -248,7 +248,7 @@ const loadadmin = async (req, res) => {
         const userData = await User.find({ is_admin: 1 });
         res.render('list-users', { users: userData, user })
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -361,7 +361,7 @@ const loadHome = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message);
+        res.render('505')
     }
 
 }
@@ -372,7 +372,7 @@ const loadprofile = async (req, res) => {
         res.render('profile', { user })
     } catch (error) {
 
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -396,7 +396,7 @@ const edit_profile = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -413,7 +413,7 @@ const blockuser = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message);
+        res.render('505')
 
     }
 }
@@ -432,7 +432,7 @@ const unblockuser = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message);
+        res.render('505')
 
     }
 
@@ -445,7 +445,7 @@ const salesReport = async (req , res )=>{
         res.render('sales-report',{user , saleData})
 
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -473,7 +473,7 @@ const showSalesreport = async (req , res )=>{
 
     } catch (error) {
 
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -484,7 +484,7 @@ const serverError = async (req, res)=>{
 
     } catch (error) {
 
-        console.log(error.message);
+        res.render('505')
     }
 }
 

@@ -19,7 +19,8 @@ const securePassword = async (password) => {
         return passwordHash;
 
     } catch (error) {
-        console.log(error.message);
+        res.render('500');
+        console.log(error.message); 
     }
 }
 const sendVerifyMail = async (name, email, user_id) => {
@@ -51,6 +52,7 @@ const sendVerifyMail = async (name, email, user_id) => {
             }
         })
     } catch (error) {
+        res.render('500');
         console.log(error.message);
     }
 }
@@ -82,6 +84,7 @@ const sendRestPassMail = async (name, email, token,) => {
             }
         })
     } catch (error) {
+        res.render('500');
         console.log(error.message);
     }
 }
@@ -96,6 +99,7 @@ const loadfaq = async ( req , res)=>{
 
         res.render('faq',{category,user});
     } catch (error) {
+        res.render('500');
         console.log(error.message);
     }
 }
@@ -109,6 +113,7 @@ const privacy_policy = async (req, res)=>{
         }
         res.render('privacy-policy',{category,user});
     } catch (error) {
+        res.render('500');
         console.log(error.message);
     }
 }
@@ -122,14 +127,20 @@ const aboutUs = async (req, res)=>{
         }
         res.render('about_us',{category,user});
     } catch (error) {
-        console.log(error.message);
+
+        res.render('500');
+        console.log(error.message); 
+
     }
 }
 const loadRegister = async (req, res) => {
     try {
         res.render('register');
     } catch (error) {
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 } //create a new  user 
 const insertUser = async (req, res) => {
@@ -176,14 +187,20 @@ const insertUser = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 }// for show login
 const loadLogin = async (req, res) => {
     try {
         res.render('login')
     } catch (error) {
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 }
 // verify user 
@@ -232,7 +249,10 @@ const verifyLogin = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 }
 const logout_user = async (req, res) => {
@@ -243,7 +263,10 @@ const logout_user = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 }
 
@@ -256,7 +279,10 @@ const forgetload = async (req, res) => {
     try {
         res.render('forget')
     } catch (error) {
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 }
 
@@ -292,7 +318,10 @@ const forgetverify = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 }
 const VerifyMail = async (req, res) => {
@@ -306,7 +335,10 @@ const VerifyMail = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 }
 
@@ -321,7 +353,10 @@ const send_verfymail = async (req , res)=>{
 
     } catch (error) {
 
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 } 
 
@@ -344,7 +379,10 @@ const forgetpasswordload = async (req, res) => {
             res.render('404', { message: "token is  invalid" })
         }
     } catch (error) {
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 }
 const resetPassword = async (req, res) => {
@@ -374,7 +412,10 @@ const resetPassword = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 
 }
@@ -403,7 +444,10 @@ const change_password = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 }
 
@@ -418,7 +462,10 @@ const loadHome = async (req, res) => {
         res.render('home', { category, product, user, banner  });
 
     } catch (error) {
-        console.log();
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 }
 const userhome = async (req, res) => {
@@ -435,7 +482,10 @@ const userhome = async (req, res) => {
         res.render('home', { user, product, category, userdata, banner })
     } catch (error) {
 
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 }
 const loadbycategory = async (req, res) => {
@@ -468,7 +518,10 @@ const loadbycategory = async (req, res) => {
         res.render('shop', { product,  category_name, user, category, countpro ,coupon })
 
     } catch (error) {
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 }
 
@@ -498,7 +551,10 @@ const loadshop = async (req, res) => {
         res.render('shop', { product, user, category, category_name, countpro , coupon })
 
     } catch (error) {
-        console.log(error.message);
+                
+        res.render('500');
+        console.log(error.message); 
+
     }
 }
 module.exports = {

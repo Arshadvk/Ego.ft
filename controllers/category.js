@@ -12,7 +12,7 @@ const loadAddCategory = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message);
+        res.render('505')
     }
 
 }
@@ -48,7 +48,7 @@ const addCategory = async (req, res) => {
 
     } catch (error) {
 
-        console.log(error.message);
+        res.render('505')
     }
 
 }
@@ -62,7 +62,7 @@ const deleteCategory = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -74,7 +74,7 @@ const editCategory = async (req , res)=>{
         res.render("edit-category",{user , category })
     } catch (error) {
 
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -88,7 +88,7 @@ const upadte_category = async (req , res)=>{
         
 
     } catch (error) {
-      console.log(error.message);  
+        res.render('505')  
     }
 }
 const listCategory = async (req, res) => {
@@ -98,7 +98,7 @@ const listCategory = async (req, res) => {
         res.render('list-category', { category, user })
     } catch (error) {
 
-        console.log(error.message);
+        res.render('505')
     }
 }
 

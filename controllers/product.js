@@ -13,6 +13,8 @@ const loadAddProduct = async (req, res) => {
         const category = await Category.find();
         res.render("add-product", { category, user });
     } catch (error) {
+
+        res.render('500');
         console.log(error.message);
     }
 };
@@ -45,6 +47,8 @@ const addProduct = async (req, res) => {
         }
         
     } catch (error) {
+
+        res.render('500');
         console.log(error.message);
     }
 };
@@ -56,6 +60,8 @@ const productlist = async (req, res) => {
 
         res.render("list-products", { product, user });
     } catch (error) {
+
+        res.render('500');
         console.log(error.message);
     }
 };
@@ -68,6 +74,8 @@ const editproduct = async (req, res) => {
         const product = await Product.findOne({ _id: req.query.id });
         res.render("edit-product", { product, category, user });
     } catch (error) {
+
+        res.render('500');
         console.log(error.message);
     }
 };
@@ -83,6 +91,8 @@ const unlistproduct = async (req, res) => {
 
         res.json({ success: true });
     } catch (error) {
+
+        res.render('500');
         console.log(error.message);
     }
 };
@@ -98,6 +108,8 @@ const listproduct = async (req, res) => {
 
         res.json({ success: true });
     } catch (error) {
+
+        res.render('500');
         console.log(error.message);
     }
 };
@@ -121,6 +133,8 @@ const updateproduct = async (req, res) => {
         );
         res.redirect("/admin/list-product");
     } catch (error) {
+
+        res.render('500');
         console.log(error.message);
     }
 };
@@ -141,6 +155,7 @@ const add_review = async ( req, res )=>{
 
     } catch (error) {
 
+        res.render('500');
         console.log(error.message);
     }
 }
@@ -158,6 +173,8 @@ const product_view = async (req, res) => {
 
         res.render("product-veiw", { product, user, category, products });
     } catch (error) {
+
+        res.render('500');
         console.log(error.message);
     }
 };
@@ -174,6 +191,7 @@ const sort_az = async (req, res) => {
         const product = await Product.find({}).sort({ product_name: -1 });
         res.render("shop", { product, user });
     } catch (error) {
+        res.render('500');
         console.log(error.message);
     }
 };
@@ -197,6 +215,7 @@ const search_product = async (req , res )=>{
         res.render('shop',{category,product,user,category_name:"search" ,coupon,countpro:''})
     } catch (error) {
 
+        res.render('500');
         console.log(error.message);
     }
 }

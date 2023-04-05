@@ -7,7 +7,7 @@ const show_banner = async (req, res) => {
         res.render('add-banner', { user })
 
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -39,7 +39,9 @@ const add_banner = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error.message);
+
+        res.render('505')
+
     }
 }
 
@@ -51,7 +53,7 @@ const show_banner_list = async (req, res) => {
         res.render('list-banner', { banner: bannerData, user })
 
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
@@ -66,7 +68,7 @@ const delete_banner = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 
 
@@ -90,7 +92,7 @@ const edit_banner = async (req , res )=>{
         })
         res.json({ success:true })
     } catch (error) {
-        console.log(error.message);
+        res.render('505')
     }
 }
 
