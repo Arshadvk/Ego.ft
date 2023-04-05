@@ -45,6 +45,7 @@ admin_route.get('/add-admin', auth.isLogin, admincontroller.addAdmin);
 admin_route.post('/add-admin', admincontroller.insertAdmin);
 admin_route.get('/admin_list', auth.isLogin, admincontroller.loadadmin)
 
+
 // product managment
 admin_route.get('/add-product', auth.isLogin, product_controller.loadAddProduct);
 admin_route.post('/add-product', upload.array('image', 4), product_controller.addProduct);
@@ -86,6 +87,11 @@ admin_route.get('/view-order', auth.isLogin, order_controller.view_order_admin)
 admin_route.post('/update_status', auth.isLogin, order_controller.updateStatus);
 admin_route.post('/confirm_return', order_controller.confirm_return)
 
+
+admin_route.get('/sales-report', auth.isLogin , admincontroller.salesReport );
+admin_route.post('/sales-report' , auth.isLogin , admincontroller.showSalesreport );
+
+admin_route.get('/500' ,admincontroller.serverError )
 
 admin_route.get('*', (req, res) => {
 

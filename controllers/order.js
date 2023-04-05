@@ -64,41 +64,41 @@ const add_coupon = async (req, res) => {
 
     const min_amount = req.body.min_amount;
 
-    if(min_amount.trim() > 0 &&
-     description.trim() !== "" && 
-     discount_percentage > 0 && 
-     discountprice > 0 
-     && code.trim() !== "" &&
-     name.trim() !== "" ){
+    if (min_amount.trim() > 0 &&
+      description.trim() !== "" &&
+      discount_percentage > 0 &&
+      discountprice > 0
+      && code.trim() !== "" &&
+      name.trim() !== "") {
 
-    const coupon = new Coupon({
+      const coupon = new Coupon({
 
-      coupon_name: req.body.name,
+        coupon_name: req.body.name,
 
-      description: req.body.description,
+        description: req.body.description,
 
-      code: req.body.code,
+        code: req.body.code,
 
-      expiry_date: req.body.date,
+        expiry_date: req.body.date,
 
-      discountpercentage: req.body.discount_percentage,
+        discountpercentage: req.body.discount_percentage,
 
-      maxdiscountprice: req.body.discountprice,
+        maxdiscountprice: req.body.discountprice,
 
-      min_amount: req.body.min_amount,
+        min_amount: req.body.min_amount,
 
-    });
+      });
 
-    const data = await coupon.save();
+      const data = await coupon.save();
 
-    if (data) {
+      if (data) {
 
-      res.render("add-coupon", { user });
+        res.render("add-coupon", { user });
+
+      }
+    } else {
 
     }
-  }else{
-     
-  }
   } catch (error) {
 
     console.log(error.message);
@@ -220,13 +220,13 @@ const editing_coupon = async (req, res) => {
 
 };
 
-const coupon_active = async (req , res )=>{
+const coupon_active = async (req, res) => {
 
   try {
     const coupon_id = req.body.coupid
     const value = req.body.value
-    const coupon = await Coupon.updateOne({_id : coupon_id},{$set:{active:value}})
-    res.json({success:true})
+    const coupon = await Coupon.updateOne({ _id: coupon_id }, { $set: { active: value } })
+    res.json({ success: true })
   } catch (error) {
 
     console.log(error.message);
@@ -280,7 +280,7 @@ const apply_coupon = async (req, res) => {
 
       if (userused) {
 
-        
+
         res.json({ used: true });
 
       } else {
@@ -297,7 +297,7 @@ const apply_coupon = async (req, res) => {
             if (discountAmount <= coupondata.maxdiscountprice) {
 
               let discount_value = discountAmount;
-              
+
               let value = cartTotel - discount_value;
 
 
@@ -331,7 +331,7 @@ const apply_coupon = async (req, res) => {
                 { _id: req.session.user._id },
 
                 { $set: { cartTotel: value } }
-                
+
               );
 
               const coupon_used = await Coupon.updateOne(
@@ -379,12 +379,12 @@ const place_order = async (req, res) => {
 
     const id = req.session.user._id;
 
-    const user = await User.findOne({_id : id })
+    const user = await User.findOne({ _id: id })
 
     const productPush = [];
 
     const orderData = req.body;
-    
+
     //converting to array
     if (!Array.isArray(orderData.productId)) {
 
@@ -424,20 +424,20 @@ const place_order = async (req, res) => {
     }
 
     // status updating
-    let status 
+    let status
 
-    if(req.body.payment_method == "COD"){
+    if (req.body.payment_method == "COD") {
 
       status = "Confirmed"
 
-    }else if (req.body.payment_method == "UPI" ){
+    } else if (req.body.payment_method == "UPI") {
 
       status = "Pending"
 
-    }else if (req.body.payment_method == "WALLET" ){
-      if(user.wallet < orderData.totel ){
+    } else if (req.body.payment_method == "WALLET") {
+      if (user.wallet < orderData.totel) {
 
-        res.json({wallet:false})
+        res.json({ wallet: false })
 
         return
       }
@@ -445,14 +445,24 @@ const place_order = async (req, res) => {
       status = "Confirmed"
 
     }
-     
 
+    const index = req.body.address
+    const address = {
+      name: user.address[index].name  ,
+      number: user.address[index].number ,
+      pincode: user.address[index].pincode ,
+      state: user.address[index].state ,
+      district : user.address[index].district ,
+      place : user.address[index].place ,
+      street: user.address[index].street ,
+      building: user.address[index].building ,
+
+    }
     const totel = req.body.totel;
     const orderId = `Order#${uuid.v4()}`;
     const order = new Order({
       userId: req.session.user._id,
-
-      deliveryAddress: req.body.address,
+      address: address,
       product: productPush,
       totel: totel,
       paymentType: req.body.payment_method,
@@ -466,8 +476,8 @@ const place_order = async (req, res) => {
 
       res.json({ status: true });
 
-    } 
-    
+    }
+
 
     else if (req.body.payment_method == "UPI") {
 
@@ -484,18 +494,18 @@ const place_order = async (req, res) => {
         res.json({ viewRazorpay: true, order });
 
       });
-    }else if (req.body.payment_method == "WALLET") {
-      
+    } else if (req.body.payment_method == "WALLET") {
+
       const walupdate = user.wallet - orderData.totel
 
-      await User.updateOne({_id : id },{$set:{wallet:walupdate}})
+      await User.updateOne({ _id: id }, { $set: { wallet: walupdate } })
 
-      res.json({status : true })
-  
-    } 
-  
-  
-}catch (error) {
+      res.json({ status: true })
+
+    }
+
+
+  } catch (error) {
 
     console.log(error.message);
   }
@@ -526,8 +536,8 @@ const verify_payment = async (req, res) => {
       res.json({ status: true });
     } else {
       res.json({ failed: true });
-      
-     
+
+
     }
   } catch (error) {
     console.log(error.message);
@@ -544,10 +554,9 @@ const order_success = async (req, res) => {
       { $set: { cart: [], cartTotel: 0 } }
     );
 
-    const order = await Order.findOne()
-      .sort({ date: -1 })
-      .populate({path:'product', populate:{path:'productid', model:'Product'}})
+    const order = await Order.findOne().sort({ date: -1 }).populate({ path: 'product', populate: { path: 'productid', model: 'Product' } })
 
+   
     for (let i = 0; i < order.product.length; i++) {
       await Product.updateOne(
         { _id: order.product[i].productid },
@@ -660,7 +669,7 @@ const show_orderlist = async (req, res) => {
     console.log(error.message);
 
   }
-  
+
 };
 
 const view_order_admin = async (req, res) => {

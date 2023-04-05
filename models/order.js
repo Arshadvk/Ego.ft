@@ -12,9 +12,39 @@ const orderSchema = new mongoose.Schema({
         unique: true,
 
     },
-    deliveryAddress: {
-        type:  String ,
-        required: true
+    address: {
+        name: {
+            type: String,
+            required: true
+        }, 
+        number: {
+            type: Number,
+            required: true
+        }, 
+        pincode: {
+            type: Number,
+            required: true
+        }, 
+        state: {
+            type: String,
+            required: true
+        },
+        district :{
+            type : String ,
+            required: true
+        } ,
+        place: {
+            type: String,
+            required: true
+        }, 
+        street: {
+            type: String,
+            required: true
+        }, 
+        building: {
+            type: String,
+            required: true
+        }, 
     },
     date: {
         type: Date,

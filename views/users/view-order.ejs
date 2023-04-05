@@ -65,7 +65,14 @@
 
                       <tr>
                         <td><strong>
-                          <%= order[0].deliveryAddress %>
+                    <%= order[0].address.name%> <br>
+                    <%= order[0].address.number%> <br>
+                    <%= order[0].address.pincode%> <br> 
+                    <%= order[0].address.building%> <br>
+                    <%= order[0].address.street%> <br>
+                    <%= order[0].address.place%> <br>
+                    <%= order[0].address.district%> <br>
+                    <%= order[0].address.state %>
                           </strong></td>
                         <td><strong>
                             <%= order[0].paymentType %>

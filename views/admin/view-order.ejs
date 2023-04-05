@@ -32,7 +32,16 @@
                   <%= user_id[0].userId.name %>
                 </td>
                 <td><strong>
-                    <%= user_id[0].deliveryAddress%>
+                  <%= user_id[0].address.name%> <br>
+                    <%= user_id[0].address.number%> <br>
+                    <%= user_id[0].address.pincode%> <br> 
+                    <%= user_id[0].address.building%> <br>
+                    <%= user_id[0].address.street%> <br>
+                    <%= user_id[0].address.place%> <br>
+                    <%= user_id[0].address.district%> <br>
+                    <%= user_id[0].address.state %>
+
+
                   </strong></td>
                 <td><strong>
                     <%= order[0].paymentType %>

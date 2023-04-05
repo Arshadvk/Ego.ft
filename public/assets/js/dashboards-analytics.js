@@ -502,9 +502,7 @@
   }
   const dates = document.getElementById('date').value
   const sales = document.getElementById('sales').value
-  console.log(sales);
-  console.log(typeof sales);
-  console.log(dates);
+
   
   const sale = JSON.parse(sales);
   const date = JSON.parse(dates);
@@ -616,7 +614,7 @@ let dayOfWeekStrings = dateStrings.map(getDayOfWeek);
           show: false
         },
         min: 10,
-        max: 50000,
+        max: 15000,
         tickAmount: 4
       }
     };

@@ -39,7 +39,7 @@ const sendVerifyMail = async (name, email, user_id) => {
             from: "egoftverify@gmail.com",
             to: email,
             subject: 'Verify Your Email',
-            html: '<p>Hey ' + name + ', Wowwee! Thanks for registering an account with Ego.ft! You are the coolest person in all the land. i hope you love our products  Before we get started, we will need to verify your email. <a href= "https://egoft.shop/verify?id=' + user_id + '" </a> click here </p>'
+            html: '<p>Heyyy ' + name + ', Wowwee! Thanks for registering an account with Ego.ft! You are the coolest person in all the land. i hope you love our products  Before we get started, we will need to verify your email. <a href= "https://egoft.shop/verify?id=' + user_id + '" </a> click here </p>'
 
 
         }

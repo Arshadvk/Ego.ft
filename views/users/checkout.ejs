@@ -98,10 +98,10 @@
                                         <div class="col-sm-12" id="reloadDiv">
                                             <select id="Select Category" name="address" class="form-select" required>
                                                 <% if(user[0].address.length>0 ){
-                                                    user[0].address.forEach((x)=>{ %>
+                                                    user[0].address.forEach((x,index)=>{ %>
 
                                                     <option
-                                                        value="<%= x.name %> , (<%= x.number %>),  <%= x.building %> ,<%= x.street %> ,<%= x.district %> , <%= x.state %> ,<%= x.pincode %> ">
+                                                        value="<%= index %>">
                                                         <strong>
                                                             <%= x.name %>
                                                         </strong>

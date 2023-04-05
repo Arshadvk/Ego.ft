@@ -438,7 +438,55 @@ const unblockuser = async (req, res) => {
 
 }
 
+const salesReport = async (req , res )=>{
+    try {
+        const user = await User.findOne({ _id: req.session.admin })
+        const saleData = undefined
+        res.render('sales-report',{user , saleData})
 
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+const showSalesreport = async (req , res )=>{
+
+    try {
+        const user = await User.findOne({ _id: req.session.admin })
+        const currentDate = new Date(req.body.from) 
+        const newDate  = new Date(currentDate) 
+        newDate.setDate(currentDate.getDate()+1)
+        console.log(currentDate);
+        console.log(newDate);
+        if(req.body.from.trim()== '' || req.body.to.trim()==''){
+
+        }else{
+            const saleData = await Order.find({
+                status: 'Delivered' , 
+                date:{$gte: new Date(req.body.from),
+                    $lte: new Date(req.body.to)}
+            }).populate({path:'product',populate:{path:'productid',model:'Product'}})
+
+            console.log(saleData);
+            res.render('sales-report',{saleData , user})
+        }
+
+    } catch (error) {
+
+        console.log(error.message);
+    }
+}
+
+const serverError = async (req, res)=>{
+    try {
+        
+        res.render('500')
+
+    } catch (error) {
+
+        console.log(error.message);
+    }
+}
 
 module.exports = {
     loadLogin,
@@ -454,5 +502,8 @@ module.exports = {
     insertAdmin,
     loadadmin,
     change_password,
-    edit_profile
+    edit_profile,
+    salesReport,
+    showSalesreport,
+    serverError
 }
