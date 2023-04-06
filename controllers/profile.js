@@ -45,24 +45,29 @@ const add_address = async (req, res) => {
     try {
 
         const id = req.session.user._id
-
-        const address = await User.updateOne({ _id: id }, {
-            $push: {
-                address: {
-                    name: req.body.name,
-
-                    number: req.body.number,
-                    pincode: req.body.pincode,
-                    state: req.body.state,
-                    place: req.body.place,
-                    street: req.body.street,
-                    building: req.body.building,
-                    district: req.body.district,
-
-
+        if(req.body.name.trim()!= "" && req.body.number.trim() !="" && 
+        req.body.pincode.trim() !="" &&  req.body.state.trim() !="" && 
+        req.body.place.trim() !=""   &&  req.body.street.trim() !=""  
+        ){
+            const address = await User.updateOne({ _id: id }, {
+                $push: {
+                    address: {
+                        name: req.body.name,
+    
+                        number: req.body.number,
+                        pincode: req.body.pincode,
+                        state: req.body.state,
+                        place: req.body.place,
+                        street: req.body.street,
+                        building: req.body.building,
+                        district: req.body.district,
+    
+    
+                    }
                 }
-            }
-        })
+            })
+        }
+       
 
         res.redirect('/address')
 
@@ -102,6 +107,11 @@ const edit_address = async (req, res) => {
         const district = req.body.district
         const building = req.body.building
 
+        if(req.body.name.trim()!= "" && req.body.number.trim() !="" && 
+        req.body.pincode.trim() !="" &&  req.body.state.trim() !="" && 
+        req.body.place.trim() !=""   &&  req.body.street.trim() !=""  
+        ){
+
         const data = await User.updateOne({ _id: id , 'address._id': address_id }, {
             $set: 
                 
@@ -120,11 +130,9 @@ const edit_address = async (req, res) => {
         ).then((res)=>{
             res.json({success: true})
         })
-   
-        
-
-
-
+    }else{
+    
+    }
 
     } catch (error) {
         res.render('500');

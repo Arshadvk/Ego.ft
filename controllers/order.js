@@ -197,11 +197,11 @@ const editing_coupon = async (req, res) => {
 
           expiry_date: date,
 
-          discountpercentage: discountprice,
+          discountpercentage: discount_percentage,
 
           description: description,
 
-          maxdiscountprice: discount_percentage,
+          maxdiscountprice:  discountprice,
 
           min_amount: min_amount
 
@@ -305,7 +305,7 @@ const apply_coupon = async (req, res) => {
 
                 { _id: req.session.user._id },
 
-                { $set: { cartTotel: value } }
+                { $set: { cartTotel: value , discount : discountAmount  } }
 
               );
 
@@ -330,9 +330,11 @@ const apply_coupon = async (req, res) => {
 
                 { _id: req.session.user._id },
 
-                { $set: { cartTotel: value } }
+                { $set: { cartTotel: value , discount : discount_value } }
 
               );
+              
+
 
               const coupon_used = await Coupon.updateOne(
 
@@ -432,7 +434,7 @@ const place_order = async (req, res) => {
 
     } else if (req.body.payment_method == "UPI") {
 
-      status = "Pending"
+      status = "Confirmed"
 
     } else if (req.body.payment_method == "WALLET") {
       if (user.wallet < orderData.totel) {
@@ -656,7 +658,7 @@ const confirm_return = async (req, res) => {
 
     const status = req.body.status;
     const order = await Order.find({ _id: orderId });
-
+    const wallet = await User.updateOne({_id: order[0].userId},{$inc:{wallet : order[0].totel}})
     const upate = await Order.updateOne(
       { _id: orderId },
       { $set: { status: status } }

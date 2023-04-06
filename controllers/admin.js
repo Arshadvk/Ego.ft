@@ -441,7 +441,7 @@ const unblockuser = async (req, res) => {
 const salesReport = async (req , res )=>{
     try {
         const user = await User.findOne({ _id: req.session.admin })
-        const saleData = undefined
+        const saleData = ""
         res.render('sales-report',{user , saleData})
 
     } catch (error) {
