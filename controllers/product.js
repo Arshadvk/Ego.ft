@@ -179,7 +179,7 @@ const product_view = async (req, res) => {
     }
 };
 
-const sort_az = async (req, res) => {
+const sort = async (req, res) => {
     try {
         let user;
         if (req.session.user) {
@@ -188,8 +188,31 @@ const sort_az = async (req, res) => {
             user = false;
         }
 
-        const product = await Product.find({}).sort({ product_name: -1 });
-        res.render("shop", { product, user });
+        const sort_value = req.query.value
+
+        const category = await Category.find({});
+
+        if(sort_value == "az"){
+
+            const product = await Product.find({}).sort({ product_name: -1 });
+            res.render("shop", { product, user });
+
+        }else if(sort_value== "za"){
+
+            const product = await Product.find({}).sort({ product_name: -1 });
+            res.render("shop", { product, user });
+
+        }else if(sort_value == "high"){
+
+            const product = await Product.find({}).sort({ product_name: -1 });
+            res.render("shop", { product, user });
+
+        }else if(sort_value == "low"){
+
+            const product = await Product.find({}).sort({ product_name: -1 });
+            res.render("shop", { product, user ,category });
+        }
+        
     } catch (error) {
         res.render('500');
         console.log(error.message);
@@ -229,7 +252,7 @@ module.exports = {
     listproduct,
     updateproduct,
     product_view,
-    sort_az,
+    sort,
     add_review,
     search_product
 };
